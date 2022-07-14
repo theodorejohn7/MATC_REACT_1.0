@@ -31,10 +31,10 @@ function App() {
 
 
           <Route path="/404" element={<NotFound />} />
-          <Route path="*" element={<Navigate replace to="/register" />} />
+          <Route path="*" element={<Navigate replace to="/home" />} />
         </Routes>
       </Suspense>
-      <h1>EOC</h1>
+       
     </div>
   );
 }

@@ -1,10 +1,11 @@
 const navigation = {
   brand: { name: "E-Commerce", to: "/" },
   links: [
+    { name: "Home", to: "/home" },
     { name: "Login", to: "/login" },
     { name: "Register", to: "/register" },
     { name: "About Us", to: "/about" },
-    { name: "Blog", to: "/blog" },
+    { name: "Product Management", to: "/productmgmt" },
   ],
 };
 

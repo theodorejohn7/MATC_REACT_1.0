@@ -1,11 +1,17 @@
-import React from 'react'
+ 
 
-type Props = {}
+import CarouselComp from "./CarouselComp";
+import Products from "./Products";
+
+type Props = {};
 
 const Home = (props: Props) => {
   return (
-    <div>Home</div>
-  )
-}
+    <div>
+      <CarouselComp />
+      <Products />
+    </div>
+  );
+};
 
-export default Home
+export default Home;
