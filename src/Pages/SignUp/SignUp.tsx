@@ -1,30 +1,10 @@
 import React, { useState } from 'react'
  
 
-import {Grid, TextField,Button, createStyles,Theme} from '@mui/material'
+import {Grid, TextField,Button} from '@mui/material'
 import { Formik, Form, FormikProps } from 'formik'
 import * as Yup from 'yup'
-
-const useStyles = createStyles((theme: Theme) =>
-    createStyles({
-        root: {
-            maxWidth: '450px',
-            display: 'block',
-            margin: '0 auto',
-        },
-        textField: {
-            '& > *': {
-                width: '100%',
-            },
-        },
-        submitButton: {
-            marginTop: '24px',
-        },
-        title: { textAlign: 'center' },
-        successMessage: { color: 'green' },
-        errorMessage: { color: 'red' },
-    })
-)
+ 
 
 interface ISignUpForm {
     fullName: string

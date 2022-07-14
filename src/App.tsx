@@ -7,6 +7,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 const Login = lazy(() => import("./Pages/Login/Login"));
 const Home = lazy(() => import("./Pages/Home/Home"));
 const SignUp = lazy(() => import("./Pages/SignUp/SignUp"));
+const ProductManagement = lazy(()=> import("./Pages/Management/ProductManagement"))
 const NotFound = lazy(() => import("./Pages/NotFound/NotFound"));
 
 function App() {
@@ -17,9 +18,11 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/productmgmt" element={<ProductManagement />} />
+
 
           <Route path="/404" element={<NotFound />} />
-          <Route path="*" element={<Navigate replace to="/signup" />} />
+          <Route path="*" element={<Navigate replace to="/productmgmt" />} />
         </Routes>
       </Suspense>
       <h1>Welcome</h1>
