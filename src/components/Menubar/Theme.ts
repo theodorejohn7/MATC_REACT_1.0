@@ -14,16 +14,16 @@ export const Theme = {
     }
   }
   
-export  const Navbar = styled.nav`
-    background: ${Theme.colors.dark};
-    font-family: ${Theme.fonts.heading};
-    color: ${Theme.colors.blue};
-    height: 35px;
-    border-radius:10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    a { color: white; text-decoration: none; }`;
+// export  const Navbar = styled.nav`
+//     background: ${Theme.colors.dark};
+//     font-family: ${Theme.fonts.heading};
+//     color: ${Theme.colors.blue};
+//     height: 35px;
+//     border-radius:10px;
+//     display: flex;
+//     align-items: center;
+//     justify-content: space-between;
+//     a { color: white; text-decoration: none; }`;
   
  export const Brand = styled.a`
     font-weight: bold;

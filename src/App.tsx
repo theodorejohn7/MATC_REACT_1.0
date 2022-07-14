@@ -6,6 +6,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./Pages/Home/Home";
 import Menubar from "./components/Menubar/Menubar";
 import navigation from "./components/Menubar/Navigation";
+import ResponsiveNavbar from "./components/ResponsiveNavbar/ResponsiveNavbar"
 
 const Login = lazy(() => import("./Pages/Login/Login"));
  
@@ -18,8 +19,9 @@ const NotFound = lazy(() => import("./Pages/NotFound/NotFound"));
 function App() {
   return (
     <div className="App">
-      <Menubar brand={navigation.brand} links={navigation.links} />
-   
+      {/* <Menubar brand={navigation.brand} links={navigation.links} /> */}
+   <ResponsiveNavbar />
+
       <Suspense fallback={<p>Loading...</p>}>
         <Routes>
           <Route path="/home" element={<Home />} />
