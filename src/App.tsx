@@ -7,7 +7,7 @@ import Home from "./Pages/Home/Home";
 import Menubar from "./components/Menubar/Menubar";
 import navigation from "./components/Menubar/Navigation";
 import ResponsiveNavbar from "./components/ResponsiveNavbar/ResponsiveNavbar"
-
+import Footer from "./components/Footer/Footer";
 const Login = lazy(() => import("./Pages/Login/Login"));
  
 const Register = lazy(() => import("./Pages/Register/Register"));
@@ -36,7 +36,7 @@ function App() {
           <Route path="*" element={<Navigate replace to="/home" />} />
         </Routes>
       </Suspense>
-       
+       <Footer />
     </div>
   );
 }

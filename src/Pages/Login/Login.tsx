@@ -16,6 +16,7 @@ interface FormValues {
 }
 
 export default function Login() {
+
   const FIREBASE_URL = process.env.REACT_APP_FIREBASE_URL;
 
   const [username, setUsername] = React.useState("");
@@ -40,7 +41,7 @@ export default function Login() {
     p: 4,
   };
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="md" style={{minHeight:'350px',marginTop:'15px'}}>
       {/* <Box mb={3} p={2}> */}
       <div style={{ textAlign: "center" }}>
         <Typography

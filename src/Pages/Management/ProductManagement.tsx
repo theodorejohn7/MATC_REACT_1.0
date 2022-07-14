@@ -11,12 +11,9 @@ import {
 import React, { useCallback, useEffect, useState } from "react";
 import "antd/dist/antd.css";
 import "./styles.css";  
- 
+
 import { useSelector, useDispatch } from "react-redux";
 import { getMuttonData } from "../../redux/action/testAction";
-
- 
- 
 import { patchProductUpdate } from "../../redux/action/patchProductAction";
 import { deleteProductData } from "../../redux/action/deleteProductAction";
 import { getProductData } from "../../redux/action/getProductAction";
@@ -403,8 +400,8 @@ const ProductManagement: React.FC = () => {
   //   // "bordered"
   // };
   return (
-    <>
-      <div>
+    <div style={{minHeight:'350px'}}>
+      <div >
         <Button
           type="primary"
           className="custom_button"
@@ -453,7 +450,7 @@ const ProductManagement: React.FC = () => {
           )}
         </Spin>
       </Form>
-    </>
+    </div>
   );
 };
 
