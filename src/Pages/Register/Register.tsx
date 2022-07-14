@@ -1,20 +1,24 @@
 import * as React from "react";
 import { Container, Typography, Grid, Button } from "@mui/material";
 
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
 import { Formik, FormikHelpers, FormikProps, Form, Field } from "formik";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-import database from '../../axios/firebase'
+import database from "../../axios/firebase";
 import { FormTextField } from "../../components/FormTextField/FormTextField";
- 
+
 import ValidationSchema from "./ValidationSchema";
 
 interface FormValues {
   name: string;
-   userName: string;
+  userName: string;
   password: string;
   confirmPassword: string;
   eMail: string;
-  confirmEMail:string;
+  confirmEMail: string;
   address: string;
   pincode: number;
   state: string;
@@ -23,9 +27,36 @@ interface FormValues {
   securityAns: string;
 }
 
-export default function Login() {
+export default function Register() {
+  const FIREBASE_URL = process.env.REACT_APP_FIREBASE_URL;
+  const [status, setStatus] = React.useState(false);
+  const [errorMessage, setErrorMessage] = React.useState("");
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const navigate = useNavigate()
+
+
+  const style = {
+    position: "absolute" as "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 400,
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    margin: 0,
+    padding: 0,
+    p: 4,
+  };
+
+
+  const handleRegister = () => {
+    navigate(`/home`)
+  }
   return (
-    <Container maxWidth="sm"  >
+    <Container maxWidth="sm">
       {/* <Box mb={3} p={2}> */}
       <div style={{ textAlign: "center" }}>
         <Typography
@@ -44,7 +75,7 @@ export default function Login() {
             password: "",
             confirmPassword: "",
             eMail: "",
-            confirmEMail:"",
+            confirmEMail: "",
             address: "",
             state: "",
             pincode: 0,
@@ -58,19 +89,44 @@ export default function Login() {
             formikHelpers: FormikHelpers<FormValues>
           ) => {
             console.log(values);
-            
-            database.ref(values.name).set({
-                name: values.name ,
-                userName: values.userName ,
-                password: values.password ,
-                eMail: values.eMail, 
-                address: values.address,
-                state: values.state,
-                pincode: values.pincode,
-                country: values.country,
-                securityQn: values.securityQn,
-                securityAns: values.securityAns,
-                }).catch(alert);
+
+            axios
+              .get(`${FIREBASE_URL}/${values.userName}.json`)
+              .then((response) => {
+                console.log("response", response.data);
+                console.log("value", values);
+
+                if (values.userName === response.data.userName) {
+                  setErrorMessage("Username already Registered");
+                  setOpen(true);
+                }
+              }).catch((_error)=>{
+                 console.log("logging data to db")
+                database
+                .ref(values.userName)
+                .set({
+                  name: values.name,
+                  userName: values.userName,
+                  password: values.password,
+                  eMail: values.eMail,
+                  address: values.address,
+                  state: values.state,
+                  pincode: values.pincode,
+                  country: values.country,
+                  securityQn: values.securityQn,
+                  securityAns: values.securityAns,
+                })
+                .catch(alert);
+                setErrorMessage("Details Registered Successfully");
+                setOpen(true);
+                console.log("data sent to Database")
+               setStatus(true)
+
+              });
+              
+
+          
+
             formikHelpers.setSubmitting(false);
           }}
         >
@@ -85,7 +141,7 @@ export default function Login() {
                     component={FormTextField}
                   />
                 </Grid>
-                
+
                 <Grid item xs={6}>
                   <Field
                     name="userName"
@@ -128,20 +184,19 @@ export default function Login() {
                     component={FormTextField}
                   />
                 </Grid>
-                <Grid item xs={12}    alignItems="stretch" >
+                <Grid item xs={12} alignItems="stretch">
                   <Field
                     name="address"
                     label="Address"
                     size="medium"
                     component={FormTextField}
-                    style={{ width:'95%'}}
+                    style={{ width: "95%" }}
                   />
                 </Grid>
                 <Grid item xs={6}>
                   <Field
                     name="pincode"
                     label="Pincode"
-                   
                     type="number"
                     size="small"
                     component={FormTextField}
@@ -155,7 +210,7 @@ export default function Login() {
                     component={FormTextField}
                   />
                 </Grid>
-                
+
                 <Grid item xs={6}>
                   <Field
                     name="country"
@@ -172,7 +227,7 @@ export default function Login() {
                     component={FormTextField}
                   />
                 </Grid>
-             
+
                 <Grid item xs={6}>
                   <Field
                     name="securityAns"
@@ -197,6 +252,28 @@ export default function Login() {
           )}
         </Formik>
       </div>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box className="border border-secondary p-2 rounded" sx={style}>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            {errorMessage}
+          </Typography>
+          <div className="  float-end ">
+            {!status&&<Button onClick={handleClose} variant="contained">
+              Ok
+            </Button>}
+{
+  status&&<Button onClick={handleRegister} variant="contained">
+ Navigate to Homepage
+</Button>
+} 
+          </div>
+        </Box>
+      </Modal>
     </Container>
   );
 }
