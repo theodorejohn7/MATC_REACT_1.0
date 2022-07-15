@@ -24,6 +24,9 @@ interface IPost {
 const defaultPosts: IPost[] = [];
 
 const Products = () => {
+
+const API_URL = process.env.REACT_APP_API_URL;
+
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -67,11 +70,11 @@ const Products = () => {
     if (cancelTokenSource) {
       cancelTokenSource.cancel("User cancelled operation");
     }
-  };
+  }; 
 
   React.useEffect(() => {
     mongoInstance
-      .get<IPost[]>("http://localhost:7002/api/category/mutton", {
+      .get<IPost[]>(`${API_URL}api/category/mutton`, {
         timeout: 10000,
       })
       .then((response) => {
@@ -96,7 +99,7 @@ const Products = () => {
 
   React.useEffect(() => {
     mongoInstance
-      .get<IPost[]>("http://localhost:7002/api/category/chicken", {
+      .get<IPost[]>(`${API_URL}api/category/chicken`, {
         timeout: 10000,
       })
       .then((response) => {
@@ -121,7 +124,7 @@ const Products = () => {
 
   React.useEffect(() => {
     mongoInstance
-      .get<IPost[]>("http://localhost:7002/api/category/seafood", {
+      .get<IPost[]>(`${API_URL}api/category/seafood`, {
         timeout: 10000,
       })
       .then((response) => {
