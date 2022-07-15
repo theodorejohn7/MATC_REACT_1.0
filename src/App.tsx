@@ -14,6 +14,8 @@ const Register = lazy(() => import("./Pages/Register/Register"));
 
 const SignUp = lazy(() => import("./Pages/SignUp/SignUp"));
 const ProductManagement = lazy(()=> import("./Pages/Management/ProductManagement"))
+const Cart = lazy(() => import("./components/ShoppingCart/ShoppingCart"));
+
 const NotFound = lazy(() => import("./Pages/NotFound/NotFound"));
 
 function App() {
@@ -31,6 +33,7 @@ function App() {
 
           <Route path="/productmgmt" element={<ProductManagement />} />
 
+          <Route path="/cart" element={<Cart />} />
 
           <Route path="/404" element={<NotFound />} />
           <Route path="*" element={<Navigate replace to="/home" />} />

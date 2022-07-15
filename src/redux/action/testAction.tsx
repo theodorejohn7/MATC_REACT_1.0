@@ -1,11 +1,11 @@
 import axios from "axios";
 import { Dispatch } from "redux";
 
-
 const API_URL = process.env.REACT_APP_API_URL;
 
 export const GET_MUTTON_DATA = "GET_MUTTON_DATA";
 export const RESET_MUTTON_DATA = "RESET_MUTTON_DATA";
+export const EDIT_MUTTON_DATA = "EDIT_MUTTON_DATA";
 
 export const getMuttonData = (): any => {
   return async (dispatch: Dispatch) => {
@@ -21,9 +21,22 @@ export const getMuttonData = (): any => {
           return false;
         }
       });
-      if (muttonDataRecords) { 
-        
+      if (muttonDataRecords) {
         dispatch({ type: GET_MUTTON_DATA, data: muttonDataRecords });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const editMuttonData = (data:any):any => {
+  console.log("inside edit mutton data")
+  return async (dispatch: Dispatch) => {
+    try {
+      const muttonDataRecords = data;
+      if (muttonDataRecords) {
+        dispatch({ type: EDIT_MUTTON_DATA, data: muttonDataRecords });
       }
     } catch (error) {
       console.log(error);
