@@ -41,9 +41,9 @@ export default function Login() {
     p: 4,
   };
   return (
-    <Container maxWidth="md" style={{minHeight:'350px',marginTop:'15px'}}>
+    <Container maxWidth="md" className="border border-primary  rounded d-flex align-items-center justify-content-center " style={{minHeight:'350px',marginTop:'20px',}}>
       {/* <Box mb={3} p={2}> */}
-      <div style={{ textAlign: "center" }}>
+      <div className="border border-danger   " style={{ textAlign: "center" }}>
         <Typography
           align="center"
           variant="h5"

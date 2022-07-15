@@ -1,4 +1,4 @@
-import { GET_MUTTON_DATA, RESET_MUTTON_DATA } from "../action/testAction";
+import { GET_MUTTON_DATA, RESET_MUTTON_DATA, EDIT_MUTTON_DATA } from "../action/testAction";
 
 const initialState = {};
 
@@ -9,6 +9,8 @@ const muttonDataReducer = (
   switch (action.type) {
     case GET_MUTTON_DATA:
       return { ...state, getMuttonData: action.data };
+      case EDIT_MUTTON_DATA :
+        return { ...state, getMuttonData: action.data};
     case RESET_MUTTON_DATA:
       return { ...state, getMuttonData: [] };
     default:
