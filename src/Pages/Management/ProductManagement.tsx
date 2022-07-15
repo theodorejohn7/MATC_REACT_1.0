@@ -98,6 +98,12 @@ interface IPost {
 const defaultPosts: IPost[] = [];
 
 const ProductManagement: React.FC = () => {
+
+
+const API_URL = process.env.REACT_APP_API_URL;
+
+
+
   const [form] = Form.useForm();
   const [editingKey, setEditingKey] = useState("");
 
@@ -455,34 +461,4 @@ const ProductManagement: React.FC = () => {
 };
 
 export default ProductManagement;
-// .editable-row .ant-form-item-explain {
-//   position: absolute;
-//   top: 100%;
-//   font-size: 12px;
-// }
-
-//   React.useEffect(() => {
-//     mongoInstance
-//       .get<IPost[]>("http://localhost:7002/api/category/mutton", {
-//         timeout: 10000,
-//       })
-//       .then((response) => {
-//         console.log("api response", response.data);
-//         setMuttonPosts(response.data);
-//         setData(response.data);
-//         setLoading(false);
-//       })
-//       .catch((ex) => {
-//         console.log("error", ex);
-//         let error1 = axios.isCancel(ex)
-//           ? "Request Cancelled"
-//           : ex.code === "ECONNABORTED"
-//           ? "A timeout has occurred"
-//           : ex.response.status === 404
-//           ? "Resource Not Found"
-//           : "An unexpected error has occurred";
-
-//         setError(error1);
-//         setLoading(false);
-//       });
-//   }, []);
+ 
