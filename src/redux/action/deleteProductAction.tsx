@@ -1,13 +1,11 @@
 import axios from "axios";
 import { Dispatch } from "redux";
 
-const API_URL = process.env.REACT_APP_API_URL;
-
 export const DELETE_PRODUCT_DATA = "DELETE_PRODUCT_DATA";
 
 export const deleteProductData = (id: string): any => {
   return async (dispatch: Dispatch) => {
-    const apiURL = `${API_URL}api/delete/${id}`;
+    const apiURL = `http://localhost:7002/api/delete/${id}`;
 
     try {
       const deleteProductRecords = await axios
