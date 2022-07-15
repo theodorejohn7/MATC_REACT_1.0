@@ -1,13 +1,16 @@
 import axios from "axios";
 import { Dispatch } from "redux";
 
+
+const API_URL = process.env.REACT_APP_API_URL;
+
 export const GET_MUTTON_DATA = "GET_MUTTON_DATA";
 export const RESET_MUTTON_DATA = "RESET_MUTTON_DATA";
 
 export const getMuttonData = (): any => {
   return async (dispatch: Dispatch) => {
     console.log("@$# testAction");
-    const apiURL = `http://localhost:7002/api/category/mutton`;
+    const apiURL = ` ${API_URL}api/category/mutton`;
 
     try {
       const muttonDataRecords = await axios.get(apiURL).then((response) => {
