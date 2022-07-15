@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store";
 
 
-import client from "../src/graphql/apolloConfig";
+// import client from "../src/graphql/apolloConfig";
 
 
 import App from "./App";
@@ -22,11 +22,11 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
 
-    <ApolloProvider client={client}>
+    {/* <ApolloProvider client={client}> */}
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </ApolloProvider>
+    {/* </ApolloProvider> */}
     </Provider>
   </React.StrictMode>
 );
