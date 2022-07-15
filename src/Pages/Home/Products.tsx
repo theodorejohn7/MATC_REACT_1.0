@@ -30,8 +30,10 @@ interface IPost {
 const defaultPosts: IPost[] = [];
 
 const Products = () => {
+ 
   const API_URL = process.env.REACT_APP_API_URL;
 
+ 
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -82,6 +84,7 @@ const Products = () => {
     }
   };
 
+ 
   const fetchMuttonRecordsData = useCallback(async () => {
     console.log("indise fetch mutton");
     try {
@@ -101,6 +104,27 @@ const Products = () => {
     },
     [dispatch]
   );
+ 
+  React.useEffect(() => {
+    mongoInstance
+      .get<IPost[]>("http://localhost:7002/api/category/mutton", {
+        timeout: 10000,
+      })
+      .then((response) => {
+        console.log("api response", response.data);
+        setMuttonPosts(response.data);
+        setLoading(false);
+      })
+      .catch((ex) => {
+        console.log("error", ex);
+        let error1 = axios.isCancel(ex)
+          ? "Request Cancelled"
+          : ex.code === "ECONNABORTED"
+          ? "A timeout has occurred"
+          : ex.response.status === 404
+          ? "Resource Not Found"
+          : "An unexpected error has occurred";
+ 
 
   React.useEffect(() => {
     fetchMuttonRecordsData();
@@ -188,7 +212,7 @@ const Products = () => {
 // conso
   React.useEffect(() => {
     mongoInstance
-      .get<IPost[]>(`${API_URL}api/category/chicken`, {
+      .get<IPost[]>("http://localhost:7002/api/category/chicken", {
         timeout: 10000,
       })
       .then((response) => {
@@ -213,7 +237,7 @@ const Products = () => {
 
   React.useEffect(() => {
     mongoInstance
-      .get<IPost[]>(`${API_URL}api/category/seafood`, {
+      .get<IPost[]>("http://localhost:7002/api/category/seafood", {
         timeout: 10000,
       })
       .then((response) => {
