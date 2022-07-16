@@ -5,8 +5,11 @@ export const GET_PRODUCT_DATA = "GET_PRODUCT_DATA";
 export const RESET_PRODUCT_DATA = "RESET_PRODUCT_DATA";
 
 export const getProductData = (category:string): any => {
+  
+const API_URL = process.env.REACT_APP_API_URL;
+
   return async (dispatch: Dispatch) => {
-    const apiURL = `http://localhost:7002/api/category/${category}`;
+    const apiURL = `${API_URL}api/category/${category}`;
     try {
       const productDataRecords = await axios.get(apiURL).then((response) => {
         if (response) {

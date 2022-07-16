@@ -1,4 +1,6 @@
 import axios from "axios";
+const API_URL = process.env.REACT_APP_API_URL;
+
 
 const instance = axios.create({
   baseURL: `https://react-theo-default-rtdb.firebaseio.com/`,
@@ -10,7 +12,7 @@ instance.defaults.headers.common["Authorization"] =
 
 
 export const mongoInstance = axios.create({
-  baseURL: `https://localhost:7002/`,
+  baseURL: `${API_URL}`,
 });
 mongoInstance.defaults.headers.common["channelName"] = "Theodore's Channel";
 

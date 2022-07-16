@@ -100,6 +100,7 @@ const defaultPosts: IPost[] = [];
 const ProductManagement: React.FC = () => {
   const [form] = Form.useForm();
   const [editingKey, setEditingKey] = useState("");
+  const API_URL = process.env.REACT_APP_API_URL;
 
   const dispatch = useDispatch();
 
