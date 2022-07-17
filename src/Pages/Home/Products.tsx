@@ -241,7 +241,7 @@ const Products = () => {
     <div className="App">
 
       <div className="">
-        <h3 className="display-1">Mutton</h3>
+        <h3 className="display-1"   style={{textShadow:'2px 2px 6px #171BCE',fontWeight:350}}>Mutton</h3>
         <Carousel
           ssr
           partialVisbile
@@ -252,7 +252,8 @@ const Products = () => {
         </Carousel>
       </div>
       <div>
-        <h3 className="display-1">Chicken</h3>
+      <h3 className="display-1 text-dark" style={{textShadow:' 4px 3px 12px #171BCE',fontWeight:350}}>Chicken</h3>
+ 
         <Carousel
           ssr
           partialVisbile
@@ -263,7 +264,9 @@ const Products = () => {
         </Carousel>
       </div>
       <div>
-        <h3 className="display-1">Sea Foods</h3>
+      
+      <h3 className="display-1 text-dark" style={{textShadow:' 4px 3px 12px #171BCE',fontWeight:350}}>Sea Foods</h3>
+
         <Carousel
           ssr
           partialVisbile
