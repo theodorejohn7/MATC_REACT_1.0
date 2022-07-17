@@ -10,6 +10,8 @@ import { mongoInstance } from "../../axios/instance";
 import { Button } from "react-bootstrap";
 import { getMuttonData, editMuttonData } from "../../redux/action/testAction";
 
+import { SingleProduct } from "./SingleProduct";
+
 import "bootstrap/dist/css/bootstrap.css";
 import "react-multi-carousel/lib/styles.css";
 
@@ -30,10 +32,10 @@ interface IPost {
 const defaultPosts: IPost[] = [];
 
 const Products = () => {
- 
+
   const API_URL = process.env.REACT_APP_API_URL;
 
- 
+
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -41,12 +43,12 @@ const Products = () => {
       paritialVisibilityGutter: 15,
     },
     tablet: {
-      breakpoint: { max: 1024, min: 464 },
+      breakpoint: { max: 1024, min: 750 },
       items: 3,
       paritialVisibilityGutter: 10,
     },
     mobile: {
-      breakpoint: { max: 464, min: 0 },
+      breakpoint: { max: 750, min: 0 },
       items: 2,
       paritialVisibilityGutter: 5,
     },
@@ -84,9 +86,9 @@ const Products = () => {
     }
   };
 
- 
+
   const fetchMuttonRecordsData = useCallback(async () => {
-    console.log("indise fetch mutton");
+    console.log("inside fetch mutton");
     try {
       dispatch(getMuttonData());
     } catch (error_1) {
@@ -104,7 +106,7 @@ const Products = () => {
     },
     [dispatch]
   );
- 
+
   React.useEffect(() => {
     mongoInstance
       .get<IPost[]>(`${API_URL}api/category/mutton`, {
@@ -129,16 +131,16 @@ const Products = () => {
         let error1 = axios.isCancel(ex)
           ? "Request Cancelled"
           : ex.code === "ECONNABORTED"
-          ? "A timeout has occurred"
-          : ex.response.status === 404
-          ? "Resource Not Found"
-          : "An unexpected error has occurred";
+            ? "A timeout has occurred"
+            : ex.response.status === 404
+              ? "Resource Not Found"
+              : "An unexpected error has occurred";
 
         setError(error1);
         setLoading(false);
       });
   }, []);
- 
+
 
   React.useEffect(() => {
     fetchMuttonRecordsData();
@@ -158,46 +160,7 @@ const Products = () => {
   //   setMuttonPosts(muttonRecordsData);
   // console.log("mutton redux data",muttonRecordsData)
 
-  const handleAddCart = (product: IPost) => {
-    let temp: any;
-    switch (product.category) {
-      case "mutton": {
-        console.log("mutton");
-        temp = muttonPosts;
-        break;
-      }
-      case "chicken":
-        console.log("chicken");
-        break;
-      default:
-        console.log("default");
-    }
-    temp.forEach((post: IPost) => {
-      if (post.id === product.id) {
-        if (!post.units) {
-          Object.assign(post, { units: 1 });
-        } else {
-          const currUnit = post.units;
-          Object.assign(post, { units: currUnit + 1 });
-        }
-      }
-    });
-
-    // console.log("curr product",currProduct)
-
-    // if(currProduct.units!==product.units)
-    // {
-    //   console.log("units changed")
-    //   setMuttonPosts(temp)
-    // } else {
-    //   console.log("units not changed")
-    // }
-
-    // console.log(product.units, "product", product.description);
-
-    console.log("products", temp);
-    editMuttonRecordsData(temp);
-  };
+   
 
   // React.useEffect(() => {
   //   mongoInstance
@@ -223,7 +186,7 @@ const Products = () => {
   //       setLoading(false);
   //     });
   // }, );
-// conso
+  // conso
   React.useEffect(() => {
     mongoInstance
       .get<IPost[]>(`${API_URL}api/category/chicken`, {
@@ -239,10 +202,10 @@ const Products = () => {
         let error1 = axios.isCancel(ex)
           ? "Request Cancelled"
           : ex.code === "ECONNABORTED"
-          ? "A timeout has occurred"
-          : ex.response.status === 404
-          ? "Resource Not Found"
-          : "An unexpected error has occurred";
+            ? "A timeout has occurred"
+            : ex.response.status === 404
+              ? "Resource Not Found"
+              : "An unexpected error has occurred";
 
         setError(error1);
         setLoading(false);
@@ -264,10 +227,10 @@ const Products = () => {
         let error1 = axios.isCancel(ex)
           ? "Request Cancelled"
           : ex.code === "ECONNABORTED"
-          ? "A timeout has occurred"
-          : ex.response.status === 404
-          ? "Resource Not Found"
-          : "An unexpected error has occurred";
+            ? "A timeout has occurred"
+            : ex.response.status === 404
+              ? "Resource Not Found"
+              : "An unexpected error has occurred";
 
         setError(error1);
         setLoading(false);
@@ -276,303 +239,44 @@ const Products = () => {
 
   return (
     <div className="App">
-      {loading && <button onClick={handleCancelClick}>Cancel</button>}
-      <div>
-        <h3 className="display-1">Mutton</h3>
 
+      <div className="">
+        <h3 className="display-1">Mutton</h3>
         <Carousel
           ssr
           partialVisbile
           itemClass="image-item"
           responsive={responsive}
         >
-          {muttonPosts.map((post, index) => {
-            if (index < 13)
-              return (
-                <div>
-                  <Card
-                    key={index}
-                    className=" lh-1 px-1 pt-4 card m-2 h-100"
-                    style={{
-                      minWidth: "10rem",
-                      height: "26rem",
-                      maxHeight: "50rem",
-                      overflow: "hidden",
-                      boxShadow: "3px 3px 10px 3px #000000",
-                    }}
-                  >
-                    <Card.Img
-                      variant="top"
-                      src={post.image}
-                      className="m-0 p-0 img-fluid"
-                      style={{
-                        width: "16rem",
-                        height: "8rem",
-                        borderRadius: "8px",
-                        boxShadow: "3px 3px 10px 3px #cc3300",
-                      }}
-                    />
-
-                    <Card.Body className="  p-0 m-0">
-                      <Card.Header
-                        className="  m-0"
-                        style={{ borderRadius: "10px" }}
-                      >
-                        <h6 className="text-center p-0 m-0">
-                          {post.title.charAt(0).toUpperCase() +
-                            post.title.substring(1, 40)}
-                        </h6>
-                        {post.title.length < 23 ? <br /> : ""}
-                      </Card.Header>
-
-                      <Card.Text className="text-center  ">
-                        <p
-                          className="lh-1 py-1 fw-light"
-                          style={{ fontSize: "14px" }}
-                        >
-                          {post.description.charAt(0).toUpperCase() +
-                            post.description.substring(1, 60)}
-                        </p>
-                      </Card.Text>
-                    </Card.Body>
-                    <Card.Footer className="  p-0 m-0">
-                      <p className="p-0 m-0" style={{ fontSize: "11px" }}>
-                        {"Net. Wt.: " + post.netWeight + "gms"}{" "}
-                        {"Gross Wt.: " + post.grossWeight + "gms"}
-                      </p>
-                    </Card.Footer>
-                    <Card.Footer>
-                      <p style={{ fontSize: "12px" }}>
-                        {post.discPrice - post.price < 0 ? (
-                          <span>
-                            <del>Price : ₹{post.price}</del> Disc Price : ₹
-                            {post.discPrice}
-                          </span>
-                        ) : (
-                          <span>Price : ₹{post.price}</span>
-                        )}
-                      </p>
-                    </Card.Footer>
-
-                    <Card.Footer className="d-flex">
-                      {!post.units && (
-                        <Button
-                          variant="primary"
-                          type="button"
-                          onClick={() => handleAddCart(post)}
-                        >
-                          Buy{" "}
-                        </Button>
-                             
-                      )}
-                      {/* <Form.Control
-                        className=" text-center"
-                        type="text"
-                        value={post.units}
-                      /> */}
-                 
-                      <span>text</span>
-                      {post.units && (
-                        <div>
-                          <Button
-                            variant="primary"
-                            type="button"
-                            onClick={() => handleAddCart(post)}
-                          >
-                            -{" "}
-                          </Button>
-                          <Form.Control
-                            className=" text-center"
-                            type="text"
-                            value={`1`}
-                          />
-                          <Button
-                            variant="primary"
-                            type="button"
-                            onClick={() => handleAddCart(post)}
-                          >
-                            +{" "}
-                          </Button>
-                        </div>
-                      )}
-                    </Card.Footer>
-                  </Card>
-                </div>
-              );
-          })}
+           { muttonPosts.map((item) => <SingleProduct {...item} />)}
+        </Carousel>
+      </div>
+      <div>
+        <h3 className="display-1">Chicken</h3>
+        <Carousel
+          ssr
+          partialVisbile
+          itemClass="image-item"
+          responsive={responsive}
+        >
+           { chickenPosts.map((item) => <SingleProduct {...item} />)}
+        </Carousel>
+      </div>
+      <div>
+        <h3 className="display-1">Sea Foods</h3>
+        <Carousel
+          ssr
+          partialVisbile
+          itemClass="image-item"
+          responsive={responsive}
+        >
+           { seafoodPosts.map((item) => <SingleProduct {...item} />)}
         </Carousel>
       </div>
 
-      {/* CHICKEN */}
-
-      <h3 className="display-1">Chicken</h3>
-
-      <Carousel
-        ssr
-        partialVisbile
-        itemClass="image-item"
-        responsive={responsive}
-      >
-        {chickenPosts.map((post, index) => {
-          if (index < 13)
-            return (
-              <div>
-                <Card
-                  key={index}
-                  className=" lh-1 px-1 pt-4 card m-2 h-100"
-                  style={{
-                    minWidth: "10rem",
-                    height: "26rem",
-                    maxHeight: "50rem",
-                    overflow: "hidden",
-                    boxShadow: "3px 3px 10px 3px #000000",
-                  }}
-                >
-                  <Card.Img
-                    variant="top"
-                    src={post.image}
-                    className="m-0 p-0 img-fluid"
-                    style={{
-                      width: "16rem",
-                      height: "8rem",
-                      borderRadius: "8px",
-                      boxShadow: "3px 3px 10px 3px #cc3300",
-                    }}
-                  />
-
-                  <Card.Body className="  p-0 m-0">
-                    <Card.Header
-                      className="  m-0"
-                      style={{ borderRadius: "10px" }}
-                    >
-                      <h6 className="text-center p-0 m-0">
-                        {post.title.charAt(0).toUpperCase() +
-                          post.title.substring(1, 40)}
-                      </h6>
-                      {post.title.length < 23 ? <br /> : ""}
-                    </Card.Header>
-
-                    <Card.Text className="text-center  ">
-                      <p
-                        className="lh-1 py-1 fw-light"
-                        style={{ fontSize: "14px" }}
-                      >
-                        {post.description.charAt(0).toUpperCase() +
-                          post.description.substring(1, 60)}
-                      </p>
-                    </Card.Text>
-                  </Card.Body>
-                  <Card.Footer className="  p-0 m-0">
-                    <p className="p-0 m-0" style={{ fontSize: "11px" }}>
-                      {"Net. Wt.: " + post.netWeight + "gms"}{" "}
-                      {"Gross Wt.: " + post.grossWeight + "gms"}
-                    </p>
-                  </Card.Footer>
-                  <Card.Footer>
-                    <p style={{ fontSize: "12px" }}>
-                      {post.discPrice - post.price < 0 ? (
-                        <span>
-                          <del>Price : ₹{post.price}</del> Disc Price : ₹
-                          {post.discPrice}
-                        </span>
-                      ) : (
-                        <span>Price : ₹{post.price}</span>
-                      )}
-                    </p>
-                  </Card.Footer>
-                  <Button variant="primary" type="button">
-                    Buy{" "}
-                  </Button>
-                </Card>
-              </div>
-            );
-        })}
-      </Carousel>
-
-      {/* SeaFood */}
-
-      <h3 className="display-1">Sea Foods</h3>
-      <Carousel
-        ssr
-        partialVisbile
-        itemClass="image-item"
-        responsive={responsive}
-      >
-        {seafoodPosts.map((post, index) => {
-          if (index < 13)
-            return (
-              <div>
-                <Card
-                  key={index}
-                  className=" lh-1 px-1 pt-4 card m-2 h-100"
-                  style={{
-                    minWidth: "10rem",
-                    height: "26rem",
-                    maxHeight: "50rem",
-                    overflow: "hidden",
-                    boxShadow: "3px 3px 10px 3px #000000",
-                  }}
-                >
-                  <Card.Img
-                    variant="top"
-                    src={post.image}
-                    className="m-0 p-0 img-fluid"
-                    style={{
-                      width: "16rem",
-                      height: "8rem",
-                      borderRadius: "8px",
-                      boxShadow: "3px 3px 10px 3px #cc3300",
-                    }}
-                  />
-
-                  <Card.Body className="  p-0 m-0">
-                    <Card.Header
-                      className="  m-0"
-                      style={{ borderRadius: "10px" }}
-                    >
-                      <h6 className="text-center p-0 m-0">
-                        {post.title.charAt(0).toUpperCase() +
-                          post.title.substring(1, 40)}
-                      </h6>
-                      {post.title.length < 23 ? <br /> : ""}
-                    </Card.Header>
-
-                    <Card.Text className="text-center  ">
-                      <p
-                        className="lh-1 py-1 fw-light"
-                        style={{ fontSize: "14px" }}
-                      >
-                        {post.description.charAt(0).toUpperCase() +
-                          post.description.substring(1, 60)}
-                      </p>
-                    </Card.Text>
-                  </Card.Body>
-                  <Card.Footer className="  p-0 m-0">
-                    <p className="p-0 m-0" style={{ fontSize: "11px" }}>
-                      {"Net. Wt.: " + post.netWeight + "gms"}{" "}
-                      {"Gross Wt.: " + post.grossWeight + "gms"}
-                    </p>
-                  </Card.Footer>
-                  <Card.Footer>
-                    <p style={{ fontSize: "12px" }}>
-                      {post.discPrice - post.price < 0 ? (
-                        <span>
-                          <del>Price : ₹{post.price}</del> Disc Price : ₹
-                          {post.discPrice}
-                        </span>
-                      ) : (
-                        <span>Price : ₹{post.price}</span>
-                      )}
-                    </p>
-                  </Card.Footer>
-                  <Button variant="primary" type="button">
-                    Buy{" "}
-                  </Button>
-                </Card>
-              </div>
-            );
-        })}
-      </Carousel>
+      {loading && <button onClick={handleCancelClick}>Cancel</button>}
+       
+  
 
       {error && <p className="error">{error}</p>}
 
