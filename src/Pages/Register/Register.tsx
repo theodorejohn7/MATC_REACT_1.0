@@ -56,9 +56,9 @@ export default function Register() {
     navigate(`/home`)
   }
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="sm" style={{  marginTop:'20px',}}>
       {/* <Box mb={3} p={2}> */}
-      <div style={{ textAlign: "center" }}>
+      <div className="border border-primary p-4 rounded " style={{ textAlign: "center",boxShadow: '1px 3px 38px 10px rgba(139,149,237,1)' }}>
         <Typography
           align="center"
           variant="h5"
