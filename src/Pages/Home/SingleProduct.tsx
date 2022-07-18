@@ -67,9 +67,9 @@ export function SingleProduct({ id, image, title, description, netWeight, grossW
                         {title.length < 24 ? <br /> : ""}
                     </Card.Header>
 
-                    <Card.Text className="text-center  ">
+                    <Card.Text className="text-center mb-0 pb-0  ">
                         <p
-                            className="lh-1 py-1 fw-light"
+                            className="lh-1 py-1 mb-0 pb-0 fw-light"
                             style={{ fontSize: "14px" }}
                         >
                             {description.charAt(0).toUpperCase() +
@@ -83,8 +83,8 @@ export function SingleProduct({ id, image, title, description, netWeight, grossW
                         {"Gross Wt.: " + grossWeight + "gms"}
                     </p>
                 </Card.Footer>
-                <Card.Footer>
-                    <p style={{ fontSize: "12px" }}>
+                <Card.Footer className=" ">
+                    <p className="mb-0 pb-0" style={{ fontSize: "12px" }}>
                         {discPrice - price < 0 ? (
                             <span>
                                 <del>Price : {formatCurrency(price)}</del> <br />Disc Price : 
