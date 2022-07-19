@@ -32,9 +32,7 @@ interface IPost {
 const defaultPosts: IPost[] = [];
 
 const Products = () => {
-
   const API_URL = process.env.REACT_APP_API_URL;
-
 
   const responsive = {
     desktop: {
@@ -86,7 +84,6 @@ const Products = () => {
     }
   };
 
-
   const fetchMuttonRecordsData = useCallback(async () => {
     console.log("inside fetch mutton");
     try {
@@ -131,16 +128,15 @@ const Products = () => {
         let error1 = axios.isCancel(ex)
           ? "Request Cancelled"
           : ex.code === "ECONNABORTED"
-            ? "A timeout has occurred"
-            : ex.response.status === 404
-              ? "Resource Not Found"
-              : "An unexpected error has occurred";
+          ? "A timeout has occurred"
+          : ex.response.status === 404
+          ? "Resource Not Found"
+          : "An unexpected error has occurred";
 
         setError(error1);
         setLoading(false);
       });
   }, []);
-
 
   React.useEffect(() => {
     fetchMuttonRecordsData();
@@ -159,8 +155,6 @@ const Products = () => {
 
   //   setMuttonPosts(muttonRecordsData);
   // console.log("mutton redux data",muttonRecordsData)
-
-   
 
   // React.useEffect(() => {
   //   mongoInstance
@@ -202,10 +196,10 @@ const Products = () => {
         let error1 = axios.isCancel(ex)
           ? "Request Cancelled"
           : ex.code === "ECONNABORTED"
-            ? "A timeout has occurred"
-            : ex.response.status === 404
-              ? "Resource Not Found"
-              : "An unexpected error has occurred";
+          ? "A timeout has occurred"
+          : ex.response.status === 404
+          ? "Resource Not Found"
+          : "An unexpected error has occurred";
 
         setError(error1);
         setLoading(false);
@@ -227,10 +221,10 @@ const Products = () => {
         let error1 = axios.isCancel(ex)
           ? "Request Cancelled"
           : ex.code === "ECONNABORTED"
-            ? "A timeout has occurred"
-            : ex.response.status === 404
-              ? "Resource Not Found"
-              : "An unexpected error has occurred";
+          ? "A timeout has occurred"
+          : ex.response.status === 404
+          ? "Resource Not Found"
+          : "An unexpected error has occurred";
 
         setError(error1);
         setLoading(false);
@@ -239,33 +233,31 @@ const Products = () => {
 
   return (
     <div className="App">
-
       <div className="">
-        <h3 className="display-1"   style={{textShadow:'2px 2px 6px #171BCE',fontWeight:350}}>Mutton</h3>
+        <h3
+          className="display-1"
+          style={{ textShadow: "2px 2px 6px #171BCE", fontWeight: 350 }}
+        >
+          Mutton
+        </h3>
         <Carousel
           ssr
           partialVisbile
           itemClass="image-item"
           responsive={responsive}
         >
-           { muttonPosts.map((item) => <SingleProduct {...item} />)}
+          {muttonPosts.map((item) => (
+            <SingleProduct {...item} />
+          ))}
         </Carousel>
       </div>
       <div>
-      <h3 className="display-1 text-dark" style={{textShadow:' 4px 3px 12px #171BCE',fontWeight:350}}>Chicken</h3>
- 
-        <Carousel
-          ssr
-          partialVisbile
-          itemClass="image-item"
-          responsive={responsive}
+        <h3
+          className="display-1 text-dark"
+          style={{ textShadow: " 4px 3px 12px #171BCE", fontWeight: 350 }}
         >
-           { chickenPosts.map((item) => <SingleProduct {...item} />)}
-        </Carousel>
-      </div>
-      <div>
-      
-      <h3 className="display-1 text-dark" style={{textShadow:' 4px 3px 12px #171BCE',fontWeight:350}}>Sea Foods</h3>
+          Chicken
+        </h3>
 
         <Carousel
           ssr
@@ -273,13 +265,32 @@ const Products = () => {
           itemClass="image-item"
           responsive={responsive}
         >
-           { seafoodPosts.map((item) => <SingleProduct {...item} />)}
+          {chickenPosts.map((item) => (
+            <SingleProduct {...item} />
+          ))}
+        </Carousel>
+      </div>
+      <div>
+        <h3
+          className="display-1 text-dark"
+          style={{ textShadow: " 4px 3px 12px #171BCE", fontWeight: 350 }}
+        >
+          Sea Foods
+        </h3>
+
+        <Carousel
+          ssr
+          partialVisbile
+          itemClass="image-item"
+          responsive={responsive}
+        >
+          {seafoodPosts.map((item) => (
+            <SingleProduct {...item} />
+          ))}
         </Carousel>
       </div>
 
       {loading && <button onClick={handleCancelClick}>Cancel</button>}
-       
-  
 
       {error && <p className="error">{error}</p>}
 

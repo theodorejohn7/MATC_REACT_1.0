@@ -3,7 +3,7 @@ const API_URL = process.env.REACT_APP_API_URL;
 
 
 const instance = axios.create({
-  baseURL: `https://react-theo-default-rtdb.firebaseio.com/`,
+  baseURL: `${API_URL}`,
 });
 instance.defaults.headers.common["channelName"] = "John's Channel";
 

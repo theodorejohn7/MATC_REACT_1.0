@@ -2,7 +2,7 @@ import { Offcanvas, Stack } from "react-bootstrap";
 import { useShoppingCart } from "../../context/ShoppingCartContext";
 import { formatCurrency } from "../../utilities/formatCurrency";
 import { CartItem } from "./CartItem";
-import storeItems from "../data/items.json";
+ 
 import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
  
@@ -53,8 +53,7 @@ export default function ShoppingCart({ isOpen }: ShoppingCartProps) {
     
       const allRecordsData:AllRecords[] = useSelector(
         (state: any) => state.getProductReducer?.getAllProductData
-      );
-console.log("@!@ store item",storeItems);
+      ); 
 console.log("@!@ all records data",allRecordsData);
 
     return <Offcanvas show={isOpen} placement="end" onHide={closeCart}>
