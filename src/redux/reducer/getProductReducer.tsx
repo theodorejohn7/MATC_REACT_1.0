@@ -14,7 +14,6 @@ const getProductReducer = (
     case GET_PRODUCT_DATA:
       return { ...state, getProductData: action.data };
     case GET_ALL_PRODUCT_DATA:
-      console.log("state", state);
       return { ...state, getAllProductData: action.data };
     case RESET_PRODUCT_DATA:
       return { ...state, getProductData: [] };

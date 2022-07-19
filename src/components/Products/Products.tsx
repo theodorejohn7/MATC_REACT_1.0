@@ -142,7 +142,7 @@ const Products = () => {
         )}
         <Carousel
           ssr
-          partialVisbile
+          partialVisible
           itemClass="image-item"
           responsive={responsive}
         >
@@ -163,7 +163,7 @@ const Products = () => {
 
         <Carousel
           ssr
-          partialVisbile
+          partialVisible
           itemClass="image-item"
           responsive={responsive}
         >
@@ -184,7 +184,7 @@ const Products = () => {
 
         <Carousel
           ssr
-          partialVisbile
+          partialVisible
           itemClass="image-item"
           responsive={responsive}
         >
