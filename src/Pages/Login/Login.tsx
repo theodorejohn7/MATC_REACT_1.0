@@ -1,22 +1,19 @@
+import axios from "axios";
 import * as React from "react";
-
-import { Container, Typography, Grid, Button } from "@mui/material";
-
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-
+import { Container, Typography, Grid, Button } from "@mui/material";
 import { Formik, FormikHelpers, FormikProps, Form, Field } from "formik";
-import axios from "axios";
 
 import { FormTextField } from "../../components/FormTextField/FormTextField";
 import ValidationSchema from "./ValidationSchema";
+
 interface FormValues {
   name: string;
   password: string;
 }
 
 export default function Login() {
-
   const FIREBASE_URL = process.env.REACT_APP_FIREBASE_URL;
 
   const [username, setUsername] = React.useState("");
@@ -24,7 +21,7 @@ export default function Login() {
 
   const [errorMessage, setErrorMessage] = React.useState("");
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
+
   const handleClose = () => setOpen(false);
 
   const style = {
@@ -40,10 +37,21 @@ export default function Login() {
     padding: 0,
     p: 4,
   };
+
   return (
-    <Container maxWidth="md" className="   rounded d-flex align-items-center justify-content-center " style={{minHeight:'350px', marginTop:'20px',}}>
-      {/* <Box mb={3} p={2}> */}
-      <div className="border border-primary p-4 rounded " style={{ textAlign: "center", width:'15rem',boxShadow: '1px 3px 38px 10px rgba(139,149,237,1)' }}>
+    <Container
+      maxWidth="md"
+      className="   rounded d-flex align-items-center justify-content-center "
+      style={{ minHeight: "350px", marginTop: "20px" }}
+    >
+      <div
+        className="border border-primary p-4 rounded "
+        style={{
+          textAlign: "center",
+          width: "15rem",
+          boxShadow: "1px 3px 38px 10px rgba(139,149,237,1)",
+        }}
+      >
         <Typography
           align="center"
           variant="h5"
@@ -51,7 +59,6 @@ export default function Login() {
         >
           Login Form
         </Typography>
-        {/* </Box> */}
 
         <Formik
           initialValues={{
@@ -68,10 +75,12 @@ export default function Login() {
             axios
               .get(`${FIREBASE_URL}/${values.name}.json`)
               .then((response) => {
-                console.log(values.name, response.data.name);
-
                 if (values.name === response.data.name) {
-                  console.log("available name");
+                  console.log(
+                    values.name,
+                    "available name",
+                    response.data.name
+                  );
                 }
                 if (values.password !== response.data.password) {
                   console.log("invalid password");
