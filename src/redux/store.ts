@@ -1,13 +1,13 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 
 import ReduxThunk from "redux-thunk";
-import testReducer from "./reducer/testReducer";
-import patchProductReducer from "./reducer/patchProductReducer";
+import muttonReducer from "./reducer/muttonReducer";
 import getProductReducer from "./reducer/getProductReducer";
+import patchProductReducer from "./reducer/patchProductReducer";
 import deleteProductReducer from "./reducer/deleteProductReducer";
 
 const appReducer = combineReducers({
-  testReducer: testReducer,
+  muttonReducer: muttonReducer,
   patchProductReducer: patchProductReducer,
   getProductReducer: getProductReducer,
   deleteProductReducer: deleteProductReducer,
@@ -15,7 +15,4 @@ const appReducer = combineReducers({
 
 export const store = createStore(appReducer, applyMiddleware(ReduxThunk));
 
-//@1 inline with https://redux.js.org/tutorials/typescript-quick-start for 441@Promduct management
-export type AppDispatch = typeof store.dispatch;
-export type RootState = ReturnType<typeof store.getState>;
-//@1
+ 

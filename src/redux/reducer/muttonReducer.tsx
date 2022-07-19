@@ -1,4 +1,4 @@
-import { GET_MUTTON_DATA, RESET_MUTTON_DATA, EDIT_MUTTON_DATA } from "../action/testAction";
+import { GET_MUTTON_DATA, RESET_MUTTON_DATA, EDIT_MUTTON_DATA } from "../action/MuttonAction";
 
 const initialState = {};
 

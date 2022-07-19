@@ -5,7 +5,7 @@ import { useState, useCallback, useEffect } from "react";
 
 import { SingleProduct } from "./SingleProduct";
 import { mongoInstance } from "../../axios/instance";
-import { getMuttonData } from "../../redux/action/testAction";
+import { getMuttonData } from "../../redux/action/MuttonAction";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "react-multi-carousel/lib/styles.css";
@@ -79,7 +79,7 @@ const Products = () => {
   };
 
   const muttonRecordsData = useSelector(
-    (state: any) => state.testReducer?.getMuttonData
+    (state: any) => state.muttonReducer?.getMuttonData
   );
 
   const fetchMuttonRecordsData = useCallback(async () => {

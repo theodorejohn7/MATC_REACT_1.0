@@ -11,7 +11,7 @@ import {
 import React, { useCallback, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { getMuttonData } from "../../redux/action/testAction";
+import { getMuttonData } from "../../redux/action/MuttonAction";
 import { getProductData } from "../../redux/action/getProductAction";
 import { deleteProductData } from "../../redux/action/deleteProductAction";
 import { patchProductUpdate } from "../../redux/action/patchProductAction";
@@ -357,7 +357,7 @@ const ProductManagement: React.FC = () => {
   }, [productRecordsData]);
 
   const muttonRecordsData = useSelector(
-    (state: any) => state.testReducer?.getMuttonData
+    (state: any) => state.muttonReducer?.getMuttonData
   );
 
   const [spinLoader, setSpinLoader] = useState(false);

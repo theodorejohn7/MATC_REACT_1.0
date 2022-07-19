@@ -7,8 +7,6 @@ const patchProductReducer = (
   action: { type: string; data: any }
 ) => {
   if (action.type === PATCH_PRODUCT_UPDATE) {
-    console.log("@$# inside patch REDUCER if statement");
-
     return { ...state, patchProductUpdate: action.data };
   } else {
     return state;
