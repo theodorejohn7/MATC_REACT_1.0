@@ -1,11 +1,7 @@
- 
-
-import CarouselComp from "./CarouselComp";
 import Products from "./Products";
+import CarouselComp from "./CarouselComp";
 
-type Props = {};
-
-const Home = (props: Props) => {
+const Home = () => {
   return (
     <div>
       <CarouselComp />

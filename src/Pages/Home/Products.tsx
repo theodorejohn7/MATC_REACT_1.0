@@ -1,7 +1,7 @@
 import Carousel from "react-multi-carousel";
 import axios, { CancelTokenSource } from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import React, { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect } from "react";
 
 import { SingleProduct } from "./SingleProduct";
 import { mongoInstance } from "../../axios/instance";
