@@ -1,5 +1,5 @@
-import Products from "./Products";
-import CarouselComp from "./CarouselComp";
+import Products from "../../components/Products/Products"
+import CarouselComp from "../../components/Carousel/CarouselComp";
 
 const Home = () => {
   return (

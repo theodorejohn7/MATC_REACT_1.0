@@ -5,7 +5,7 @@ import { useState, useCallback, useEffect } from "react";
 
 import { SingleProduct } from "./SingleProduct";
 import { mongoInstance } from "../../axios/instance";
-import { getMuttonData, editMuttonData } from "../../redux/action/testAction";
+import { getMuttonData } from "../../redux/action/testAction";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "react-multi-carousel/lib/styles.css";
@@ -83,7 +83,7 @@ const Products = () => {
   );
 
   const fetchMuttonRecordsData = useCallback(async () => {
-      try {
+    try {
       dispatch(getMuttonData());
     } catch (error_1) {
       console.log(error_1);
