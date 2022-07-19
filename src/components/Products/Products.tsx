@@ -1,5 +1,4 @@
 import Carousel from "react-multi-carousel";
-import axios, { CancelTokenSource } from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useCallback, useEffect } from "react";
 
@@ -58,25 +57,10 @@ const Products = () => {
   const [muttonPosts, setMuttonPosts]: [IPost[], (posts: IPost[]) => void] =
     useState(defaultPosts);
 
-  const [tempPosts, setTempPosts]: [IPost[], (posts: IPost[]) => void] =
-    useState(defaultPosts);
-
   const [loading, setLoading]: [boolean, (loading: boolean) => void] =
     useState<boolean>(true);
 
   const [error, setError]: [string, (error: string) => void] = useState("");
-
-  const cancelToken = axios.CancelToken;
-  const [cancelTokenSource, setCancelTokenSource]: [
-    CancelTokenSource,
-    (cancelTokenSource: CancelTokenSource) => void
-  ] = useState(cancelToken.source());
-
-  const handleCancelClick = () => {
-    if (cancelTokenSource) {
-      cancelTokenSource.cancel("User cancelled operation");
-    }
-  };
 
   const muttonRecordsData = useSelector(
     (state: any) => state.muttonReducer?.getMuttonData
@@ -101,14 +85,6 @@ const Products = () => {
       })
       .catch((ex) => {
         console.log("error", ex);
-        let error1 = axios.isCancel(ex)
-          ? "Request Cancelled"
-          : ex.code === "ECONNABORTED"
-          ? "A timeout has occurred"
-          : ex.response.status === 404
-          ? "Resource Not Found"
-          : "An unexpected error has occurred";
-        setError(error1);
         setLoading(false);
       });
   }, []);
@@ -134,15 +110,6 @@ const Products = () => {
       })
       .catch((ex) => {
         console.log("error", ex);
-        let error1 = axios.isCancel(ex)
-          ? "Request Cancelled"
-          : ex.code === "ECONNABORTED"
-          ? "A timeout has occurred"
-          : ex.response.status === 404
-          ? "Resource Not Found"
-          : "An unexpected error has occurred";
-
-        setError(error1);
         setLoading(false);
       });
   }, []);
@@ -158,15 +125,6 @@ const Products = () => {
       })
       .catch((ex) => {
         console.log("error", ex);
-        let error1 = axios.isCancel(ex)
-          ? "Request Cancelled"
-          : ex.code === "ECONNABORTED"
-          ? "A timeout has occurred"
-          : ex.response.status === 404
-          ? "Resource Not Found"
-          : "An unexpected error has occurred";
-
-        setError(error1);
         setLoading(false);
       });
   }, []);
@@ -174,12 +132,14 @@ const Products = () => {
   return (
     <div className="App">
       <div className="">
-        <h3
-          className="display-1"
-          style={{ textShadow: "2px 2px 6px #171BCE", fontWeight: 350 }}
-        >
-          Mutton
-        </h3>
+        {!loading && (
+          <h3
+            className="display-1"
+            style={{ textShadow: "2px 2px 6px #171BCE", fontWeight: 350 }}
+          >
+            Mutton
+          </h3>
+        )}
         <Carousel
           ssr
           partialVisbile
@@ -192,12 +152,14 @@ const Products = () => {
         </Carousel>
       </div>
       <div>
-        <h3
-          className="display-1 text-dark"
-          style={{ textShadow: " 4px 3px 12px #171BCE", fontWeight: 350 }}
-        >
-          Chicken
-        </h3>
+        {!loading && (
+          <h3
+            className="display-1 text-dark"
+            style={{ textShadow: " 4px 3px 12px #171BCE", fontWeight: 350 }}
+          >
+            Chicken
+          </h3>
+        )}
 
         <Carousel
           ssr
@@ -211,12 +173,14 @@ const Products = () => {
         </Carousel>
       </div>
       <div>
-        <h3
-          className="display-1 text-dark"
-          style={{ textShadow: " 4px 3px 12px #171BCE", fontWeight: 350 }}
-        >
-          Sea Foods
-        </h3>
+        {!loading && (
+          <h3
+            className="display-1 text-dark"
+            style={{ textShadow: " 4px 3px 12px #171BCE", fontWeight: 350 }}
+          >
+            Sea Foods
+          </h3>
+        )}
 
         <Carousel
           ssr
@@ -230,9 +194,7 @@ const Products = () => {
         </Carousel>
       </div>
 
-      {loading && (
-        <button onClick={handleCancelClick}>Cancel Loading content</button>
-      )}
+      {loading && <p>Loading Updated Products .... </p>}
 
       {error && <p className="error">{error}</p>}
 
