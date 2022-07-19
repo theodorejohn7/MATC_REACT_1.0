@@ -9,14 +9,15 @@ import {
   Typography,
 } from "antd";
 import React, { useCallback, useEffect, useState } from "react";
-import "antd/dist/antd.css";
-import "./styles.css";  
-
 import { useSelector, useDispatch } from "react-redux";
+
 import { getMuttonData } from "../../redux/action/testAction";
-import { patchProductUpdate } from "../../redux/action/patchProductAction";
-import { deleteProductData } from "../../redux/action/deleteProductAction";
 import { getProductData } from "../../redux/action/getProductAction";
+import { deleteProductData } from "../../redux/action/deleteProductAction";
+import { patchProductUpdate } from "../../redux/action/patchProductAction";
+
+import "./styles.css";
+import "antd/dist/antd.css";
 
 interface Item {
   id: string;
@@ -32,8 +33,8 @@ interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
   editing: boolean;
   dataIndex: string;
   title: any;
-  _record:string;
-  _index:string;
+  _record: string;
+  _index: string;
   description: string;
   image: string;
   inputType: "number" | "text" | "lineOfText";
@@ -42,11 +43,23 @@ interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
   children: React.ReactNode;
 }
 
+interface IPost {
+  image: string;
+  title: string;
+  description: string;
+  id: string;
+  _id: string;
+  userId?: number;
+  discPrice: number;
+  grossWeight: number;
+}
+
+const defaultPosts: IPost[] = [];
+
 const EditableCell: React.FC<EditableCellProps> = ({
   editing,
   dataIndex,
   title,
-
   inputType,
   _record,
   _index,
@@ -84,33 +97,17 @@ const EditableCell: React.FC<EditableCellProps> = ({
   );
 };
 
-interface IPost {
-  id: any;
-  image: string;
-  userId?: number;
-  title: string;
-  description: string;
-  _id: string;
-  discPrice:number;
-  grossWeight:number;
-}
-
-const defaultPosts: IPost[] = [];
-
 const ProductManagement: React.FC = () => {
+  const dispatch = useDispatch();
   const [form] = Form.useForm();
   const [editingKey, setEditingKey] = useState("");
-  const API_URL = process.env.REACT_APP_API_URL;
 
-  const dispatch = useDispatch();
-
-  const [error, setError]: [string, (error: string) => void] =
-    React.useState("");
+  const [error, setError]: [string, (error: string) => void] = useState("");
   const [muttonPosts, setMuttonPosts]: [IPost[], (posts: IPost[]) => void] =
-    React.useState(defaultPosts);
+    useState(defaultPosts);
 
   const [loading, setLoading]: [boolean, (loading: boolean) => void] =
-    React.useState<boolean>(true);
+    useState<boolean>(true);
 
   const [data, setData] = useState(muttonPosts);
 
@@ -131,9 +128,9 @@ const ProductManagement: React.FC = () => {
   };
 
   const updateProductData = useCallback(
-    async (id:string, body:any) => {
+    async (id: string, body: any) => {
       try {
-        dispatch(patchProductUpdate(id, body)) ;
+        dispatch(patchProductUpdate(id, body));
       } catch (_error) {
         console.log(_error);
       }
@@ -142,9 +139,9 @@ const ProductManagement: React.FC = () => {
   );
 
   const deleteProductRecords = useCallback(
-    async (id:string) => {
+    async (id: string) => {
       try {
-        dispatch(deleteProductData(id) );
+        dispatch(deleteProductData(id));
       } catch (err) {
         console.log(err);
       }
@@ -155,12 +152,8 @@ const ProductManagement: React.FC = () => {
   const save = async (key: React.Key) => {
     try {
       const row = await form.validateFields();
-      //    as Item
-
       const newData = [...data];
       const index = newData.findIndex((item) => key === item.id);
-      console.log("@$# newData", index);
-      console.log("@$# row", row);
 
       if (index > -1) {
         const item = newData[index];
@@ -168,7 +161,6 @@ const ProductManagement: React.FC = () => {
           ...item,
           ...row,
         });
-        console.log("@$# newdataRow", newData[index]);
 
         updateProductData(newData[index]._id, newData[index]);
 
@@ -246,7 +238,13 @@ const ProductManagement: React.FC = () => {
       dataIndex: "image",
       width: "10%",
       editable: true,
-      render: (image:string) => <img alt={`${image}+image`} src={`${image}`} style={{ height: "10vh" }} />,
+      render: (image: string) => (
+        <img
+          alt={`${image}+image`}
+          src={`${image}`}
+          style={{ height: "10vh" }}
+        />
+      ),
     },
     {
       title: "Rating ",
@@ -300,12 +298,10 @@ const ProductManagement: React.FC = () => {
     },
   ];
 
-  const handleDelete = (key:string) => {
+  const handleDelete = (key: string) => {
     const newData = data.filter((item) => item._id !== key);
-    console.log("Key", key);
     deleteProductRecords(key);
-    setData(newData)
-    console.log("New Data", newData);
+    setData(newData);
   };
 
   const mergedColumns = columns.map((col) => {
@@ -353,7 +349,9 @@ const ProductManagement: React.FC = () => {
 
       setLoading(false);
       if (productRecordsData.error) {
-        setError(productRecordsData !== undefined && productRecordsData?.message);
+        setError(
+          productRecordsData !== undefined && productRecordsData?.message
+        );
       }
     }
   }, [productRecordsData]);
@@ -375,7 +373,6 @@ const ProductManagement: React.FC = () => {
 
   useEffect(() => {
     if (muttonRecordsData) {
-      console.log("@$# 292", muttonRecordsData);
       setMuttonPosts(muttonRecordsData);
       setData(muttonRecordsData);
       setSpinLoader(false);
@@ -387,22 +384,16 @@ const ProductManagement: React.FC = () => {
   }, [muttonRecordsData]);
 
   interface DataType {
-    key: number;
-    name: string;
-    age: number;
     address: string;
     description: string;
+    name: string;
+    age: number;
+    key: number;
   }
-  // const showTitle = true;
-  // const defaultTitle = "Wellcome";
-  // const tableProps: TableProps<DataType> = {
-  //   // loading,
-  //   size: "middle",
-  //   // "bordered"
-  // };
+
   return (
-    <div style={{minHeight:'350px'}}>
-      <div >
+    <div style={{ minHeight: "350px" }}>
+      <div>
         <Button
           type="primary"
           className="custom_button"
@@ -430,7 +421,6 @@ const ProductManagement: React.FC = () => {
         <Spin spinning={spinLoader} className="custom_button" tip="Loading...">
           {!loading && (
             <Table
-              // {...tableProps}
               className="table_style"
               components={{
                 body: {
@@ -456,34 +446,3 @@ const ProductManagement: React.FC = () => {
 };
 
 export default ProductManagement;
-// .editable-row .ant-form-item-explain {
-//   position: absolute;
-//   top: 100%;
-//   font-size: 12px;
-// }
-
-//   React.useEffect(() => {
-//     mongoInstance
-//       .get<IPost[]>("http://localhost:7002/api/category/mutton", {
-//         timeout: 10000,
-//       })
-//       .then((response) => {
-//         console.log("api response", response.data);
-//         setMuttonPosts(response.data);
-//         setData(response.data);
-//         setLoading(false);
-//       })
-//       .catch((ex) => {
-//         console.log("error", ex);
-//         let error1 = axios.isCancel(ex)
-//           ? "Request Cancelled"
-//           : ex.code === "ECONNABORTED"
-//           ? "A timeout has occurred"
-//           : ex.response.status === 404
-//           ? "Resource Not Found"
-//           : "An unexpected error has occurred";
-
-//         setError(error1);
-//         setLoading(false);
-//       });
-//   }, []);
