@@ -13,7 +13,7 @@ const Login = lazy(() => import("./Pages/Login/Login"));
 
 const Register = lazy(() => import("./Pages/Register/Register"));
 
-const SignUp = lazy(() => import("./Pages/SignUp/SignUp"));
+
 const ProductManagement = lazy(
   () => import("./Pages/Management/ProductManagement")
 );
@@ -33,7 +33,7 @@ function App() {
             <Routes>
               <Route path="/home" element={<Home />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<SignUp />} />
+          
               <Route path="/register" element={<Register />} />
 
               <Route path="/productmgmt" element={<ProductManagement />} />

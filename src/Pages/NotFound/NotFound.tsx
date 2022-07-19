@@ -1,11 +1,15 @@
-import React from 'react'
+import React from "react";
 
-type Props = {}
-
-const NotFound = (props: Props) => {
+const NotFound = () => {
   return (
-    <div>NotFound</div>
-  )
-}
+    <div>
+      <img
+        src="./img/404.webp"
+        style={{ maxWidth: "75%" }}
+        alt="404 error message"
+      />
+    </div>
+  );
+};
 
-export default NotFound
+export default NotFound;
