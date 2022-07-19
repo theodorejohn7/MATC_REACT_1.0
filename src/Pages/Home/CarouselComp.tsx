@@ -1,13 +1,14 @@
-import React from "react";
+import axios from "axios";
 import Carousel from "react-bootstrap/Carousel";
- 
-import axios, { CancelTokenSource } from "axios";
+import { useEffect, useState } from "react";
 
+import instance from "../../axios/instance";
 
 import "bootstrap/dist/css/bootstrap.css";
-type Props = {};
 
-const CarouselComp = (props: Props) => {
+const CarouselComp = () => {
+  const CAROUSEL_API_URL = process.env.REACT_APP_CAROUSEL_API_URL;
+
   interface IPost {
     id?: number;
     image: string;
@@ -15,48 +16,24 @@ const CarouselComp = (props: Props) => {
 
   const defaultPosts: IPost[] = [];
 
-
   const [posts, setPosts]: [IPost[], (posts: IPost[]) => void] =
-    React.useState(defaultPosts);
+    useState(defaultPosts);
 
   const [loading, setLoading]: [boolean, (loading: boolean) => void] =
-    React.useState<boolean>(true);
+    useState<boolean>(true);
 
-  const [error, setError]: [string, (error: string) => void] =
-    React.useState("");
+  const [error, setError]: [string, (error: string) => void] = useState("");
 
-  const cancelToken = axios.CancelToken; //create cancel token
-  const [cancelTokenSource, setCancelTokenSource]: [
-    CancelTokenSource,
-    (cancelTokenSource: CancelTokenSource) => void
-  ] = React.useState(cancelToken.source());
-
-
-  const handleCancelClick = () => {
-    if (cancelTokenSource) {
-      cancelTokenSource.cancel("User cancelled operation");
-    }
-  };
-
-
-
-
-  React.useEffect(() => {
-    axios
-      .get<IPost[]>(
-        "https://62bae56f573ca8f8328e3c55.mockapi.io/theo/coverImage",
-        {
-          cancelToken: cancelTokenSource.token,
-          headers: {
-            "Content-Type": "application/json",
-          },
-          timeout: 10000,
-        }
-      )
+  useEffect(() => {
+    instance
+      .get<IPost[]>(`${CAROUSEL_API_URL}`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        timeout: 10000,
+      })
       .then((response) => {
-    
         setPosts(response.data);
-        
       })
       .catch((ex) => {
         let error1 = axios.isCancel(ex)
@@ -82,23 +59,11 @@ const CarouselComp = (props: Props) => {
       }}
     >
       <Carousel>
-
-       { posts.map((data)=>(
-        
+        {posts.map((data) => (
           <Carousel.Item>
- 
-          <img
-            className="d-block   w-100"
-            src={data.image}
-             
-          />
-          
-        </Carousel.Item>
-       
+            <img className="d-block   w-100" src={data.image} />
+          </Carousel.Item>
         ))}
-       
-         
-        
       </Carousel>
     </div>
   );

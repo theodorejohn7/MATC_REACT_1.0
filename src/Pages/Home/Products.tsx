@@ -1,11 +1,11 @@
 import Carousel from "react-multi-carousel";
 import axios, { CancelTokenSource } from "axios";
-import React, { useState, useCallback, useEffect } from "react";
-import { mongoInstance } from "../../axios/instance";
 import { useSelector, useDispatch } from "react-redux";
+import React, { useState, useCallback, useEffect } from "react";
 
-import { getMuttonData, editMuttonData } from "../../redux/action/testAction";
 import { SingleProduct } from "./SingleProduct";
+import { mongoInstance } from "../../axios/instance";
+import { getMuttonData, editMuttonData } from "../../redux/action/testAction";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "react-multi-carousel/lib/styles.css";
@@ -83,8 +83,7 @@ const Products = () => {
   );
 
   const fetchMuttonRecordsData = useCallback(async () => {
-    console.log("inside fetch mutton");
-    try {
+      try {
       dispatch(getMuttonData());
     } catch (error_1) {
       console.log(error_1);
@@ -125,7 +124,7 @@ const Products = () => {
     }
   }, [muttonRecordsData]);
 
- useEffect(() => {
+  useEffect(() => {
     mongoInstance
       .get<IPost[]>(`${API_URL}api/category/chicken`, {
         timeout: 10000,
@@ -150,7 +149,7 @@ const Products = () => {
       });
   }, []);
 
- useEffect(() => {
+  useEffect(() => {
     mongoInstance
       .get<IPost[]>(`${API_URL}api/category/seafood`, {
         timeout: 10000,
@@ -234,7 +233,9 @@ const Products = () => {
         </Carousel>
       </div>
 
-      {loading && <button onClick={handleCancelClick}>Cancel Loading content</button>}
+      {loading && (
+        <button onClick={handleCancelClick}>Cancel Loading content</button>
+      )}
 
       {error && <p className="error">{error}</p>}
 
