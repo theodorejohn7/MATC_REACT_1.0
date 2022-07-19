@@ -1,81 +1,79 @@
-import { Offcanvas, Stack } from "react-bootstrap";
-import { useShoppingCart } from "../../context/ShoppingCartContext";
-import { formatCurrency } from "../../utilities/formatCurrency";
-import { CartItem } from "./CartItem";
- 
 import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
- 
- 
-import {getAllProductData} from "../../redux/action/getProductAction"
+import { Offcanvas, Stack } from "react-bootstrap";
+
+import { CartItem } from "./CartItem";
+import { formatCurrency } from "../../utilities/formatCurrency";
+import { useShoppingCart } from "../../context/ShoppingCartContext";
+import { getAllProductData } from "../../redux/action/getProductAction";
 
 type ShoppingCartProps = {
-    isOpen: boolean
-}
-
+  isOpen: boolean;
+};
 
 interface AllRecords {
-    _id:string;
-    rating:number;
-    __v:string;
-    image: string;
-    userId?: number;
-    title: string;
-    description: string;
-    price: number;
-    discPrice: number;
-    grossWeight: number;
-    netWeight: number;
-    units?: number;
-    category: string;
-    id: number;
-  }
-  
+  _id: string;
+  __v: string;
+  image: string;
+  title: string;
+  description: string;
+  category: string;
+  rating: number;
+  userId?: number;
+  price: number;
+  discPrice: number;
+  grossWeight: number;
+  netWeight: number;
+  units?: number;
+  id: number;
+}
 
 export default function ShoppingCart({ isOpen }: ShoppingCartProps) {
-    const { closeCart, cartItems } = useShoppingCart()
-    const dispatch = useDispatch();
+  const { closeCart, cartItems } = useShoppingCart();
 
+  const dispatch = useDispatch();
 
-    const fetchAllRecordsData = useCallback(async () => {
-        console.log("inside fetch mutton");
-        try {
-          dispatch(getAllProductData());
-        } catch (error_1) {
-          console.log(error_1);
-        }
-      }, [dispatch]);
+  const allRecordsData: AllRecords[] = useSelector(
+    (state: any) => state.getProductReducer?.getAllProductData
+  );
 
+  const fetchAllRecordsData = useCallback(async () => {
 
-      useEffect(() => {
-        fetchAllRecordsData();
-      }, []);
-    
-      const allRecordsData:AllRecords[] = useSelector(
-        (state: any) => state.getProductReducer?.getAllProductData
-      ); 
-console.log("@!@ all records data",allRecordsData);
+    try {
+      dispatch(getAllProductData());
+    } catch (error_1) {
+      console.log(error_1);
+    }
+  }, [dispatch]);
 
-    return <Offcanvas show={isOpen} placement="end" onHide={closeCart}>
-        <Offcanvas.Header closeButton>
-            <Offcanvas.Title>
-                Cart
-            </Offcanvas.Title>
-        </Offcanvas.Header>
+  useEffect(() => {
+    fetchAllRecordsData();
+  }, []);
 
-        <Offcanvas.Body>
-            <Stack gap={3} >
-                {cartItems.map(item => (
-                    <CartItem key={item.id} {...item} />
-                ))}
-                <div className="ms-auto fw-bold fs-5">
-                    Total{formatCurrency(cartItems.reduce((total, cartItem) => {
+  return (
+    <Offcanvas show={isOpen} placement="end" onHide={closeCart}>
+      <Offcanvas.Header closeButton>
+        <Offcanvas.Title>Cart</Offcanvas.Title>
+      </Offcanvas.Header>
 
-                        const item = allRecordsData?.find(item => item.id === cartItem.id)
-                        return total+(item?.price || 0)*cartItem.quantity
-                    },0))}
-                </div>
-            </Stack>
-        </Offcanvas.Body>
+      <Offcanvas.Body>
+        <Stack gap={3}>
+          {cartItems.map((item) => (
+            <CartItem key={item.id} {...item} />
+          ))}
+          <div className="ms-auto fw-bold fs-5">
+            Total
+            {formatCurrency(
+              cartItems.reduce((total, cartItem) => {
+                const item = allRecordsData?.find(
+                  (item) => item.id === cartItem.id
+                );
+                return total + (item?.price || 0) * cartItem.quantity;
+              }, 0)
+            )}
+          </div>
+        </Stack>
+      </Offcanvas.Body>
     </Offcanvas>
+  );
 }

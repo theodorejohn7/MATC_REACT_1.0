@@ -1,10 +1,10 @@
-import { Button, Stack } from "react-bootstrap";
-import { useShoppingCart } from "../../context/ShoppingCartContext"; 
-import { formatCurrency } from "../../utilities/formatCurrency";
-import { getAllProductData } from "../../redux/action/getProductAction";
-
 import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Button, Stack } from "react-bootstrap";
+
+import { useShoppingCart } from "../../context/ShoppingCartContext";
+import { formatCurrency } from "../../utilities/formatCurrency";
+import { getAllProductData } from "../../redux/action/getProductAction";
 
 type CartItemsProps = {
   id: number;
@@ -13,18 +13,18 @@ type CartItemsProps = {
 
 interface AllRecords {
   _id: string;
-  rating: number;
   __v: string;
   image: string;
-  userId?: number;
   title: string;
   description: string;
+  category: string;
+  userId?: number;
+  rating: number;
   price: number;
   discPrice: number;
   grossWeight: number;
   netWeight: number;
   units?: number;
-  category: string;
   id: number;
 }
 
