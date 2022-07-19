@@ -32,7 +32,6 @@ export function CartItem({ id, quantity }: CartItemsProps) {
   const dispatch = useDispatch();
 
   const fetchAllRecordsData = useCallback(async () => {
-    console.log("inside fetch mutton");
     try {
       dispatch(getAllProductData());
     } catch (error_1) {

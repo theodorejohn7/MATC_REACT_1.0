@@ -96,7 +96,6 @@ const Products = () => {
         timeout: 10000,
       })
       .then((response) => {
-        console.log("api response", response.data);
         setMuttonPosts(response.data);
         setLoading(false);
       })
@@ -130,7 +129,6 @@ const Products = () => {
         timeout: 10000,
       })
       .then((response) => {
-        console.log("api response", response.data);
         setChickenPosts(response.data);
         setLoading(false);
       })
@@ -155,7 +153,6 @@ const Products = () => {
         timeout: 10000,
       })
       .then((response) => {
-        console.log("api response", response.data);
         setSeafoodPosts(response.data);
         setLoading(false);
       })
