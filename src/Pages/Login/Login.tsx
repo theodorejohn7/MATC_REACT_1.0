@@ -92,6 +92,7 @@ export default function Login() {
               .catch((error_12) => {
                 setErrorMessage("Username Not Registered ");
                 setOpen(true);
+                console.log(error_12)
               });
 
             formikHelpers.setSubmitting(false);

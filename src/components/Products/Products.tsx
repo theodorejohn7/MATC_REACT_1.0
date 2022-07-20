@@ -60,8 +60,6 @@ const Products = () => {
   const [loading, setLoading]: [boolean, (loading: boolean) => void] =
     useState<boolean>(true);
 
-  const [error, setError]: [string, (error: string) => void] = useState("");
-
   const muttonRecordsData = useSelector(
     (state: any) => state.muttonReducer?.getMuttonData
   );
@@ -195,8 +193,6 @@ const Products = () => {
       </div>
 
       {loading && <p>Loading Updated Products .... </p>}
-
-      {error && <p className="error">{error}</p>}
 
       <br />
     </div>

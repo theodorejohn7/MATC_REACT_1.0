@@ -12,7 +12,7 @@ type ShoppingCartProviderProps = {
   children: ReactNode;
 };
 
-type ShoppingCartContext = {
+type ShoppingCartContextType = {
   cartQuantity: number;
   getItemQuantity: (id: number) => number;
   cartItems: CartItem[];
@@ -23,7 +23,7 @@ type ShoppingCartContext = {
   removeFromCart: (id: number) => void;
 };
 
-const ShoppingCartContext = createContext({} as ShoppingCartContext);
+const ShoppingCartContext = createContext({} as ShoppingCartContextType);
 
 export function useShoppingCart() {
   return useContext(ShoppingCartContext);

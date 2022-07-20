@@ -26,7 +26,7 @@ test("render Submit button", () => {
   expect(submitButton).toBeInTheDocument();
 });
 
-it("displays error message while providing an empty input fields", async () => {
+it("performs validation in the field", async () => {
   render(<Login />);
   const username = screen.getByTestId("test_username");
   const submitButton = screen.getByTestId("test_submit");

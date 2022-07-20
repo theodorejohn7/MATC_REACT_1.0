@@ -26,10 +26,10 @@ const Footer = () => {
             <h5> OPTIMISED FOR MOBILE</h5>
             <hr />
             <div className="mb-4">
-              <img src="./img/app-store.svg" />
+              <img src="./img/app-store.svg" alt="app-store-image"/>
             </div>
             <div>
-              <img src="./img/play-store.png" />
+              <img src="./img/play-store.png" alt="play-store-image" />
             </div>
           </Col>
         </Row>

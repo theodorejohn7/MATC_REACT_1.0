@@ -4,8 +4,8 @@ const validationSchema = yup.object().shape({
   name: yup
     .string()
     .min(8, "Expected to have minimum 8 characters")
-    .required("Required"),
-  userName: yup.string().required("Required"),
+    .required("Required Field"),
+  userName: yup.string().required("Required Field"),
   password: yup
     .string()
     .min(8, "Expected to have minimum 8 characters")
@@ -15,24 +15,24 @@ const validationSchema = yup.object().shape({
       /(?=.*[ -\/:-@\[-\`{-~]{1,})/,
       "Expected to have minimum 1 special char (@,!,#, etc)."
     )
-    .required("Required"),
+    .required("Required Field"),
   confirmPassword: yup
     .string()
     .oneOf([yup.ref("password")], "Passwords do not match")
-    .required("Required"),
-  eMail: yup.string().required("Required"),
+    .required("Required Field"),
+  eMail: yup.string().required("Required Field"),
   confirmEMail: yup.string()
   .oneOf([yup.ref("eMail")], "e-Mail ID's do not match")
-    .required("Required"),
-  address: yup.string().required("Required"),
+    .required("Required Field"),
+  address: yup.string().required("Required Field"),
   pincode: yup
     .number()
     .positive("Pincode can have Positive values only")
-    .required("Required"),
-  state: yup.string().required("Required"),
-  country: yup.string().required("Required"),
-  securityQn: yup.string().required("Required"),
-  securityAns: yup.string().required("Required"),
+    .required("Required Field"),
+  state: yup.string().required("Required Field"),
+  country: yup.string().required("Required Field"),
+  securityQn: yup.string().required("Required Field"),
+  securityAns: yup.string().required("Required Field"),
 });
 
 export default validationSchema;
