@@ -4,7 +4,7 @@ const validationSchema = yup.object().shape({
   name: yup
     .string()
     .min(8, "Expected to have minimum 8 characters")
-    .required("Required"),
+    .required("Username Required"),
   password: yup
     .string()
     .min(8, "Expected to have minimum 8 characters")
@@ -14,7 +14,7 @@ const validationSchema = yup.object().shape({
       /(?=.*[ -\/:-@\[-\`{-~]{1,})/,
       "Expected to have minimum 1 special char (@,!,#, etc)."
     )
-    .required("Required"),
+    .required("Password Required"),
    
 });
 

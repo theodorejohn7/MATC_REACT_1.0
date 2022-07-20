@@ -104,9 +104,10 @@ export default function Login() {
                   <Field
                     name="name"
                     label="Name"
+                    data-testid="test_username"
                     size="small"
                     component={FormTextField}
-                  />
+                  />  
                 </Grid>
                 <Grid item xs={12}>
                   <Field
@@ -122,6 +123,8 @@ export default function Login() {
                     type="submit"
                     variant="outlined"
                     size="large"
+                    data-testid="test_submit"
+
                     color="primary"
                     disabled={formikProps.isSubmitting}
                   >
