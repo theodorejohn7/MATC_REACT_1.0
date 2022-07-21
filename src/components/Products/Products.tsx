@@ -191,8 +191,8 @@ const Products = () => {
           ))}
         </Carousel>
       </div>
-
-      {loading && <p>Loading Updated Products .... </p>}
+      <p>Loading Updated Products .... </p>
+      {/* {loading && <p>Loading Updated Products .... </p>} */}
 
       <br />
     </div>
