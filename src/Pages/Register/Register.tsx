@@ -131,7 +131,6 @@ export default function Register() {
                   <Field
                     name="name"
                     label="Name"
-                    data-testid="test_name"
                     size="small"
                     component={FormTextField}
                   />
@@ -141,7 +140,6 @@ export default function Register() {
                   <Field
                     name="userName"
                     label="User Name"
-                    data-testid="test_userName"
                     size="small"
                     component={FormTextField}
                   />
@@ -151,7 +149,6 @@ export default function Register() {
                     name="password"
                     type="password"
                     label="Password"
-                    data-testid="test_password"
                     size="small"
                     component={FormTextField}
                   />
@@ -161,7 +158,6 @@ export default function Register() {
                     name="confirmPassword"
                     label="Confirm Password"
                     type="password"
-                    data-testid="test_confirmPassword"
                     size="small"
                     component={FormTextField}
                   />
@@ -170,7 +166,6 @@ export default function Register() {
                   <Field
                     name="eMail"
                     label="e-Mail address"
-                    data-testid="test_eMail"
                     size="small"
                     component={FormTextField}
                   />
@@ -179,7 +174,6 @@ export default function Register() {
                   <Field
                     name="confirmEMail"
                     label="Confirm e-Mail address"
-                    data-testid="test_confirmEMail"
                     size="small"
                     component={FormTextField}
                   />
@@ -188,7 +182,6 @@ export default function Register() {
                   <Field
                     name="address"
                     label="Address"
-                    data-testid="test_address"
                     size="medium"
                     component={FormTextField}
                     style={{ width: "95%" }}
@@ -198,7 +191,6 @@ export default function Register() {
                   <Field
                     name="pincode"
                     label="Pincode"
-                    data-testid="test_pincode"
                     type="number"
                     size="small"
                     component={FormTextField}
@@ -208,7 +200,6 @@ export default function Register() {
                   <Field
                     name="state"
                     label="State"
-                    data-testid="test_state"
                     size="small"
                     component={FormTextField}
                   />
@@ -218,7 +209,6 @@ export default function Register() {
                   <Field
                     name="securityQn"
                     label="Security Question"
-                    data-testid="test_secQuestion"
                     size="small"
                     component={FormTextField}
                   />
@@ -228,8 +218,6 @@ export default function Register() {
                   <Field
                     name="country"
                     label="Country"
-                    data-testid="test_country"
-
                     size="small"
                     component={FormTextField}
                   />
@@ -239,8 +227,6 @@ export default function Register() {
                   <Field
                     name="securityAns"
                     label="Security Answer"
-                    data-testid="test_secAnswer"
-
                     size="small"
                     component={FormTextField}
                   />
@@ -250,7 +236,6 @@ export default function Register() {
                     type="submit"
                     variant="outlined"
                     data-testid="test_submitButton"
-
                     size="large"
                     color="primary"
                     disabled={formikProps.isSubmitting}
