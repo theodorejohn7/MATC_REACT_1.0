@@ -396,6 +396,7 @@ const ProductManagement: React.FC = () => {
       <div>
         <Button
           type="primary"
+          data-testid="DataButton"
           className="custom_button"
           onClick={() => fetchMuttonRecordsData()}
         >
@@ -417,10 +418,11 @@ const ProductManagement: React.FC = () => {
         </Button>
       </div>
 
-      <Form form={form} component={false}>
+      <Form data-testid="DataTable" className="data_table" form={form}  component={false} >
         <Spin spinning={spinLoader} className="custom_button" tip="Loading...">
           {!loading && (
             <Table
+            
               className="table_style"
               components={{
                 body: {

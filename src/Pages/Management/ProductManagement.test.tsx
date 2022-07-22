@@ -38,22 +38,21 @@ describe("Testing Product Management Page", () => {
     expect(seafoodButton).toBeInTheDocument();
   });
 
-  test("displays message when UserName field has less than 8 characters", async () => {
-    render(
-      <Provider store={store}>
-        <ProductManagement />
-      </Provider>
-    );
+//   test("displays Product details after button click",   () => {
+//     render(
+//       <Provider store={store}>
+//         <ProductManagement />
+//       </Provider>
+//     );
+    
+//     const submitButton = screen.getByTestId("DataButton");
+//     userEvent.click(submitButton);
+ 
 
-    const submitButton = screen.getByText("Display Mutton Data", {
-      exact: false,
-    });
-    userEvent.click(submitButton);
+   
+//       const field = screen.getByTestId("DataTable");
 
-    await waitFor(() => {
-      const field = screen.getByTestId("DataTable");
-
-      expect(field).toBeInTheDocument();
-    });
-  });
+//       expect(field).toBeInTheDocument();
+  
+//   });
 });
