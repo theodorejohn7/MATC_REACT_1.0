@@ -58,13 +58,13 @@ export default function ShoppingCart({ isOpen }: ShoppingCartProps) {
 
       <Offcanvas.Body>
         <Stack gap={3}>
-          {cartItems.map((item) => (
+          {cartItems?.map((item) => (
             <CartItem key={item.id} {...item} />
           ))}
           <div className="ms-auto fw-bold fs-5">
             Total
             {formatCurrency(
-              cartItems.reduce((total, cartItem) => {
+              cartItems?.reduce((total, cartItem) => {
                 const item = allRecordsData?.find(
                   (item) => item.id === cartItem.id
                 );
