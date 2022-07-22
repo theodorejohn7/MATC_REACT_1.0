@@ -15,6 +15,9 @@ describe("Testing Footer Component", () => {
     const contactNumber = screen.getByText("Chennai - 9789123619", {
       exact: false,
     });
+
+    expect(FooterText).toBeInTheDocument();
+
     expect(contactNumber).toBeInTheDocument();
   });
 
