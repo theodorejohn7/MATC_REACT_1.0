@@ -40,10 +40,12 @@ export function SingleProduct({
   return (
     <div
       style={{ height: "28rem" }}
+      data-testid={`test_${id}`}
       className="py-4  align-items-center justify-content-center d-flex  "
     >
       <Card
         key={id}
+        data-testid={`test_${id}`}
         className=" lh-1 px-1 pt-4 card m-2 h-100"
         style={{
           minWidth: "10rem",
