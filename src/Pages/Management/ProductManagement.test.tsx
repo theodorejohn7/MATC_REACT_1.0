@@ -37,22 +37,4 @@ describe("Testing Product Management Page", () => {
     expect(chickenButton).toBeInTheDocument();
     expect(seafoodButton).toBeInTheDocument();
   });
-
-//   test("displays Product details after button click",   () => {
-//     render(
-//       <Provider store={store}>
-//         <ProductManagement />
-//       </Provider>
-//     );
-    
-//     const submitButton = screen.getByTestId("DataButton");
-//     userEvent.click(submitButton);
- 
-
-   
-//       const field = screen.getByTestId("DataTable");
-
-//       expect(field).toBeInTheDocument();
-  
-//   });
 });
