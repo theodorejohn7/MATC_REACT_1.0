@@ -64,7 +64,7 @@ const Products = () => {
     (state: any) => state.muttonReducer?.getMuttonData
   );
 
-  const fetchMuttonRecordsData = useCallback(async () => {
+    const fetchMuttonRecordsData = useCallback(async () => {
     try {
       dispatch(getMuttonData());
     } catch (error_1) {
@@ -73,23 +73,10 @@ const Products = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    mongoInstance
-      .get<IPost[]>(`${API_URL}api/category/mutton`, {
-        timeout: 10000,
-      })
-      .then((response) => {
-        setMuttonPosts(response.data);
-        setLoading(false);
-      })
-      .catch((ex) => {
-        console.log("error", ex);
-        setLoading(false);
-      });
-  }, []);
-
-  useEffect(() => {
     fetchMuttonRecordsData();
   }, []);
+ 
+
 
   useEffect(() => {
     if (muttonRecordsData) {
@@ -191,8 +178,7 @@ const Products = () => {
           ))}
         </Carousel>
       </div>
-      <p>Loading Updated Products .... </p>
-      {/* {loading && <p>Loading Updated Products .... </p>} */}
+      {loading && <p>Loading Updated Products .... </p>}
 
       <br />
     </div>

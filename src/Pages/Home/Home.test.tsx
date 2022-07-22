@@ -1,32 +1,56 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-
-import { BrowserRouter as Router } from "react-router-dom";
-import userEvent from "@testing-library/user-event";
-
-import Products from "../../components/Products/Products";
-
-import Home from "./Home";
+import axios from "axios";
 import { Provider } from "react-redux";
+import { render, screen } from "@testing-library/react";
+ 
+import Home from "./Home";
 import { store } from "../../redux/store";
 
-describe("Testing Home Page", () => { 
- 
+const API_URL = process.env.REACT_APP_API_URL;
 
+jest.setTimeout(35000);
 
-  test("Loading", async () => {
+describe("Testing Home Page", () => {
+  test("Renders Home page", async () => {
     render(
-        <Provider store={store}>
-        <Products />
+      <Provider store={store}>
+        <Home />
+      </Provider>
+    );
+  });
+
+  it("Displays loading message", async () => {
+    render(
+      <Provider store={store}>
+        <Home />
       </Provider>
     );
 
-    expect(screen.getByText("Loading Updated Products .... ")).toBeInTheDocument();
-  
+    const text = await screen.findByText("Loading Updated Products ....");
 
-    await waitFor(() => {
-        expect(screen.getByText("Loading Updated Products .... ")).toBeInTheDocument();
-    });
+    expect(text).toBeInTheDocument();
   });
 
+  it("API returns data for category - Mutton", async () => {
+    const response = await axios.get(`${API_URL}api/category/mutton`, {
+      timeout: 35000,
+    });
 
+    expect(response.data[0].category).toEqual("mutton"); // Make an assertion on the result
+  });
+
+  it("API returns data for category - Chicken", async () => {
+    const response = await axios.get(`${API_URL}api/category/chicken`, {
+      timeout: 35000,
+    });
+
+    expect(response.data[0].category).toEqual("chicken"); // Make an assertion on the result
+  });
+
+  it("API returns data for category - Seafood", async () => {
+    const response = await axios.get(`${API_URL}api/category/seafood`, {
+      timeout: 35000,
+    });
+
+    expect(response.data[0].category).toEqual("seafood"); // Make an assertion on the result
+  });
 });
