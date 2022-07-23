@@ -1,12 +1,15 @@
 import axios from "axios";
-import * as React from "react";
+import { useState } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { Container, Typography, Grid, Button } from "@mui/material";
 import { Formik, FormikHelpers, FormikProps, Form, Field } from "formik";
 
-import { FormTextField } from "../../components/FormTextField/FormTextField";
 import ValidationSchema from "./ValidationSchema";
+import { useSessionStorage } from "../../hooks/useSessionStorage";
+import { FormTextField } from "../../components/FormTextField/FormTextField";
+import { useUserLoginContext } from "../../context/UserLoginContext";
+import { useNavigate } from "react-router-dom";
 
 interface FormValues {
   name: string;
@@ -14,15 +17,27 @@ interface FormValues {
 }
 
 export default function Login() {
-  const FIREBASE_URL = process.env.REACT_APP_FIREBASE_URL;
+  const USER_API_URL = process.env.REACT_APP_USER_API_URL;
+  const ADMIN_USER = process.env.REACT_APP_ADMIN_USER;
 
-  const [username, setUsername] = React.useState("");
-  const [password, setPassword] = React.useState("");
 
-  const [errorMessage, setErrorMessage] = React.useState("");
-  const [open, setOpen] = React.useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [accessToken, setAccessToken] = useSessionStorage<string[]>(
+    "accessToken",
+    []
+  );
+  const [refreshToken, setRefreshToken] = useSessionStorage<string[]>(
+    "refreshToken",
+    []
+  );
+  const { login, checkAdmin } = useUserLoginContext();
+  const [errorMessage, setErrorMessage] = useState("");
+  const [open, setOpen] = useState(false);
 
   const handleClose = () => setOpen(false);
+
+  const navigate = useNavigate();
 
   const style = {
     position: "absolute" as "absolute",
@@ -70,29 +85,53 @@ export default function Login() {
             values: FormValues,
             formikHelpers: FormikHelpers<FormValues>
           ) => {
-            console.log(values);
-
+            let data = {
+              userName: values.name,
+              password: values.password,
+            };
             axios
-              .get(`${FIREBASE_URL}/${values.name}.json`)
+              .post(`${USER_API_URL}/login`, data)
               .then((response) => {
-                if (values.name === response.data.name) {
-                  console.log(
-                    values.name,
-                    "available name",
-                    response.data.name
-                  );
+                if (response.data.message === "login successful") {
+                  setAccessToken(response.data.data.token);
+                  setRefreshToken(response.data.data.refreshToken);
+                  checkAdmin(values.name);
+                  login(values.name);
+
+                  if (values.name===ADMIN_USER) {
+                    setErrorMessage(
+                      "Login Successfull Now towards Product Management Page"
+                    );
+                    setOpen(true);
+                    setTimeout(() => {
+                      navigate(`/productmgmt`);
+                    }, 2000);
+                  } else {
+                    setErrorMessage(
+                      "Login Successfull Navigating to our Store"
+                    );
+                    setOpen(true);
+                    setTimeout(() => {
+                      navigate(`/home`);
+                    }, 2000);
+                  }
                 }
-                if (values.password !== response.data.password) {
-                  console.log("invalid password");
-                  setErrorMessage("Username Registered Invalid password");
+              })
+              .catch((error) => {
+                console.log("error", error.response.data.message);
+
+                if (
+                  error.response.data.message ===
+                  "Incorrect Password, Try again!"
+                ) {
+                  setErrorMessage("Incorrect password Please Try Again");
                   setOpen(true);
                 }
-                console.log(username, password);
-              })
-              .catch((error_12) => {
-                setErrorMessage("Username Not Registered ");
-                setOpen(true);
-                console.log(error_12)
+
+                if (error.response.data.message === "User not found") {
+                  setErrorMessage("Username Not Registered ");
+                  setOpen(true);
+                }
               });
 
             formikHelpers.setSubmitting(false);
@@ -108,7 +147,7 @@ export default function Login() {
                     data-testid="test_username"
                     size="small"
                     component={FormTextField}
-                  />  
+                  />
                 </Grid>
                 <Grid item xs={12}>
                   <Field
@@ -125,7 +164,6 @@ export default function Login() {
                     variant="outlined"
                     size="large"
                     data-testid="test_submit"
-
                     color="primary"
                     disabled={formikProps.isSubmitting}
                   >

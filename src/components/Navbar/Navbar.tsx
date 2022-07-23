@@ -2,11 +2,14 @@ import { Button, Container, Nav, Navbar as NavbarBs } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 
 import { useShoppingCart } from "../../context/ShoppingCartContext";
+import {useUserLoginContext} from "../../context/UserLoginContext";
 
 import "./style.css";
 
 export default function Navbar() {
   const { openCart, cartQuantity } = useShoppingCart();
+  const {isLoggedin,isAdmin,logout} = useUserLoginContext();
+
   return (
     <NavbarBs
       sticky="top"
@@ -32,9 +35,12 @@ export default function Navbar() {
               <Nav.Link to="/register" as={NavLink}>
                 Register
               </Nav.Link>
-              <Nav.Link to="/productmgmt" as={NavLink}>
+            { isAdmin&& <Nav.Link to="/productmgmt" as={NavLink}>
                 Product Management
-              </Nav.Link>
+              </Nav.Link>}
+              { isLoggedin&& <Nav.Link to="/home"  onClick={()=>logout()} as={NavLink}>
+                Log Out
+              </Nav.Link>}
             </Nav>
           </NavbarBs.Collapse>
           <NavbarBs.Toggle aria-controls="responsive-navbar-nav " />

@@ -5,6 +5,7 @@ import { Offcanvas, Stack } from "react-bootstrap";
 import { CartItem } from "./CartItem";
 import { formatCurrency } from "../../utilities/formatCurrency";
 import { useShoppingCart } from "../../context/ShoppingCartContext";
+import {useUserLoginContext} from "../../context/UserLoginContext"
 import { getAllProductData } from "../../redux/action/getProductAction";
 
 type ShoppingCartProps = {
@@ -30,6 +31,7 @@ interface AllRecords {
 
 export default function ShoppingCart({ isOpen }: ShoppingCartProps) {
   const { closeCart, cartItems } = useShoppingCart();
+const {currentUser}= useUserLoginContext();
 
   const dispatch = useDispatch();
 
@@ -53,7 +55,7 @@ export default function ShoppingCart({ isOpen }: ShoppingCartProps) {
   return (
     <Offcanvas show={isOpen} placement="end" onHide={closeCart}>
       <Offcanvas.Header closeButton>
-        <Offcanvas.Title>Cart</Offcanvas.Title>
+        <Offcanvas.Title>{currentUser? `${currentUser}'s Cart`  : "Cart" } </Offcanvas.Title>
       </Offcanvas.Header>
 
       <Offcanvas.Body>
