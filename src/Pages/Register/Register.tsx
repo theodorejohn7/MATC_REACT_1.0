@@ -26,12 +26,14 @@ interface FormValues {
 }
 
 export default function Register() {
-  const FIREBASE_URL = process.env.REACT_APP_FIREBASE_URL;
+  const USER_API_URL = process.env.REACT_APP_USER_API_URL;
   const [status, setStatus] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState("");
   const [open, setOpen] = React.useState(false);
   const handleClose = () => setOpen(false);
   const navigate = useNavigate();
+
+  console.log(USER_API_URL)
 
   const style = {
     position: "absolute" as "absolute",
@@ -87,39 +89,66 @@ export default function Register() {
             values: FormValues,
             formikHelpers: FormikHelpers<FormValues>
           ) => {
+            let data = {
+              name: values.name,
+              eMail: values.eMail,
+              password: values.password,
+              userName: values.userName,
+              address: values.address,
+              pincode: values.pincode,
+              state: values.state,
+              country: values.country,
+              secQuestion: values.securityQn,
+              secAnswer: values.securityAns,
+            };
+            console.log("data",data);
+            console.log(`${USER_API_URL}api/v1/user/register`)
             axios
-              .get(`${FIREBASE_URL}/${values.userName}.json`)
+              .post(`${USER_API_URL}/register`,data)
               .then((response) => {
-                console.log("response", response.data);
-                console.log("value", values);
+                console.log("response",response)
+                console.log(response)}).catch((error2)=>{
+                  console.log(error2.response.data.message)
+                  if (error2.response.data.message==="User already exists") {
+                          setErrorMessage("Username already Registered");
+                          setOpen(true);
+                        }
 
-                if (values.userName === response.data.userName) {
-                  setErrorMessage("Username already Registered");
-                  setOpen(true);
-                }
-              })
-              .catch((_error) => {
-                console.log("logging data to db");
-                database
-                  .ref(values.userName)
-                  .set({
-                    name: values.name,
-                    userName: values.userName,
-                    password: values.password,
-                    eMail: values.eMail,
-                    address: values.address,
-                    state: values.state,
-                    pincode: values.pincode,
-                    country: values.country,
-                    securityQn: values.securityQn,
-                    securityAns: values.securityAns,
-                  })
-                  .catch(alert);
-                setErrorMessage("Details Registered Successfully");
-                setOpen(true);
-                console.log("data sent to Database");
-                setStatus(true);
-              });
+                })
+
+            // axios
+            //   .get(`${FIREBASE_URL}/${values.userName}.json`)
+            //   .then((response) => {
+            //     console.log("response", response.data);
+            //     console.log("value", values);
+
+            //     if (values.userName === response.data.userName) {
+            //       setErrorMessage("Username already Registered");
+            //       setOpen(true);
+            //     }
+            //   })
+            // .catch((_error) => {
+            //   console.log("logging data to db");
+            //   database
+            //     .ref(values.userName)
+            //     .set({
+            //       name: values.name,
+            //       userName: values.userName,
+            //       password: values.password,
+            //       eMail: values.eMail,
+            //       address: values.address,
+            //       state: values.state,
+            //       pincode: values.pincode,
+            //       country: values.country,
+            //       securityQn: values.securityQn,
+            //       securityAns: values.securityAns,
+            //     })
+            //     .catch(alert);
+            //   setErrorMessage("Details Registered Successfully");
+            //   setOpen(true);
+            //   console.log("data sent to Database");
+            //   setStatus(true);
+            // });
 
             formikHelpers.setSubmitting(false);
           }}
