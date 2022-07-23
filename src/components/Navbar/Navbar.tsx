@@ -8,7 +8,7 @@ import "./style.css";
 
 export default function Navbar() {
   const { openCart, cartQuantity } = useShoppingCart();
-  const {isLoggedin,isAdmin,logout} = useUserLoginContext();
+  const {isLoggedin,isAdmin,logout,currentUser} = useUserLoginContext();
 
   return (
     <NavbarBs
@@ -23,6 +23,7 @@ export default function Navbar() {
         <NavbarBs.Brand href="/home" className="new-font">
           Our Meat Store
         </NavbarBs.Brand>
+         { isLoggedin&& `Welcome ${currentUser}`}
         <div className="d-flex">
           <NavbarBs.Collapse id="responsive-navbar-nav ">
             <Nav className="me-auto" style={{ fontWeight: 600 }}>
