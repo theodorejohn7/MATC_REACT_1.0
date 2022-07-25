@@ -102,7 +102,7 @@ export default function Register() {
             axios
               .post(`${USER_API_URL}/register`, data)
               .then((response) => {
-                console.log("response", response);
+                console.log("response", response.status);
                 if ((response.statusText === "Created") || (response.status===201) ){
                   setErrorMessage("Details Registered Successfully");
                   setOpen(true);
