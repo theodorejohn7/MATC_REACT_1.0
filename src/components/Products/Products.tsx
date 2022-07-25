@@ -1,7 +1,8 @@
 import Carousel from "react-multi-carousel";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useCallback, useEffect } from "react";
-import { Container, Typography, Grid, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { Typography, Button } from "@mui/material";
 
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -9,7 +10,7 @@ import Modal from "@mui/material/Modal";
 import { SingleProduct } from "./SingleProduct";
 import { mongoInstance } from "../../axios/instance";
 import { getMuttonData } from "../../redux/action/MuttonAction";
-import {useUserLoginContext} from "../../context/UserLoginContext"
+import { useUserLoginContext } from "../../context/UserLoginContext";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "react-multi-carousel/lib/styles.css";
@@ -32,12 +33,12 @@ const defaultPosts: IPost[] = [];
 
 const Products = () => {
   const API_URL = process.env.REACT_APP_API_URL;
-  const {setNotLoggedinPopup,notLoggedIn} = useUserLoginContext();
+  const { setNotLoggedinPopup, notLoggedIn } = useUserLoginContext();
 
   const dispatch = useDispatch();
 
+  const navigate = useNavigate();
 
-  
   const style = {
     position: "absolute" as "absolute",
     top: "50%",
@@ -86,10 +87,7 @@ const Products = () => {
     (state: any) => state.muttonReducer?.getMuttonData
   );
 
-
-
-
-    const fetchMuttonRecordsData = useCallback(async () => {
+  const fetchMuttonRecordsData = useCallback(async () => {
     try {
       dispatch(getMuttonData());
     } catch (error_1) {
@@ -100,8 +98,6 @@ const Products = () => {
   useEffect(() => {
     fetchMuttonRecordsData();
   }, []);
- 
-
 
   useEffect(() => {
     if (muttonRecordsData) {
@@ -138,6 +134,11 @@ const Products = () => {
         setLoading(false);
       });
   }, []);
+
+  const handlePopupClose = () => {
+    setNotLoggedinPopup();
+    navigate(`/login`);
+  };
 
   return (
     <div className="App">
@@ -209,25 +210,21 @@ const Products = () => {
 
       <Modal
         open={notLoggedIn}
-        onClose={setNotLoggedinPopup}
+        onClose={handlePopupClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box className="border border-secondary p-2 rounded" sx={style}>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-         Please login to Add Products to cart
+            Please Login to Add Products to cart
           </Typography>
           <div className="  float-end ">
-         
-              <Button onClick={setNotLoggedinPopup} variant="contained">
-                Ok
-              </Button>
-         
-          
+            <Button onClick={handlePopupClose} variant="contained">
+              Ok
+            </Button>
           </div>
         </Box>
       </Modal>
-
     </div>
   );
 };

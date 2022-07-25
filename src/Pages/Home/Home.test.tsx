@@ -1,7 +1,8 @@
 import axios from "axios";
 import { Provider } from "react-redux";
 import { render, screen } from "@testing-library/react";
- 
+import { BrowserRouter as Router } from "react-router-dom";
+
 import Home from "./Home";
 import { store } from "../../redux/store";
 
@@ -13,7 +14,9 @@ describe("Testing Home Page", () => {
   test("Renders Home page", async () => {
     render(
       <Provider store={store}>
-        <Home />
+        <Router>
+          <Home />
+        </Router>
       </Provider>
     );
   });
@@ -21,7 +24,9 @@ describe("Testing Home Page", () => {
   it("Displays loading message", async () => {
     render(
       <Provider store={store}>
-        <Home />
+        <Router>
+          <Home />
+        </Router>
       </Provider>
     );
 
