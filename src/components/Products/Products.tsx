@@ -1,10 +1,15 @@
 import Carousel from "react-multi-carousel";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useCallback, useEffect } from "react";
+import { Container, Typography, Grid, Button } from "@mui/material";
+
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
 
 import { SingleProduct } from "./SingleProduct";
 import { mongoInstance } from "../../axios/instance";
 import { getMuttonData } from "../../redux/action/MuttonAction";
+import {useUserLoginContext} from "../../context/UserLoginContext"
 
 import "bootstrap/dist/css/bootstrap.css";
 import "react-multi-carousel/lib/styles.css";
@@ -27,8 +32,25 @@ const defaultPosts: IPost[] = [];
 
 const Products = () => {
   const API_URL = process.env.REACT_APP_API_URL;
+  const {setNotLoggedinPopup,notLoggedIn} = useUserLoginContext();
 
   const dispatch = useDispatch();
+
+
+  
+  const style = {
+    position: "absolute" as "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 400,
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    margin: 0,
+    padding: 0,
+    p: 4,
+  };
 
   const responsive = {
     desktop: {
@@ -63,6 +85,9 @@ const Products = () => {
   const muttonRecordsData = useSelector(
     (state: any) => state.muttonReducer?.getMuttonData
   );
+
+
+
 
     const fetchMuttonRecordsData = useCallback(async () => {
     try {
@@ -181,6 +206,28 @@ const Products = () => {
       {loading && <p>Loading Updated Products .... </p>}
 
       <br />
+
+      <Modal
+        open={notLoggedIn}
+        onClose={setNotLoggedinPopup}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box className="border border-secondary p-2 rounded" sx={style}>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+         Please login to Add Products to cart
+          </Typography>
+          <div className="  float-end ">
+         
+              <Button onClick={setNotLoggedinPopup} variant="contained">
+                Ok
+              </Button>
+         
+          
+          </div>
+        </Box>
+      </Modal>
+
     </div>
   );
 };

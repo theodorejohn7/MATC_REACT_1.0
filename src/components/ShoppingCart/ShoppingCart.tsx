@@ -70,7 +70,7 @@ const {currentUser}= useUserLoginContext();
                 const item = allRecordsData?.find(
                   (item) => item.id === cartItem.id
                 );
-                return total + (item?.price || 0) * cartItem.quantity;
+                return total + ( (item?.discPrice ? item?.discPrice :   item?.price) || 0) * cartItem.quantity;
               }, 0)
             )}
           </div>
