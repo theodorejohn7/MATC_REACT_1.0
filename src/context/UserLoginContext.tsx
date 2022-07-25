@@ -1,7 +1,5 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 
-import { useLocalStorage } from "../hooks/useLocalStorage";
-
 type UserContextProviderProps = {
   children: ReactNode;
 };
@@ -10,7 +8,7 @@ type UserContextType = {
   currentUser: string;
   isLoggedin: boolean;
   isAdmin: boolean;
-  login: (arg0:string) => void;
+  login: (arg0: string) => void;
   logout: () => void;
   checkAdmin: (arg0: string) => void;
 };
@@ -29,8 +27,8 @@ export function UserloginContextProvider({
   const [currentUser, setCurrentUser] = useState("");
   const ADMIN_USER = process.env.REACT_APP_ADMIN_USER;
 
-  function login(user:string) {
-    setCurrentUser(user)
+  function login(user: string) {
+    setCurrentUser(user);
     setIsLoggedin(true);
   }
 
@@ -50,7 +48,7 @@ export function UserloginContextProvider({
 
   return (
     <UserLoginContext.Provider
-      value={{ isLoggedin, checkAdmin,currentUser, isAdmin, login, logout }}
+      value={{ isLoggedin, checkAdmin, currentUser, isAdmin, login, logout }}
     >
       {children}
     </UserLoginContext.Provider>
