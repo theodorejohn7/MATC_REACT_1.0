@@ -103,7 +103,7 @@ export default function Register() {
               .post(`${USER_API_URL}/register`, data)
               .then((response) => {
                 console.log("response", response);
-                if (response.statusText === "Created") {
+                if ((response.statusText === "Created") || (response.status===201) ){
                   setErrorMessage("Details Registered Successfully");
                   setOpen(true);
                   console.log("data sent to Database");
