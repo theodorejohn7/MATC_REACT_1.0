@@ -2,13 +2,13 @@ import { Button, Container, Nav, Navbar as NavbarBs } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 
 import { useShoppingCart } from "../../context/ShoppingCartContext";
-import {useUserLoginContext} from "../../context/UserLoginContext";
+import { useUserLoginContext } from "../../context/UserLoginContext";
 
 import "./style.css";
 
 export default function Navbar() {
   const { openCart, cartQuantity } = useShoppingCart();
-  const {isLoggedin,isAdmin,logout,currentUser} = useUserLoginContext();
+  const { isLoggedin, isAdmin, logout, currentUser } = useUserLoginContext();
 
   return (
     <NavbarBs
@@ -23,25 +23,33 @@ export default function Navbar() {
         <NavbarBs.Brand href="/home" className="new-font">
           Our Meat Store
         </NavbarBs.Brand>
-         { isLoggedin&& `Welcome ${currentUser}`}
+        {isLoggedin && `Welcome ${currentUser}`}
         <div className="d-flex">
           <NavbarBs.Collapse id="responsive-navbar-nav ">
             <Nav className="me-auto" style={{ fontWeight: 600 }}>
               <Nav.Link to="/home" as={NavLink}>
                 Store
               </Nav.Link>
-              <Nav.Link to="/login" as={NavLink}>
-                Login
-              </Nav.Link>
-              <Nav.Link to="/register" as={NavLink}>
-                Register
-              </Nav.Link>
-            { isAdmin&& <Nav.Link to="/productmgmt" as={NavLink}>
-                Product Management
-              </Nav.Link>}
-              { isLoggedin&& <Nav.Link to="/home"  onClick={()=>logout()} as={NavLink}>
-                Log Out
-              </Nav.Link>}
+              {(!isLoggedin) && (
+                <Nav.Link to="/login" as={NavLink}>
+                  Login
+                </Nav.Link>
+              )}
+              {(!isLoggedin) && (
+                <Nav.Link to="/register" as={NavLink}>
+                  Register
+                </Nav.Link>
+              )}
+              {isAdmin && (
+                <Nav.Link to="/productmgmt" as={NavLink}>
+                  Product Management
+                </Nav.Link>
+              )}
+              {isLoggedin && (
+                <Nav.Link to="/home" onClick={() => logout()} as={NavLink}>
+                  Log Out
+                </Nav.Link>
+              )}
             </Nav>
           </NavbarBs.Collapse>
           <NavbarBs.Toggle aria-controls="responsive-navbar-nav " />
