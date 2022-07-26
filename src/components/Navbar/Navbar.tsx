@@ -23,19 +23,20 @@ export default function Navbar() {
         <NavbarBs.Brand href="/home" className="new-font">
           Our Meat Store
         </NavbarBs.Brand>
-        {isLoggedin && `Welcome ${currentUser}`}
+        {isLoggedin &&<span className="  d-none d-lg-block  " > Welcome {currentUser}</span>}
+
         <div className="d-flex">
           <NavbarBs.Collapse id="responsive-navbar-nav ">
             <Nav className="me-auto" style={{ fontWeight: 600 }}>
               <Nav.Link to="/home" as={NavLink}>
                 Store
               </Nav.Link>
-              {(!isLoggedin) && (
+              {!isLoggedin && (
                 <Nav.Link to="/login" as={NavLink}>
                   Login
                 </Nav.Link>
               )}
-              {(!isLoggedin) && (
+              {!isLoggedin && (
                 <Nav.Link to="/register" as={NavLink}>
                   Register
                 </Nav.Link>
