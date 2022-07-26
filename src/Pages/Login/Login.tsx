@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
+import Spinner from "react-bootstrap/Spinner";
 import { Container, Typography, Grid, Button } from "@mui/material";
 import { Formik, FormikHelpers, FormikProps, Form, Field } from "formik";
 
@@ -20,7 +21,6 @@ export default function Login() {
   const USER_API_URL = process.env.REACT_APP_USER_API_URL;
   const ADMIN_USER = process.env.REACT_APP_ADMIN_USER;
 
-
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [accessToken, setAccessToken] = useSessionStorage<string[]>(
@@ -32,6 +32,7 @@ export default function Login() {
     []
   );
   const { login, checkAdmin } = useUserLoginContext();
+  const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [open, setOpen] = useState(false);
 
@@ -85,6 +86,7 @@ export default function Login() {
             values: FormValues,
             formikHelpers: FormikHelpers<FormValues>
           ) => {
+            setLoading(true);
             let data = {
               userName: values.name,
               password: values.password,
@@ -98,7 +100,8 @@ export default function Login() {
                   checkAdmin(values.name);
                   login(values.name);
 
-                  if (values.name===ADMIN_USER) {
+                  if (values.name === ADMIN_USER) {
+                    setLoading(false);
                     setErrorMessage(
                       "Login Successfull Now towards Product Management Page"
                     );
@@ -107,6 +110,8 @@ export default function Login() {
                       navigate(`/productmgmt`);
                     }, 2000);
                   } else {
+                    setLoading(false);
+
                     setErrorMessage(
                       "Login Successfull Navigating to our Store"
                     );
@@ -124,11 +129,15 @@ export default function Login() {
                   error.response.data.message ===
                   "Incorrect Password, Try again!"
                 ) {
+                  setLoading(false);
+
                   setErrorMessage("Incorrect password Please Try Again");
                   setOpen(true);
                 }
 
                 if (error.response.data.message === "User not found") {
+                  setLoading(false);
+
                   setErrorMessage("Username Not Registered ");
                   setOpen(true);
                 }
@@ -167,8 +176,19 @@ export default function Login() {
                     color="primary"
                     disabled={formikProps.isSubmitting}
                   >
-                    Submit
+                    {loading && (
+                      <Spinner
+                        as="span"
+                        animation="grow"
+                        size="sm"
+                        role="status"
+                        aria-hidden="true"
+                        className=" mx-0 me-2 p-0 "
+                      />
+                    )}
+                    Login
                   </Button>
+                  {/* <Spinner animation="border" className="mx-3" variant="primary" /> */}
                 </Grid>
               </Grid>
             </Form>

@@ -26,8 +26,8 @@ describe("Testing Footer Component", () => {
 
     const logo = screen.getAllByRole("img");
     expect(logo[0]).toHaveAttribute("src", "./img/app-store.svg");
-    expect(logo[0]).toHaveAttribute("alt", "app-store-image");
+    expect(logo[0]).toHaveAttribute("alt", "app-store");
     expect(logo[1]).toHaveAttribute("src", "./img/play-store.png");
-    expect(logo[1]).toHaveAttribute("alt", "play-store-image");
+    expect(logo[1]).toHaveAttribute("alt", "play-store");
   });
 });

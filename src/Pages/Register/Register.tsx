@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
+import Spinner from "react-bootstrap/Spinner";
 import { useNavigate } from "react-router-dom";
 import { Container, Typography, Grid, Button } from "@mui/material";
 import { Formik, FormikHelpers, FormikProps, Form, Field } from "formik";
@@ -29,6 +30,7 @@ export default function Register() {
   const [status, setStatus] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const handleClose = () => setOpen(false);
   const navigate = useNavigate();
 
@@ -86,6 +88,7 @@ export default function Register() {
             values: FormValues,
             formikHelpers: FormikHelpers<FormValues>
           ) => {
+            setLoading(true);
             let data = {
               name: values.name,
               eMail: values.eMail,
@@ -102,18 +105,24 @@ export default function Register() {
             axios
               .post(`${USER_API_URL}/register`, data)
               .then((response) => {
-                console.log("response", response.status);
-                if ((response.statusText === "Created") || (response.status===201) ){
+                if (
+                  response.statusText === "Created" ||
+                  response.status === 201
+                ) {
+                  setLoading(false);
+
                   setErrorMessage("Details Registered Successfully");
                   setOpen(true);
                   console.log("data sent to Database");
                   setStatus(true);
                 }
-                console.log(response);
               })
               .catch((error2) => {
+                setLoading(false);
+
                 console.log(error2);
                 if (error2.response.data.message === "User already exists") {
+                  setLoading(false);
                   setErrorMessage("Username already Registered");
                   setOpen(true);
                 }
@@ -238,6 +247,16 @@ export default function Register() {
                     color="primary"
                     disabled={formikProps.isSubmitting}
                   >
+                    {loading && (
+                      <Spinner
+                        as="span"
+                        animation="grow"
+                        size="sm"
+                        role="status"
+                        aria-hidden="true"
+                        className=" mx-0 me-2 p-0 "
+                      />
+                    )}
                     Submit
                   </Button>
                 </Grid>

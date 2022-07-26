@@ -1,10 +1,9 @@
-import Modal from "@mui/material/Modal";
 import Card from "react-bootstrap/Card";
 import { Button } from "react-bootstrap";
 
 import { useShoppingCart } from "../../context/ShoppingCartContext";
 import { formatCurrency } from "../../utilities/formatCurrency";
-import {useUserLoginContext} from "../../context/UserLoginContext"
+import { useUserLoginContext } from "../../context/UserLoginContext";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "react-multi-carousel/lib/styles.css";
@@ -39,19 +38,15 @@ export function SingleProduct({
 
   const quantity: number = getItemQuantity(id);
 
-  const {isLoggedin,setNotLoggedinPopup} = useUserLoginContext();
+  const { isLoggedin, setNotLoggedinPopup } = useUserLoginContext();
 
-  const checkLoginIncreaseQuantity = (id:number) => {
-
-    if (isLoggedin)
-    {
-      increaseCartQuantity(id)
-    }
-    else {
+  const checkLoginIncreaseQuantity = (id: number) => {
+    if (isLoggedin) {
+      increaseCartQuantity(id);
+    } else {
       setNotLoggedinPopup();
     }
-
-  }
+  };
 
   return (
     <div
@@ -128,8 +123,10 @@ export function SingleProduct({
           <div className="mt-auto w-100   ">
             {quantity === 0 ? (
               // <Button className="  " onClick={() => increaseCartQuantity(id)}>
-              <Button className="  " onClick={()=>checkLoginIncreaseQuantity(id)}>
-
+              <Button
+                className="  "
+                onClick={() => checkLoginIncreaseQuantity(id)}
+              >
                 Add to Cart
               </Button>
             ) : (
