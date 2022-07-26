@@ -48,7 +48,7 @@ export function CartItem({ id, quantity }: CartItemsProps) {
   );
 
   const { removeFromCart } = useShoppingCart();
-  const item = allRecordsData.find((item) => item.id === id);
+  const item = allRecordsData.find((item1) => item1.id === id);
   if (item == null) return null;
 
   return (

@@ -7,7 +7,6 @@ import "./App.css";
 import Home from "./Pages/Home/Home";
 import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar/Navbar";
-import { useUserLoginContext } from "./context/UserLoginContext";
 import { UserloginContextProvider } from "./context/UserLoginContext";
 import { ShoppingCartProvider } from "./context/ShoppingCartContext";
 import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
@@ -19,7 +18,6 @@ const ProductManagement = lazy(
 );
 
 function App() {
-  const { isLoggedin, isAdmin } = useUserLoginContext();
   return (
     <div className="App">
       <UserloginContextProvider>
