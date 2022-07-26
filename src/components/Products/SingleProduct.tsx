@@ -41,6 +41,8 @@ export function SingleProduct({
   const { isLoggedin, setNotLoggedinPopup } = useUserLoginContext();
 
   const checkLoginIncreaseQuantity = (id: number) => {
+    // increaseCartQuantity(id);
+
     if (isLoggedin) {
       increaseCartQuantity(id);
     } else {
@@ -121,7 +123,7 @@ export function SingleProduct({
 
         <Card.Footer className="d-flex">
           <div className="mt-auto w-100   ">
-            {quantity === 0 ? (
+            {quantity === 0 || !isLoggedin ? (
               // <Button className="  " onClick={() => increaseCartQuantity(id)}>
               <Button
                 className="  "
@@ -129,7 +131,7 @@ export function SingleProduct({
               >
                 Add to Cart
               </Button>
-            ) : (
+            ) : (isLoggedin&&<>
               <div
                 className="d-flex align-items-center flex-column"
                 style={{ gap: ".5rem" }}
@@ -153,6 +155,8 @@ export function SingleProduct({
                   <Button onClick={() => increaseCartQuantity(id)}>+</Button>
                 </div>
               </div>
+            </>
+
             )}
           </div>
         </Card.Footer>

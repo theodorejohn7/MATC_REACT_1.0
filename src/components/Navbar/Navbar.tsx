@@ -54,7 +54,7 @@ export default function Navbar() {
             </Nav>
           </NavbarBs.Collapse>
           <NavbarBs.Toggle aria-controls="responsive-navbar-nav " />
-          {cartQuantity > 0 && (
+          {cartQuantity > 0 && isLoggedin && (
             <Button
               onClick={openCart}
               style={{ width: "3rem", height: "3rem", position: "relative" }}

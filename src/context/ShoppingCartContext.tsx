@@ -37,11 +37,11 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
   let userCartItem = localStorage.getItem(`shopping-cart-${currentUser}`)
   
   const [cartItems, setCartItems] = useLocalStorage<CartItem[]>(
-    `shopping-cart-${currentUser}`,
+    `shopping-cart`,
     []
   );
 
-  setCartItems(userCartItem)
+  // setCartItems(userCartItem)
 
 
 

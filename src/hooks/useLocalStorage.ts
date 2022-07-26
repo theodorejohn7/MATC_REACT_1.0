@@ -16,10 +16,13 @@ export function useLocalStorage<T>(key: string, initialValue: T | (() => T)) {
   });
 console.log("value",value)
   useEffect(() => {
-    if (currentUser) {
-      let key1=`shopping-cart-${currentUser}`
-      localStorage.setItem(key1, JSON.stringify(value));
-    }
+    // if (currentUser) {
+    //   let key1=`shopping-cart-${currentUser}`
+    //   localStorage.setItem(key1, JSON.stringify(value));
+    // }
+
+    localStorage.setItem(key, JSON.stringify(value));
+
   }, [key, value]);
 
   return [value, setValue] as [typeof value, typeof setValue];
