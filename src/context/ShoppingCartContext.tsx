@@ -34,11 +34,17 @@ export function useShoppingCart() {
 export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
 
   const {currentUser}= useUserLoginContext();
-
+  let userCartItem = localStorage.getItem(`shopping-cart-${currentUser}`)
+  
   const [cartItems, setCartItems] = useLocalStorage<CartItem[]>(
     `shopping-cart-${currentUser}`,
     []
   );
+
+  setCartItems(userCartItem)
+
+
+
   const [isOpen, setIsOpen] = useState(false);
 
   const openCart = () => setIsOpen(true);
@@ -95,7 +101,8 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
   }
 
   function resetCart(){
-    setCartItems([])
+    // setCartItems([])
+    console.log("reset cart")
   }
 
   return (
