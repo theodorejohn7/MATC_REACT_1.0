@@ -1,7 +1,5 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import CarouselComp from "./CarouselComp";
-import userEvent from "@testing-library/user-event";
-import { BrowserRouter as Router } from "react-router-dom";
 
 describe("Testing Navbar Component", () => {
   test("renders Navbar component succesfully", () => {
