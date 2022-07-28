@@ -4,6 +4,13 @@ import { useState, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Typography, Button } from "@mui/material";
 
+// import {ProductCard} from "theo-product-card-component";
+
+// import {ProductCard} from "theo-product-card";
+import { useShoppingCart } from "../../context/ShoppingCartContext";
+
+import { ProductCard } from "theo-product-card";
+
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 
@@ -27,13 +34,27 @@ interface IPost {
   netWeight: number;
   units?: number;
   id: number;
+  isLoggedin: boolean;
+  getItemQuantity: (id: number) => number;
+  increaseCartQuantity: (arg0: number) => void;
+  decreaseCartQuantity: (arg0: number) => void;
+  removeFromCart: (arg0: number) => void;
+  setNotLoggedinPopup: () => void;
 }
 
 const defaultPosts: IPost[] = [];
 
 const Products = () => {
   const API_URL = process.env.REACT_APP_API_URL;
-  const { setNotLoggedinPopup, notLoggedIn } = useUserLoginContext();
+  const { setNotLoggedinPopup, isLoggedin, notLoggedIn } =
+    useUserLoginContext();
+
+  const {
+    getItemQuantity,
+    increaseCartQuantity,
+    decreaseCartQuantity,
+    removeFromCart,
+  } = useShoppingCart();
 
   const dispatch = useDispatch();
 
@@ -157,9 +178,16 @@ const Products = () => {
           itemClass="image-item"
           responsive={responsive}
         >
-          {muttonPosts.map((item) => (
-            <SingleProduct {...item} />
-          ))}
+          {muttonPosts.map((item) => {
+            item.isLoggedin = isLoggedin;
+            item.getItemQuantity = getItemQuantity;
+            item.increaseCartQuantity = increaseCartQuantity;
+            item.decreaseCartQuantity = decreaseCartQuantity;
+            item.removeFromCart = removeFromCart;
+            item.setNotLoggedinPopup = setNotLoggedinPopup;
+
+            return <ProductCard {...item} />;
+          })}
         </Carousel>
       </div>
       <div>
@@ -178,9 +206,16 @@ const Products = () => {
           itemClass="image-item"
           responsive={responsive}
         >
-          {chickenPosts.map((item) => (
-            <SingleProduct {...item} />
-          ))}
+          {chickenPosts.map((item) => {
+            item.isLoggedin = isLoggedin;
+            item.getItemQuantity = getItemQuantity;
+            item.increaseCartQuantity = increaseCartQuantity;
+            item.decreaseCartQuantity = decreaseCartQuantity;
+            item.removeFromCart = removeFromCart;
+            item.setNotLoggedinPopup = setNotLoggedinPopup;
+
+            return <ProductCard {...item} />;
+          })}
         </Carousel>
       </div>
       <div>
@@ -199,9 +234,16 @@ const Products = () => {
           itemClass="image-item"
           responsive={responsive}
         >
-          {seafoodPosts.map((item) => (
-            <SingleProduct {...item} />
-          ))}
+          {seafoodPosts.map((item) => {
+            item.isLoggedin = isLoggedin;
+            item.getItemQuantity = getItemQuantity;
+            item.increaseCartQuantity = increaseCartQuantity;
+            item.decreaseCartQuantity = decreaseCartQuantity;
+            item.removeFromCart = removeFromCart;
+            item.setNotLoggedinPopup = setNotLoggedinPopup;
+
+            return <ProductCard {...item} />;
+          })}
         </Carousel>
       </div>
       {loading && <p>Loading Updated Products .... </p>}

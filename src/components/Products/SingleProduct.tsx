@@ -29,6 +29,8 @@ export function SingleProduct({
   discPrice,
   price,
 }: ProductItemProps) {
+
+
   const {
     getItemQuantity,
     increaseCartQuantity,
