@@ -8,7 +8,7 @@ import { Formik, FormikHelpers, FormikProps, Form, Field } from "formik";
 
 import ValidationSchema from "./ValidationSchema";
 import { useSessionStorage } from "../../hooks/useSessionStorage";
-// import { FormTextField } from "../../components/FormTextField/FormTextField";
+
 
 import {FormTextField} from "theo-product-card";
 
@@ -24,8 +24,8 @@ export default function Login() {
   const USER_API_URL = process.env.REACT_APP_USER_API_URL;
   const ADMIN_USER = process.env.REACT_APP_ADMIN_USER;
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+
+  
   const [accessToken, setAccessToken] = useSessionStorage<string[]>(
     "accessToken",
     []
