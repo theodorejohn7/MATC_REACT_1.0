@@ -1,9 +1,8 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import ProductManagement from "./ProductManagement";
 import { Provider } from "react-redux";
 
 import { store } from "../../redux/store";
-import userEvent from "@testing-library/user-event";
 
 describe("Testing Product Management Page", () => {
   test("renders Product Management Page succesfully", () => {

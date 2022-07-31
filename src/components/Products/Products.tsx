@@ -4,9 +4,9 @@ import { useState, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Typography, Button } from "@mui/material";
 
-// import {ProductCard} from "theo-product-card-component";
 
-// import {ProductCard} from "theo-product-card";
+
+ 
 import { useShoppingCart } from "../../context/ShoppingCartContext";
 
 import { ProductCard } from "theo-product-card";
@@ -14,7 +14,7 @@ import { ProductCard } from "theo-product-card";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 
-import { SingleProduct } from "./SingleProduct";
+ 
 import { mongoInstance } from "../../axios/instance";
 import { getMuttonData } from "../../redux/action/MuttonAction";
 import { useUserLoginContext } from "../../context/UserLoginContext";
@@ -105,7 +105,7 @@ const Products = () => {
     useState<boolean>(true);
 
   const muttonRecordsData = useSelector(
-    (state: any) => state.muttonReducer?.getMuttonData
+    (state: any) => state.muttonDataReducer?.getMuttonData
   );
 
   const fetchMuttonRecordsData = useCallback(async () => {

@@ -357,7 +357,7 @@ const ProductManagement: React.FC = () => {
   }, [productRecordsData]);
 
   const muttonRecordsData = useSelector(
-    (state: any) => state.muttonReducer?.getMuttonData
+    (state: any) => state.muttonDataReducer?.getMuttonData
   );
 
   const [spinLoader, setSpinLoader] = useState(false);
@@ -391,6 +391,7 @@ const ProductManagement: React.FC = () => {
     key: number;
   }
 
+  console.log("error",error)
   return (
     <div style={{ minHeight: "350px" }}>
       <div>
