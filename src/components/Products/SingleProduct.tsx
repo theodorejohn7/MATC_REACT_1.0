@@ -42,11 +42,11 @@ export function SingleProduct({
 
   const { isLoggedin, setNotLoggedinPopup } = useUserLoginContext();
 
-  const checkLoginIncreaseQuantity = (id: number) => {
-    // increaseCartQuantity(id);
+  const checkLoginIncreaseQuantity = (id1: number) => {
+ 
 
     if (isLoggedin) {
-      increaseCartQuantity(id);
+      increaseCartQuantity(id1);
     } else {
       setNotLoggedinPopup();
     }

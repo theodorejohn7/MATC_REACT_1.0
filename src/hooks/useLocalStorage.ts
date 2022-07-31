@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { useUserLoginContext } from "../context/UserLoginContext";
 
 export function useLocalStorage<T>(key: string, initialValue: T | (() => T)) {
-  const { currentUser } = useUserLoginContext();
+
 
   const [value, setValue] = useState<T>(() => {
     const jsonValue = localStorage.getItem(key);
@@ -16,10 +15,7 @@ export function useLocalStorage<T>(key: string, initialValue: T | (() => T)) {
   });
 console.log("value",value)
   useEffect(() => {
-    // if (currentUser) {
-    //   let key1=`shopping-cart-${currentUser}`
-    //   localStorage.setItem(key1, JSON.stringify(value));
-    // }
+  
 
     localStorage.setItem(key, JSON.stringify(value));
 

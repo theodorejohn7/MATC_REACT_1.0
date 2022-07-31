@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 
 import { useLocalStorage } from "../hooks/useLocalStorage";
-import {useUserLoginContext} from "./UserLoginContext"
+
 import ShoppingCart from "../components/ShoppingCart/ShoppingCart";
 
 type CartItem = {
@@ -33,15 +33,12 @@ export function useShoppingCart() {
 
 export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
 
-  const {currentUser}= useUserLoginContext();
-  let userCartItem = localStorage.getItem(`shopping-cart-${currentUser}`)
   
   const [cartItems, setCartItems] = useLocalStorage<CartItem[]>(
     `shopping-cart`,
     []
   );
 
-  // setCartItems(userCartItem)
 
 
 

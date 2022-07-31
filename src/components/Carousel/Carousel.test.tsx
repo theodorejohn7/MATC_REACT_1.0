@@ -6,11 +6,11 @@ describe("Testing Navbar Component", () => {
     render(<CarouselComp />);
   });
 
-  test("renders Previous and next button successfully", async () => {
+  test("renders Previous and next button successfully",  () => {
     render(<CarouselComp />);
 
-    const Next = await screen.getByText("Next");
-    const Previous = await screen.getByText("Previous");
+    const Next =  screen.getByText("Next");
+    const Previous =  screen.getByText("Previous");
 
     expect(Next).toBeInTheDocument();
     expect(Previous).toBeInTheDocument();

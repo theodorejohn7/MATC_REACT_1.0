@@ -1,6 +1,5 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import {   render, screen } from "@testing-library/react";
 import Footer from "./Footer";
-import userEvent from "@testing-library/user-event";
 
 describe("Testing Footer Component", () => {
   test("renders Footer component succesfully", () => {
