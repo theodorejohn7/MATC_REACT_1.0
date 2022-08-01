@@ -4,7 +4,7 @@ const initialState = {};
 
 const muttonDataReducer = (
   state = initialState,
-  action: { type: string; data: any }
+  action: { type: string; data: any } = {type:"",data:"" }
 ) => {
   switch (action.type) {
     case GET_MUTTON_DATA:
