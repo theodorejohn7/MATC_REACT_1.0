@@ -12,7 +12,7 @@ const validationSchema = yup.object().shape({
     .matches(/(?=.*[a-z])/, "Expected to have minimum one lowercase char")
     .matches(/(?=.*[A-Z])/, "Expected to have minimum one uppercase char")
     .matches(
-      /(?=.*[ -\/:-@\[-\`{-~]{1,})/,
+      /(?=.*[ -\/:-@\[-\`{-~]+)/,
       "Expected to have minimum 1 special char or symbols."
     )
     .required("Required Field"),
@@ -29,7 +29,7 @@ const validationSchema = yup.object().shape({
   pincode: yup
   .string()
   .required()
-  .matches(/^[0-9]+$/, "Must be only digits")
+  .matches(/^\d+$/, "Must be only digits")
   .min(6, 'Must be exactly 6 digits')
   .max(6, 'Must be exactly 6 digits')
     .required("Required Field"),

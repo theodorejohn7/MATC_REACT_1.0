@@ -11,7 +11,7 @@ const validationSchema = yup.object().shape({
     .matches(/(?=.*[a-z])/, "Expected to have minimum one lowercase char")
     .matches(/(?=.*[A-Z])/, "Expected to have minimum one uppercase char")
     .matches(
-      /(?=.*[ -\/:-@\[-\`{-~]{1,})/,
+      /(?=.*[ -\/:-@\[-\`{-~]+)/,
       "Expected to have minimum 1 special char (@,!,#, etc)."
     )
     .required("Password Required"),

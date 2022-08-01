@@ -66,14 +66,14 @@ const EditableCell: React.FC<EditableCellProps> = ({
   children,
   ...restProps
 }) => {
-  const inputNode =
-    inputType === "number" ? (
-      <InputNumber />
-    ) : inputType === "lineOfText" ? (
-      <Input.TextArea autoSize showCount />
-    ) : (
-      <Input />
-    );
+  let inputNode;
+  if (inputType === "number") {
+    inputNode = <InputNumber />;
+  } else if (inputType === "lineOfText") {
+    inputNode = <Input.TextArea autoSize showCount />;
+  } else {
+    inputNode = <Input />;
+  }
 
   return (
     <td {...restProps}>
@@ -391,7 +391,7 @@ const ProductManagement: React.FC = () => {
     key: number;
   }
 
-  console.log("error",error)
+  console.log("error", error);
   return (
     <div style={{ minHeight: "350px" }}>
       <div>
@@ -419,11 +419,15 @@ const ProductManagement: React.FC = () => {
         </Button>
       </div>
 
-      <Form data-testid="DataTable" className="data_table" form={form}  component={false} >
+      <Form
+        data-testid="DataTable"
+        className="data_table"
+        form={form}
+        component={false}
+      >
         <Spin spinning={spinLoader} className="custom_button" tip="Loading...">
           {!loading && (
             <Table
-            
               className="table_style"
               components={{
                 body: {
