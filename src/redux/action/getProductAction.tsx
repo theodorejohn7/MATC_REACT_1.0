@@ -33,9 +33,9 @@ export const getAllProductData = (): any => {
   return async (dispatch: Dispatch) => {
     const apiURL = `${API_URL}api/getall`;
     try {
-      const allProductDataRecords = await axios.get(apiURL).then((response) => {
-        if (response) {
-          return response.data;
+      const allProductDataRecords = await axios.get(apiURL).then((resp) => {
+        if (resp) {
+          return resp.data;
         } else {
           return false;
         }

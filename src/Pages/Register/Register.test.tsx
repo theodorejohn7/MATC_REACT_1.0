@@ -140,7 +140,7 @@ describe("Testing Register Component", () => {
       const errorTest = screen.getByText(
         "Expected to have minimum 8 characters",
         {
-          exact: false,
+          exact: true,
         }
       );
       expect(errorTest).toBeInTheDocument();
