@@ -23,7 +23,9 @@ export default function Navbar() {
         <NavbarBs.Brand href="/home" className="new-font">
           Our Meat Store
         </NavbarBs.Brand>
-        {isLoggedin &&<span className="  d-none d-lg-block  " > Welcome {currentUser}</span>}
+        {isLoggedin && (
+          <span className="  d-none d-lg-block  "> Welcome {currentUser}</span>
+        )}
 
         <div className="d-flex">
           <NavbarBs.Collapse id="responsive-navbar-nav ">

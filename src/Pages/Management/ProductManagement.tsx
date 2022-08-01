@@ -347,8 +347,6 @@ const ProductManagement: React.FC = () => {
     }
   });
 
-  console.log("@$#", mergedColumns);
-
   const productRecordsData = useSelector(
     (state: any) => state.getProductReducer?.getProductData
   );
@@ -413,8 +411,8 @@ const ProductManagement: React.FC = () => {
     age: number;
     key: number;
   }
+  if (error) console.log("below error occured ", error);
 
-  console.log("error", error);
   return (
     <div style={{ minHeight: "350px" }}>
       <div>

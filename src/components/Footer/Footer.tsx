@@ -26,7 +26,7 @@ const Footer = () => {
             <h5> OPTIMISED FOR MOBILE</h5>
             <hr />
             <div className="mb-4">
-              <img src="./img/app-store.svg" alt="app-store"/>
+              <img src="./img/app-store.svg" alt="app-store" />
             </div>
             <div>
               <img src="./img/play-store.png" alt="play-store" />
@@ -36,7 +36,9 @@ const Footer = () => {
       </Container>
 
       <hr />
-      <p style={{fontSize:"9px"}}>Image Courtesy : https://www.licious.in/</p>
+      <p style={{ fontSize: "9px" }}>
+        Image Courtesy : https://www.licious.in/
+      </p>
     </div>
   );
 };

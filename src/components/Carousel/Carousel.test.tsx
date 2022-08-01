@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+
 import CarouselComp from "./CarouselComp";
 
 describe("Testing Navbar Component", () => {
@@ -6,11 +7,11 @@ describe("Testing Navbar Component", () => {
     render(<CarouselComp />);
   });
 
-  test("renders Previous and next button successfully",  () => {
+  test("renders Previous and next button successfully", () => {
     render(<CarouselComp />);
 
-    const Next =  screen.getByText("Next");
-    const Previous =  screen.getByText("Previous");
+    const Next = screen.getByText("Next");
+    const Previous = screen.getByText("Previous");
 
     expect(Next).toBeInTheDocument();
     expect(Previous).toBeInTheDocument();

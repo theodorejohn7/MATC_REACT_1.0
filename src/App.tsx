@@ -4,12 +4,15 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { Spin } from "antd";
 
 import "./App.css";
+
 import Home from "./Pages/Home/Home";
 import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar/Navbar";
+
 import { UserloginContextProvider } from "./context/UserLoginContext";
 import { ShoppingCartProvider } from "./context/ShoppingCartContext";
 import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
+
 const Login = lazy(() => import("./Pages/Login/Login"));
 const Register = lazy(() => import("./Pages/Register/Register"));
 const NotFound = lazy(() => import("./Pages/NotFound/NotFound"));

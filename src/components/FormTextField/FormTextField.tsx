@@ -7,7 +7,7 @@ export const FormTextField: React.FC<FieldProps & TextFieldProps> = (props) => {
   const errorMessage = getIn(props.form.errors, props.field.name);
 
   const { error, helperText, field, form, ...rest } = props;
- 
+
   return (
     <TextField
       variant="outlined"

@@ -4,7 +4,7 @@ const initialState = {};
 
 const deleteProductReducer = (
   state = initialState,
-  action: { type: string; data: any } = {type:"",data:"" }
+  action: { type: string; data: any } = { type: "", data: "" }
 ) => {
   if (action.type === DELETE_PRODUCT_DATA) {
     return { ...state, deleteProductData: action.data };

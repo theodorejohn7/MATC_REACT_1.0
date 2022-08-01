@@ -4,7 +4,7 @@ const initialState = {};
 
 const patchProductReducer = (
   state = initialState,
-  action: { type: string; data: any } = {type:"",data:"" }
+  action: { type: string; data: any } = { type: "", data: "" }
 ) => {
   if (action.type === PATCH_PRODUCT_UPDATE) {
     return { ...state, patchProductUpdate: action.data };

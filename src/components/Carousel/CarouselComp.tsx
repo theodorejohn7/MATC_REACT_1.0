@@ -44,9 +44,13 @@ const CarouselComp = () => {
       }}
     >
       <Carousel>
-        {posts.map((data,index) => (
+        {posts.map((data, index) => (
           <Carousel.Item>
-            <img className="d-block   w-100" alt={`carousel-${index}`} src={data.image} />
+            <img
+              className="d-block   w-100"
+              alt={`carousel-${index}`}
+              src={data.image}
+            />
           </Carousel.Item>
         ))}
       </Carousel>

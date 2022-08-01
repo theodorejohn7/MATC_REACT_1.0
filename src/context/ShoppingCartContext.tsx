@@ -19,7 +19,7 @@ type ShoppingCartContextType = {
   cartItems: CartItem[];
   openCart: () => void;
   closeCart: () => void;
-  resetCart:() =>void;
+  resetCart: () => void;
   increaseCartQuantity: (id: number) => void;
   decreaseCartQuantity: (id: number) => void;
   removeFromCart: (id: number) => void;
@@ -32,15 +32,10 @@ export function useShoppingCart() {
 }
 
 export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
-
-  
   const [cartItems, setCartItems] = useLocalStorage<CartItem[]>(
     `shopping-cart`,
     []
   );
-
-
-
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -56,10 +51,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     return cartItems.find((item) => item.id === id)?.quantity || 0;
   }
 
-  
-
   function increaseCartQuantity(id: number) {
-
     setCartItems((currItems) => {
       if (currItems.find((item) => item.id === id) == null) {
         return [...currItems, { id, quantity: 1 }];
@@ -97,9 +89,9 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     });
   }
 
-  function resetCart(){
+  function resetCart() {
     // setCartItems([])
-    console.log("reset cart")
+    console.log("reset cart");
   }
 
   return (

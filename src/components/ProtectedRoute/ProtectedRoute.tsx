@@ -5,7 +5,7 @@ export const ProtectedRoute: React.FC<{ children: JSX.Element }> = ({
   children,
 }) => {
   let { isAdmin } = useUserLoginContext();
- 
+
   if (!isAdmin) {
     return <Navigate to="/home" />;
   }

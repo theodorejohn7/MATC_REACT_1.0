@@ -100,6 +100,7 @@ describe("Testing Register Component", () => {
   test("displays message when UserName field has less than 8 characters", async () => {
     render(
       <Router>
+        import React from "react";
         <Register />
       </Router>
     );

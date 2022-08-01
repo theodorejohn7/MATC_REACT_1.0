@@ -1,6 +1,7 @@
 import * as yup from "yup";
-import YupPassword from 'yup-password';
-YupPassword(yup)
+import YupPassword from "yup-password";
+
+YupPassword(yup);
 
 const validationSchema = yup.object().shape({
   name: yup.string().required("Required Field"),
@@ -8,8 +9,7 @@ const validationSchema = yup.object().shape({
     .string()
     .min(8, "Expected to have minimum 8 characters")
     .required("Required Field"),
-    password: yup
-    .string().password().required(),
+  password: yup.string().password().required(),
   confirmPassword: yup
     .string()
     .oneOf([yup.ref("password")], "Passwords do not match")
@@ -21,11 +21,11 @@ const validationSchema = yup.object().shape({
     .required("Required Field"),
   address: yup.string().required("Required Field"),
   pincode: yup
-  .string()
-  .required()
-  .matches(/^\d+$/, "Must be only digits")
-  .min(6, 'Must be exactly 6 digits')
-  .max(6, 'Must be exactly 6 digits')
+    .string()
+    .required()
+    .matches(/^\d+$/, "Must be only digits")
+    .min(6, "Must be exactly 6 digits")
+    .max(6, "Must be exactly 6 digits")
     .required("Required Field"),
   state: yup.string().required("Required Field"),
   country: yup.string().required("Required Field"),

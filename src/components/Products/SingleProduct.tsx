@@ -29,8 +29,6 @@ export function SingleProduct({
   discPrice,
   price,
 }: ProductItemProps) {
-
-
   const {
     getItemQuantity,
     increaseCartQuantity,
@@ -43,8 +41,6 @@ export function SingleProduct({
   const { isLoggedin, setNotLoggedinPopup } = useUserLoginContext();
 
   const checkLoginIncreaseQuantity = (id1: number) => {
- 
-
     if (isLoggedin) {
       increaseCartQuantity(id1);
     } else {
@@ -133,32 +129,38 @@ export function SingleProduct({
               >
                 Add to Cart
               </Button>
-            ) : (isLoggedin&&<>
-              <div
-                className="d-flex align-items-center flex-column"
-                style={{ gap: ".5rem" }}
-              >
-                <div
-                  className="d-flex align-items-center justify-content-center"
-                  style={{ gap: "0.5rem" }}
-                >
-                  <Button
-                    variant="danger"
-                    size="sm"
-                    onClick={() => removeFromCart(id)}
+            ) : (
+              isLoggedin && (
+                <>
+                  <div
+                    className="d-flex align-items-center flex-column"
+                    style={{ gap: ".5rem" }}
                   >
-                    x
-                  </Button>
-                  <Button onClick={() => decreaseCartQuantity(id)}>-</Button>
-                  <div>
-                    <span className="fs-3">{quantity}</span>
-                    in cart
+                    <div
+                      className="d-flex align-items-center justify-content-center"
+                      style={{ gap: "0.5rem" }}
+                    >
+                      <Button
+                        variant="danger"
+                        size="sm"
+                        onClick={() => removeFromCart(id)}
+                      >
+                        x
+                      </Button>
+                      <Button onClick={() => decreaseCartQuantity(id)}>
+                        -
+                      </Button>
+                      <div>
+                        <span className="fs-3">{quantity}</span>
+                        in cart
+                      </div>
+                      <Button onClick={() => increaseCartQuantity(id)}>
+                        +
+                      </Button>
+                    </div>
                   </div>
-                  <Button onClick={() => increaseCartQuantity(id)}>+</Button>
-                </div>
-              </div>
-            </>
-
+                </>
+              )
             )}
           </div>
         </Card.Footer>

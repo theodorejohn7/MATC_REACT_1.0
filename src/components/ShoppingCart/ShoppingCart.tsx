@@ -4,8 +4,8 @@ import { Offcanvas, Stack } from "react-bootstrap";
 
 import { CartItem } from "./CartItem";
 import { formatCurrency } from "../../utilities/formatCurrency";
-import { useShoppingCart } from "../../context/ShoppingCartContext";
 import {useUserLoginContext} from "../../context/UserLoginContext"
+import { useShoppingCart } from "../../context/ShoppingCartContext";
 import { getAllProductData } from "../../redux/action/getProductAction";
 
 type ShoppingCartProps = {

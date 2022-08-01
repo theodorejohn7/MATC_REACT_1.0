@@ -2,14 +2,11 @@ import Carousel from "react-multi-carousel";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Typography, Button } from "@mui/material";
+import { Typography, Button, Box,Modal  } from "@mui/material";
 
 import { useShoppingCart } from "../../context/ShoppingCartContext";
 
 import { ProductCard } from "theo-components";
-
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
 
 import { mongoInstance } from "../../axios/instance";
 import { getMuttonData } from "../../redux/action/MuttonAction";
@@ -156,7 +153,6 @@ const Products = () => {
     setNotLoggedinPopup();
     navigate(`/login`);
   };
- 
 
   return (
     <div className="App">
@@ -184,10 +180,8 @@ const Products = () => {
               setNotLoggedinPopup={setNotLoggedinPopup}
               increaseCartQuantity={increaseCartQuantity}
               decreaseCartQuantity={decreaseCartQuantity}
-
             />
           ))}
-      
         </Carousel>
       </div>
       <div>
