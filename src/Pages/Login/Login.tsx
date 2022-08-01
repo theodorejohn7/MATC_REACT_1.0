@@ -9,7 +9,7 @@ import { Formik, FormikHelpers, FormikProps, Form, Field } from "formik";
 import ValidationSchema from "./ValidationSchema";
 import { useSessionStorage } from "../../hooks/useSessionStorage";
 
-import { FormTextField } from "theo-product-card";
+import { FormTextField } from "theo-components";
 
 import { useUserLoginContext } from "../../context/UserLoginContext";
 import { useNavigate } from "react-router-dom";

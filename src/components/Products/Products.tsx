@@ -6,7 +6,7 @@ import { Typography, Button } from "@mui/material";
 
 import { useShoppingCart } from "../../context/ShoppingCartContext";
 
-import { ProductCard } from "theo-product-card";
+import { ProductCard } from "theo-components";
 
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
