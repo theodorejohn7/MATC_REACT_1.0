@@ -32,7 +32,7 @@ interface Item {
 interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
   editing: boolean;
   dataIndex: string;
-  title: any;
+  title: string;
   _record: string;
   _index: string;
   description: string;
@@ -66,14 +66,14 @@ const EditableCell: React.FC<EditableCellProps> = ({
   children,
   ...restProps
 }) => {
-  const inputNode =
-    inputType === "number" ? (
-      <InputNumber />
-    ) : inputType === "lineOfText" ? (
-      <Input.TextArea autoSize showCount />
-    ) : (
-      <Input />
-    );
+  let inputNode;
+  if (inputType === "number") {
+    inputNode = <InputNumber />;
+  } else if (inputType === "lineOfText") {
+    inputNode = <Input.TextArea autoSize showCount />;
+  } else {
+    inputNode = <Input />;
+  }
 
   return (
     <td {...restProps}>
@@ -304,27 +304,50 @@ const ProductManagement: React.FC = () => {
     setData(newData);
   };
 
+  const bool: boolean = true;
+
   const mergedColumns = columns.map((col) => {
     if (!col.editable) {
       return col;
     }
-    return {
-      ...col,
-      onCell: (record: Item) => ({
-        record,
-        inputType:
-          col.dataIndex === "title" || col.dataIndex === "category"
-            ? "text"
-            : col.dataIndex === "description" || col.dataIndex === "image"
-            ? "lineOfText"
-            : "number",
 
-        dataIndex: col.dataIndex,
-        title: col.title,
-        editing: isEditing(record),
-      }),
-    };
+    if (col.dataIndex === "title" || col.dataIndex === "category") {
+      return {
+        ...col,
+        onCell: (record: Item) => ({
+          record,
+          dataIndex: col.dataIndex,
+          title: col.title,
+          editing: isEditing(record),
+          inputType: "text",
+        }),
+      };
+    } else if (col.dataIndex === "description" || col.dataIndex === "image") {
+      return {
+        ...col,
+        onCell: (record: Item) => ({
+          record,
+          dataIndex: col.dataIndex,
+          title: col.title,
+          editing: isEditing(record),
+          inputType: "lineOfText",
+        }),
+      };
+    } else {
+      return {
+        ...col,
+        onCell: (record: Item) => ({
+          record,
+          dataIndex: col.dataIndex,
+          title: col.title,
+          editing: isEditing(record),
+          inputType: "number",
+        }),
+      };
+    }
   });
+
+  console.log("@$#", mergedColumns);
 
   const productRecordsData = useSelector(
     (state: any) => state.getProductReducer?.getProductData
@@ -391,7 +414,7 @@ const ProductManagement: React.FC = () => {
     key: number;
   }
 
-  console.log("error",error)
+  console.log("error", error);
   return (
     <div style={{ minHeight: "350px" }}>
       <div>
@@ -419,11 +442,15 @@ const ProductManagement: React.FC = () => {
         </Button>
       </div>
 
-      <Form data-testid="DataTable" className="data_table" form={form}  component={false} >
+      <Form
+        data-testid="DataTable"
+        className="data_table"
+        form={form}
+        component={false}
+      >
         <Spin spinning={spinLoader} className="custom_button" tip="Loading...">
           {!loading && (
             <Table
-            
               className="table_style"
               components={{
                 body: {

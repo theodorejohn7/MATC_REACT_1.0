@@ -4,17 +4,13 @@ import { useState, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Typography, Button } from "@mui/material";
 
-
-
- 
 import { useShoppingCart } from "../../context/ShoppingCartContext";
 
-import { ProductCard } from "theo-product-card";
+import { ProductCard } from "theo-components";
 
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 
- 
 import { mongoInstance } from "../../axios/instance";
 import { getMuttonData } from "../../redux/action/MuttonAction";
 import { useUserLoginContext } from "../../context/UserLoginContext";
@@ -160,6 +156,7 @@ const Products = () => {
     setNotLoggedinPopup();
     navigate(`/login`);
   };
+ 
 
   return (
     <div className="App">
@@ -178,16 +175,19 @@ const Products = () => {
           itemClass="image-item"
           responsive={responsive}
         >
-          {muttonPosts.map((item) => {
-            item.isLoggedin = isLoggedin;
-            item.getItemQuantity = getItemQuantity;
-            item.increaseCartQuantity = increaseCartQuantity;
-            item.decreaseCartQuantity = decreaseCartQuantity;
-            item.removeFromCart = removeFromCart;
-            item.setNotLoggedinPopup = setNotLoggedinPopup;
+          {muttonPosts.map((item) => (
+            <ProductCard
+              {...item}
+              isLoggedin={isLoggedin}
+              getItemQuantity={getItemQuantity}
+              removeFromCart={removeFromCart}
+              setNotLoggedinPopup={setNotLoggedinPopup}
+              increaseCartQuantity={increaseCartQuantity}
+              decreaseCartQuantity={decreaseCartQuantity}
 
-            return <ProductCard {...item} />;
-          })}
+            />
+          ))}
+      
         </Carousel>
       </div>
       <div>
@@ -206,16 +206,17 @@ const Products = () => {
           itemClass="image-item"
           responsive={responsive}
         >
-          {chickenPosts.map((item) => {
-            item.isLoggedin = isLoggedin;
-            item.getItemQuantity = getItemQuantity;
-            item.increaseCartQuantity = increaseCartQuantity;
-            item.decreaseCartQuantity = decreaseCartQuantity;
-            item.removeFromCart = removeFromCart;
-            item.setNotLoggedinPopup = setNotLoggedinPopup;
-
-            return <ProductCard {...item} />;
-          })}
+          {chickenPosts.map((item) => (
+            <ProductCard
+              {...item}
+              isLoggedin={isLoggedin}
+              increaseCartQuantity={increaseCartQuantity}
+              decreaseCartQuantity={decreaseCartQuantity}
+              removeFromCart={removeFromCart}
+              getItemQuantity={getItemQuantity}
+              setNotLoggedinPopup={setNotLoggedinPopup}
+            />
+          ))}
         </Carousel>
       </div>
       <div>
@@ -234,16 +235,17 @@ const Products = () => {
           itemClass="image-item"
           responsive={responsive}
         >
-          {seafoodPosts.map((item) => {
-            item.isLoggedin = isLoggedin;
-            item.getItemQuantity = getItemQuantity;
-            item.increaseCartQuantity = increaseCartQuantity;
-            item.decreaseCartQuantity = decreaseCartQuantity;
-            item.removeFromCart = removeFromCart;
-            item.setNotLoggedinPopup = setNotLoggedinPopup;
-
-            return <ProductCard {...item} />;
-          })}
+          {seafoodPosts.map((item) => (
+            <ProductCard
+              {...item}
+              isLoggedin={isLoggedin}
+              getItemQuantity={getItemQuantity}
+              increaseCartQuantity={increaseCartQuantity}
+              decreaseCartQuantity={decreaseCartQuantity}
+              removeFromCart={removeFromCart}
+              setNotLoggedinPopup={setNotLoggedinPopup}
+            />
+          ))}
         </Carousel>
       </div>
       {loading && <p>Loading Updated Products .... </p>}

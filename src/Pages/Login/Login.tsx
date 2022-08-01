@@ -9,8 +9,7 @@ import { Formik, FormikHelpers, FormikProps, Form, Field } from "formik";
 import ValidationSchema from "./ValidationSchema";
 import { useSessionStorage } from "../../hooks/useSessionStorage";
 
-
-import {FormTextField} from "theo-product-card";
+import { FormTextField } from "theo-components";
 
 import { useUserLoginContext } from "../../context/UserLoginContext";
 import { useNavigate } from "react-router-dom";
@@ -24,8 +23,6 @@ export default function Login() {
   const USER_API_URL = process.env.REACT_APP_USER_API_URL;
   const ADMIN_USER = process.env.REACT_APP_ADMIN_USER;
 
-
-  
   const [accessToken, setAccessToken] = useSessionStorage<string[]>(
     "accessToken",
     []
@@ -109,6 +106,13 @@ export default function Login() {
                       "Login Successfull Now towards Product Management Page"
                     );
                     setOpen(true);
+                    console.log(
+                      "Access Token ==>> ",
+                      accessToken,
+                      "Refresh Token ==>> ",
+                      refreshToken
+                    );
+
                     setTimeout(() => {
                       navigate(`/productmgmt`);
                     }, 2000);

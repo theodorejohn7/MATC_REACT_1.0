@@ -2,7 +2,7 @@ const scanner=require("sonarqube-scanner");
 scanner({
     serverUrl:"http://localhost:9000",
     login:"admin",
-    password:"admin2",
+    password:"admin1",
     options:{
         "sonar.sources":"./src",
     },
