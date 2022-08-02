@@ -7,6 +7,26 @@ export const GET_MUTTON_DATA = "GET_MUTTON_DATA";
 export const RESET_MUTTON_DATA = "RESET_MUTTON_DATA";
 export const EDIT_MUTTON_DATA = "EDIT_MUTTON_DATA";
 
+interface IPost {
+  image: string;
+  title: string;
+  description: string;
+  id: string;
+  _id: string;
+  userId?: number;
+  discPrice: number;
+  grossWeight: number;
+  netWeight: number;
+  price: number;
+  getItemQuantity: (arg0: number) => number;
+
+  increaseCartQuantity: (arg0: number) => void;
+  decreaseCartQuantity: (arg0: number) => void;
+  removeFromCart: (arg0: number) => void;
+  isLoggedin: boolean;
+  setNotLoggedinPopup: () => void;
+}
+
 export const getMuttonData = (): any => {
   return async (dispatch: Dispatch) => {
     const apiURL = `${API_URL}api/category/mutton`;
@@ -28,7 +48,7 @@ export const getMuttonData = (): any => {
   };
 };
 
-export const editMuttonData = (data: any): any => {
+export const editMuttonData = (data: IPost): any => {
   return async (dispatch: Dispatch) => {
     try {
       const muttonDataRecords = data;

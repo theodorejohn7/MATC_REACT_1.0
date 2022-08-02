@@ -52,6 +52,15 @@ interface IPost {
   userId?: number;
   discPrice: number;
   grossWeight: number;
+  netWeight: number;
+  price: number;
+  getItemQuantity: (arg0: number) => number;
+
+  increaseCartQuantity: (arg0: number) => void;
+  decreaseCartQuantity: (arg0: number) => void;
+  removeFromCart: (arg0: number) => void;
+  isLoggedin: boolean;
+  setNotLoggedinPopup: () => void;
 }
 
 const defaultPosts: IPost[] = [];
@@ -128,7 +137,7 @@ const ProductManagement: React.FC = () => {
   };
 
   const updateProductData = useCallback(
-    async (id: string, body: any) => {
+    async (id: string, body: IPost) => {
       try {
         dispatch(patchProductUpdate(id, body));
       } catch (_error) {
@@ -240,7 +249,7 @@ const ProductManagement: React.FC = () => {
       editable: true,
       render: (image: string) => (
         <img
-          alt={`${image}+image`}
+          alt={`${image}+title`}
           src={`${image}`}
           style={{ height: "10vh" }}
         />
@@ -259,7 +268,7 @@ const ProductManagement: React.FC = () => {
       dataIndex: "operation",
       key: "operation",
 
-      render: (_: any, record: Item) => {
+      render: (_: IPost, record: Item) => {
         const editable = isEditing(record);
         return (
           <div>
@@ -303,8 +312,7 @@ const ProductManagement: React.FC = () => {
     deleteProductRecords(key);
     setData(newData);
   };
-
-  const bool: boolean = true;
+ 
 
   const mergedColumns = columns.map((col) => {
     if (!col.editable) {
