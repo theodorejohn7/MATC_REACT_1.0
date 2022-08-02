@@ -52,6 +52,8 @@ export function UserloginContextProvider({
   }
 
   function logout() {
+    sessionStorage.removeItem("accessToken");
+    sessionStorage.removeItem("refreshToken");
     resetCart();
     setCurrentUser("");
     setIsAdmin(false);

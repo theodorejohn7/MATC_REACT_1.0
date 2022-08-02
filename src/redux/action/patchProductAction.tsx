@@ -1,8 +1,9 @@
 import axios from "axios";
+import instance from "../../axios/instance";
 import { Dispatch } from "redux";
 
 export const PATCH_PRODUCT_UPDATE = "PATCH_PRODUCT_UPDATE";
-
+ 
 
 interface IPost {
   image: string;
@@ -31,7 +32,7 @@ export const patchProductUpdate = (id: string, body: IPost): any => {
   return async (dispatch: Dispatch) => {
     const apiURL = `${API_URL}api/update/${id}`;
     try {
-      const patchProductUpdateRecord = await axios
+      const patchProductUpdateRecord = await instance
         .patch(apiURL, body)
         .then((response) => {
           if (response) {

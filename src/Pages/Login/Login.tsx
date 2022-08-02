@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
+
+import instance from "../../axios/instance";
  
 import Spinner from "react-bootstrap/Spinner";
 import { Container, Typography, Grid, Button, Box,Modal  } from "@mui/material";
@@ -90,7 +92,7 @@ export default function Login() {
               userName: values.name,
               password: values.password,
             };
-            axios
+            instance
               .post(`${USER_API_URL}/login`, data)
               .then((response) => {
                 if (response.data.message === "login successful") {
