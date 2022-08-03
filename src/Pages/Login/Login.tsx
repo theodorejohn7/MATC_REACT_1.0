@@ -131,7 +131,9 @@ export default function Login() {
                 }
               })
               .catch((error) => {
-                console.log("error", error.response.data.message);
+                console.log("error", error);
+
+                console.error("error", error.response.data.message);
 
                 if (
                   error.response.data.message ===

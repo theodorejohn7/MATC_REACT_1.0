@@ -11,25 +11,23 @@ instance.defaults.headers.common["channelName"] = "John's Channel";
 
 instance.defaults.headers.common["Authorization"] = "Authorized by John";
 
+export let isRefTokenExpired: boolean;
+
 instance.interceptors.request.use((config: any) => {
   let tokenData = JSON.parse(sessionStorage.getItem("accessToken")!) || "";
+  console.log("TOKENDATA", tokenData.length);
+  // console.log("isExpired is current:", isJwtTokenExpired(`${tokenData}`));
+  if (tokenData.length>0) {
+    let status = isJwtTokenExpired(`${tokenData}`);
 
-  console.log(
-    "isExpired is old:",
-    isJwtTokenExpired(
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmRjMzQwMTcxM2Q5YzBmYTVkNTFjOTgiLCJpYXQiOjE2NTk0NDY1NzcsImV4cCI6MTY1OTQ0NjY5N30.mfdx98XToth30r2e4J5y6B-xfAIRWxaIsxdY1jSSDy0"
-    )
-  );
+    if (status) {
+      isRefTokenExpired = true;
+    } else {
+      isRefTokenExpired = false;
+    }
 
-  console.log("isExpired is current:", isJwtTokenExpired(`${tokenData}`));
-
-  let status = isJwtTokenExpired(`${tokenData}`);
-
-  if (status) {
- 
+    config.headers["X-access-token"] = `${tokenData}`;
   }
-
-  config.headers["X-access-token"] = `${tokenData}`;
   return config;
 });
 
