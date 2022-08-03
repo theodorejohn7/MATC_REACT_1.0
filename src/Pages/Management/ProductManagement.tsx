@@ -460,7 +460,7 @@ const ProductManagement: React.FC = () => {
           className="custom_button"
           onClick={() => uploadProducts()}
         >
-          Upload Products
+          Add Products
         </Button>
       </div>
 

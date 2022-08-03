@@ -20,8 +20,10 @@ export default function Navbar() {
       className="bg-white shadow-lg mb-3 "
     >
       <Container>
-        <NavbarBs.Brand href="/home" className="new-font">
+        <NavbarBs.Brand   className="new-font">
+        <Nav.Link to="/home" as={NavLink}>
           Our Meat Store
+          </Nav.Link>
         </NavbarBs.Brand>
         {isLoggedin && (
           <span className="  d-none d-lg-block  "> Welcome {currentUser}</span>
