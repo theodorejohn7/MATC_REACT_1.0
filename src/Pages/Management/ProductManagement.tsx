@@ -16,6 +16,8 @@ import { getProductData } from "../../redux/action/getProductAction";
 import { deleteProductData } from "../../redux/action/deleteProductAction";
 import { patchProductUpdate } from "../../redux/action/patchProductAction";
 
+import AddProduct from "../../components/AddProduct/AddProduct";
+
 import "./styles.css";
 import "antd/dist/antd.css";
 
@@ -63,8 +65,7 @@ interface IPost {
   setNotLoggedinPopup: () => void;
 }
 
-const defaultPosts: IPost[] = [];
-
+const defaultPosts: IPost[] = []; 
 const EditableCell: React.FC<EditableCellProps> = ({
   editing,
   dataIndex,
@@ -110,6 +111,7 @@ const ProductManagement: React.FC = () => {
   const dispatch = useDispatch();
   const [form] = Form.useForm();
   const [editingKey, setEditingKey] = useState("");
+  const [isUpload, setIsUpload] = useState(false);
 
   const [error, setError]: [string, (error: string) => void] = useState("");
   const [muttonPosts, setMuttonPosts]: [IPost[], (posts: IPost[]) => void] =
@@ -312,7 +314,6 @@ const ProductManagement: React.FC = () => {
     deleteProductRecords(key);
     setData(newData);
   };
- 
 
   const mergedColumns = columns.map((col) => {
     if (!col.editable) {
@@ -362,6 +363,7 @@ const ProductManagement: React.FC = () => {
   const fetchProductRecordsData = useCallback(
     async (category: string) => {
       try {
+        setIsUpload(false);
         setSpinLoader(true);
         dispatch(getProductData(category));
       } catch (error_2) {
@@ -393,6 +395,7 @@ const ProductManagement: React.FC = () => {
 
   const fetchMuttonRecordsData = useCallback(async () => {
     try {
+      setIsUpload(false);
       setSpinLoader(true);
       dispatch(getMuttonData());
     } catch (error_1) {
@@ -411,6 +414,11 @@ const ProductManagement: React.FC = () => {
       }
     }
   }, [muttonRecordsData]);
+
+  const uploadProducts = () => {
+    setIsUpload(true);
+    setLoading(true);
+  };
 
   interface DataType {
     address: string;
@@ -446,6 +454,14 @@ const ProductManagement: React.FC = () => {
         >
           Display SeaFood data
         </Button>
+        <Button
+          type="primary"
+          data-testid="DataButton"
+          className="custom_button"
+          onClick={() => uploadProducts()}
+        >
+          Upload Products
+        </Button>
       </div>
 
       <Form
@@ -477,6 +493,7 @@ const ProductManagement: React.FC = () => {
           )}
         </Spin>
       </Form>
+      <div>{isUpload && <AddProduct   /> }</div>
     </div>
   );
 };
