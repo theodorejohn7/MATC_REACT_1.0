@@ -3,7 +3,7 @@ import YupPassword from "yup-password";
 
 YupPassword(yup);
 
-const validationSchema = yup.object().shape({
+const ValidationSchema = yup.object().shape({
   id:yup.string()
     .required()
     .matches(/^\d+$/, "Must be only Number")
@@ -41,4 +41,4 @@ const validationSchema = yup.object().shape({
  
 });
 
-export default validationSchema;
+export default ValidationSchema;

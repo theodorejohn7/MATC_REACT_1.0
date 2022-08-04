@@ -1,14 +1,6 @@
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, ReactNode, useContext, useState } from "react";
 
 import { useShoppingCart } from "./ShoppingCartContext";
-
-import { isRefTokenExpired } from "../axios/instance";
 
 type UserContextProviderProps = {
   children: ReactNode;
@@ -67,13 +59,6 @@ export function UserloginContextProvider({
     setIsAdmin(false);
     setIsLoggedin(false);
   }
-
-  useEffect(() => {
-    if (isRefTokenExpired) {
-      console.log("logging out as token expired")
-      logout();
-    }
-  }, [isRefTokenExpired]);
 
   return (
     <UserLoginContext.Provider
