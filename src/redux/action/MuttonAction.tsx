@@ -1,4 +1,5 @@
-import axios from "axios";
+import instance from "../../axios/instance";
+ 
 import { Dispatch } from "redux";
 
 const API_URL = process.env.REACT_APP_API_URL;
@@ -32,7 +33,7 @@ export const getMuttonData = (): any => {
     const apiURL = `${API_URL}api/category/mutton`;
 
     try {
-      const muttonDataRecords = await axios.get(apiURL).then((response) => {
+      const muttonDataRecords = await instance.get(apiURL).then((response) => {
         if (response) {
           return response.data;
         } else {
@@ -47,19 +48,7 @@ export const getMuttonData = (): any => {
     }
   };
 };
-
-export const editMuttonData = (data: IPost): any => {
-  return async (dispatch: Dispatch) => {
-    try {
-      const muttonDataRecords = data;
-      if (muttonDataRecords) {
-        dispatch({ type: EDIT_MUTTON_DATA, data: muttonDataRecords });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
+ 
 
 export const resetMuttonData = () => {
   return async (dispatch: Dispatch) => {

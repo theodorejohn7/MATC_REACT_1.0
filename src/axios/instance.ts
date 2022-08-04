@@ -10,14 +10,7 @@ instance.defaults.headers.common["channelName"] = "John's Channel";
 
 instance.defaults.headers.common["Authorization"] = "Authorized by John";
 
-instance.interceptors.request.use((config: any) => {
-  let tokenData = JSON.parse(sessionStorage.getItem("accessToken")!) || "";
-
-  if (tokenData.length > 0) {
-    config.headers["X-access-token"] = `${tokenData}`;
-  }
-  return config;
-});
+ 
 
 export default instance;
 

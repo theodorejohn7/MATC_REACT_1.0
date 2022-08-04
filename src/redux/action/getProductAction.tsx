@@ -1,4 +1,5 @@
 import axios from "axios";
+import instance from "../../axios/instance";
 import { Dispatch } from "redux";
 
 export const GET_PRODUCT_DATA = "GET_PRODUCT_DATA";
@@ -11,7 +12,7 @@ export const getProductData = (category: string): any => {
   return async (dispatch: Dispatch) => {
     const apiURL = `${API_URL}api/category/${category}`;
     try {
-      const productDataRecords = await axios.get(apiURL).then((response) => {
+      const productDataRecords = await instance.get(apiURL).then((response) => {
         if (response) {
           return response.data;
         } else {
@@ -33,7 +34,7 @@ export const getAllProductData = (): any => {
   return async (dispatch: Dispatch) => {
     const apiURL = `${API_URL}api/getall`;
     try {
-      const allProductDataRecords = await axios.get(apiURL).then((resp) => {
+      const allProductDataRecords = await instance.get(apiURL).then((resp) => {
         if (resp) {
           return resp.data;
         } else {

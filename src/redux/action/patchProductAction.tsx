@@ -1,5 +1,4 @@
-import axios from "axios";
-import instance from "../../axios/instance";
+import { mongoInstance } from "../../axios/instance"; 
 import { Dispatch } from "redux";
 
 export const PATCH_PRODUCT_UPDATE = "PATCH_PRODUCT_UPDATE";
@@ -32,7 +31,7 @@ export const patchProductUpdate = (id: string, body: IPost): any => {
   return async (dispatch: Dispatch) => {
     const apiURL = `${API_URL}api/update/${id}`;
     try {
-      const patchProductUpdateRecord = await instance
+      const patchProductUpdateRecord = await mongoInstance
         .patch(apiURL, body)
         .then((response) => {
           if (response) {
