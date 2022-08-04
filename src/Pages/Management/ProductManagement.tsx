@@ -275,15 +275,15 @@ const ProductManagement: React.FC = () => {
         return (
           <div>
             {editable ? (
-              <span>
+              <span >
                 <Typography.Link
                   onClick={() => save(record.id)}
                   style={{ marginRight: 8 }}
                 >
                   Save
                 </Typography.Link>
-                <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
-                  <a>Cancel</a>
+                <Popconfirm  title="Sure to cancel?" onConfirm={cancel}>
+                <Button type="text" className="p-0 m-0">Cancel</Button>
                 </Popconfirm>
               </span>
             ) : (
@@ -300,7 +300,8 @@ const ProductManagement: React.FC = () => {
                 title="Sure to delete?"
                 onConfirm={() => handleDelete(record._id)}
               >
-                <a style={{ marginLeft: "20px" }}>Delete</a>
+                 <Button type="text" className="p-0" style={{ marginLeft: "20px" }}>Delete</Button>
+              
               </Popconfirm>
             }
           </div>
@@ -420,13 +421,7 @@ const ProductManagement: React.FC = () => {
     setLoading(true);
   };
 
-  interface DataType {
-    address: string;
-    description: string;
-    name: string;
-    age: number;
-    key: number;
-  }
+ 
   if (error) console.log("below error occured ", error);
 
   return (
