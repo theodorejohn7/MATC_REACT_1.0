@@ -321,7 +321,7 @@ const ProductManagement: React.FC = () => {
       return col;
     }
 
-    if (col.dataIndex === "title" || col.dataIndex === "category") {
+    if ( col.dataIndex === "category") {
       return {
         ...col,
         onCell: (record: Item) => ({
@@ -332,7 +332,7 @@ const ProductManagement: React.FC = () => {
           inputType: "text",
         }),
       };
-    } else if (col.dataIndex === "description" || col.dataIndex === "image") {
+    } else if (col.dataIndex === "title" || col.dataIndex === "description" || col.dataIndex === "image") {
       return {
         ...col,
         onCell: (record: Item) => ({
