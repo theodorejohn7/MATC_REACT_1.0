@@ -300,7 +300,7 @@ const ProductManagement: React.FC = () => {
                 title="Sure to delete?"
                 onConfirm={() => handleDelete(record._id)}
               >
-                 <Button type="text" className="p-0" style={{ marginLeft: "20px" }}>Delete</Button>
+                 <Button danger type="text" className="p-0 " style={{ marginLeft: "20px" }}>Delete</Button>
               
               </Popconfirm>
             }
