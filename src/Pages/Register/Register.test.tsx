@@ -139,7 +139,7 @@ describe("Testing Register Component", () => {
 
     await waitFor(() => {
       const errorTest = screen.getByText(
-        "Expected to have minimum 8 characters",
+        "password must be at least 8 characters",
         {
           exact: true,
         }
@@ -153,7 +153,7 @@ describe("Testing Register Component", () => {
 
     await waitFor(() => {
       const errorTest = screen.getByText(
-        "Expected to have minimum one uppercase char",
+        "password must contain at least 1 uppercase letter",
         {
           exact: false,
         }
@@ -167,7 +167,7 @@ describe("Testing Register Component", () => {
 
     await waitFor(() => {
       const errorTest = screen.getByText(
-        "Expected to have minimum 1 special char or symbols",
+        "password must contain at least 1 symbol",
         {
           exact: false,
         }

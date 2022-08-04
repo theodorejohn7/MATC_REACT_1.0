@@ -10,8 +10,6 @@ instance.defaults.headers.common["channelName"] = "John's Channel";
 
 instance.defaults.headers.common["Authorization"] = "Authorized by John";
 
- 
-
 export default instance;
 
 export const mongoInstance = axios.create({

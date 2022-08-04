@@ -40,7 +40,7 @@ describe("Testing Login Component", () => {
         <Login />
       </Router>
     );
-    const submitButton = screen.getByText("Submit", { exact: false });
+    const submitButton = screen.getByTestId("test_submit");
     expect(submitButton).toBeInTheDocument();
   });
 
