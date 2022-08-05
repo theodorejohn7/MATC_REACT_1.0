@@ -29,7 +29,6 @@ export function UserloginContextProvider({
   const [isLoggedin, setIsLoggedin] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [notLoggedIn, setNotLoggedIn] = useState(false);
-  const { resetCart } = useShoppingCart();
 
   const [currentUser, setCurrentUser] = useState("");
   const ADMIN_USER = process.env.REACT_APP_ADMIN_USER;
@@ -54,7 +53,6 @@ export function UserloginContextProvider({
   function logout() {
     sessionStorage.removeItem("accessToken");
     sessionStorage.removeItem("refreshToken");
-    resetCart();
     setCurrentUser("");
     setIsAdmin(false);
     setIsLoggedin(false);

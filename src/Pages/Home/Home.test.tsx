@@ -40,7 +40,7 @@ describe("Testing Home Page", () => {
       timeout: 35000,
     });
 
-    expect(response.data[0].category).toEqual("mutton"); // Make an assertion on the result
+    expect(response.data[0].category).toEqual("mutton");  
   });
 
   it("API returns data for category - Chicken", async () => {
@@ -48,7 +48,7 @@ describe("Testing Home Page", () => {
       timeout: 35000,
     });
 
-    expect(response.data[0].category).toEqual("chicken"); // Make an assertion on the result
+    expect(response.data[0].category).toEqual("chicken");  
   });
 
   it("API returns data for category - Seafood", async () => {
@@ -56,6 +56,6 @@ describe("Testing Home Page", () => {
       timeout: 35000,
     });
 
-    expect(response.data[0].category).toEqual("seafood"); // Make an assertion on the result
+    expect(response.data[0].category).toEqual("seafood");  
   });
 });

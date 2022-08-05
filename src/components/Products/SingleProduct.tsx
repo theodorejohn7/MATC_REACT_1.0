@@ -122,7 +122,6 @@ export function SingleProduct({
         <Card.Footer className="d-flex">
           <div className="mt-auto w-100   ">
             {quantity === 0 || !isLoggedin ? (
-              // <Button className="  " onClick={() => increaseCartQuantity(id)}>
               <Button
                 className="  "
                 onClick={() => checkLoginIncreaseQuantity(id)}

@@ -19,7 +19,6 @@ type ShoppingCartContextType = {
   cartItems: CartItem[];
   openCart: () => void;
   closeCart: () => void;
-  resetCart: () => void;
   increaseCartQuantity: (id: number) => void;
   decreaseCartQuantity: (id: number) => void;
   removeFromCart: (id: number) => void;
@@ -89,11 +88,6 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     });
   }
 
-  function resetCart() {
-    // setCartItems([])
-    console.log("reset cart");
-  }
-
   return (
     <ShoppingCartContext.Provider
       value={{
@@ -101,7 +95,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
         cartQuantity,
         openCart,
         closeCart,
-        resetCart,
+
         getItemQuantity,
         increaseCartQuantity,
         decreaseCartQuantity,
