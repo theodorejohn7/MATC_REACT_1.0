@@ -1,10 +1,9 @@
- 
 import { useState } from "react";
 
 import instance from "../../axios/instance";
- 
+
 import Spinner from "react-bootstrap/Spinner";
-import { Container, Typography, Grid, Button, Box,Modal  } from "@mui/material";
+import { Container, Typography, Grid, Button, Box, Modal } from "@mui/material";
 import { Formik, FormikHelpers, FormikProps, Form, Field } from "formik";
 
 import ValidationSchema from "./ValidationSchema";
@@ -24,14 +23,8 @@ export default function Login() {
   const USER_API_URL = process.env.REACT_APP_USER_API_URL;
   const ADMIN_USER = process.env.REACT_APP_ADMIN_USER;
 
-  const [accessToken, setAccessToken] = useSessionStorage<string[]>(
-    "accessToken",
-    []
-  );
-  const [refreshToken, setRefreshToken] = useSessionStorage<string[]>(
-    "refreshToken",
-    []
-  );
+  const [accessToken, setAccessToken] = useSessionStorage<string[]>("accessToken", []);
+  const [refreshToken, setRefreshToken] = useSessionStorage<string[]>("refreshToken", []);
   const { login, checkAdmin } = useUserLoginContext();
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -42,7 +35,7 @@ export default function Login() {
   const navigate = useNavigate();
 
   const style = {
-    position: "absolute" as "absolute",
+    position: "absolute" as const,
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
@@ -52,45 +45,36 @@ export default function Login() {
     boxShadow: 24,
     margin: 0,
     padding: 0,
-    p: 4,
+    p: 4
   };
 
   return (
     <Container
       maxWidth="md"
       className="   rounded d-flex align-items-center justify-content-center "
-      style={{ minHeight: "350px", marginTop: "20px" }}
-    >
+      style={{ minHeight: "350px", marginTop: "20px" }}>
       <div
         className="border border-primary p-4 rounded "
         style={{
           textAlign: "center",
           width: "15rem",
-          boxShadow: "1px 3px 38px 10px rgba(139,149,237,1)",
-        }}
-      >
-        <Typography
-          align="center"
-          variant="h5"
-          style={{ lineHeight: 1.25, marginBottom: 16 }}
-        >
+          boxShadow: "1px 3px 38px 10px rgba(139,149,237,1)"
+        }}>
+        <Typography align="center" variant="h5" style={{ lineHeight: 1.25, marginBottom: 16 }}>
           Login Form
         </Typography>
 
         <Formik
           initialValues={{
             name: "",
-            password: "",
+            password: ""
           }}
           validationSchema={ValidationSchema}
-          onSubmit={(
-            values: FormValues,
-            formikHelpers: FormikHelpers<FormValues>
-          ) => {
+          onSubmit={(values: FormValues, formikHelpers: FormikHelpers<FormValues>) => {
             setLoading(true);
-            let data = {
+            const data = {
               userName: values.name,
-              password: values.password,
+              password: values.password
             };
             instance
               .post(`${USER_API_URL}/login`, data)
@@ -103,9 +87,7 @@ export default function Login() {
 
                   if (values.name === ADMIN_USER) {
                     setLoading(false);
-                    setErrorMessage(
-                      "Login Successfull Now towards Product Management Page"
-                    );
+                    setErrorMessage("Login Successfull Now towards Product Management Page");
                     setOpen(true);
                     console.log(
                       "Access Token ==>> ",
@@ -120,9 +102,7 @@ export default function Login() {
                   } else {
                     setLoading(false);
 
-                    setErrorMessage(
-                      "Login Successfull Navigating to our Store"
-                    );
+                    setErrorMessage("Login Successfull Navigating to our Store");
                     setOpen(true);
                     setTimeout(() => {
                       navigate(`/home`);
@@ -135,10 +115,7 @@ export default function Login() {
 
                 console.error("error", error.response.data.message);
 
-                if (
-                  error.response.data.message ===
-                  "Incorrect Password, Try again!"
-                ) {
+                if (error.response.data.message === "Incorrect Password, Try again!") {
                   setLoading(false);
 
                   setErrorMessage("Incorrect password Please Try Again");
@@ -154,8 +131,7 @@ export default function Login() {
               });
 
             formikHelpers.setSubmitting(false);
-          }}
-        >
+          }}>
           {(formikProps: FormikProps<FormValues>) => (
             <Form noValidate autoComplete="off">
               <Grid container spacing={2}>
@@ -184,8 +160,7 @@ export default function Login() {
                     size="large"
                     data-testid="test_submit"
                     color="primary"
-                    disabled={formikProps.isSubmitting}
-                  >
+                    disabled={formikProps.isSubmitting}>
                     {loading && (
                       <Spinner
                         as="span"
@@ -209,8 +184,7 @@ export default function Login() {
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
+        aria-describedby="modal-modal-description">
         <Box className="border border-secondary p-2 rounded" sx={style}>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             {errorMessage}

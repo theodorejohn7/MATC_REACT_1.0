@@ -10,10 +10,10 @@ describe("Testing Footer Component", () => {
   test("renders text in Footer component succesfully", () => {
     render(<Footer />);
     const FooterText = screen.getByText("COMPANY", {
-      exact: false,
+      exact: false
     });
     const contactNumber = screen.getByText("Chennai - 9789123619", {
-      exact: false,
+      exact: false
     });
 
     expect(FooterText).toBeInTheDocument();

@@ -1,11 +1,6 @@
-import {
-  GET_MUTTON_DATA,
-  RESET_MUTTON_DATA,
-  EDIT_MUTTON_DATA,
-} from "../action/MuttonAction";
+import { GET_MUTTON_DATA, RESET_MUTTON_DATA, EDIT_MUTTON_DATA } from "../action/MuttonAction";
 
 const initialState = {};
-
 
 interface IPost {
   image: string;
@@ -27,10 +22,9 @@ interface IPost {
   setNotLoggedinPopup: () => void;
 }
 
-
 const muttonDataReducer = (
   state = initialState,
-  action: { type: string; data?: IPost } = { type: ""  }
+  action: { type: string; data?: IPost } = { type: "" }
 ) => {
   switch (action.type) {
     case GET_MUTTON_DATA:

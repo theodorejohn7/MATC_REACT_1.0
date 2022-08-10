@@ -5,10 +5,7 @@ YupPassword(yup);
 
 const validationSchema = yup.object().shape({
   name: yup.string().required("Required Field"),
-  userName: yup
-    .string()
-    .min(8, "Expected to have minimum 8 characters")
-    .required("Required Field"),
+  userName: yup.string().min(8, "Expected to have minimum 8 characters").required("Required Field"),
   password: yup.string().password().required(),
   confirmPassword: yup
     .string()
@@ -30,7 +27,7 @@ const validationSchema = yup.object().shape({
   state: yup.string().required("Required Field"),
   country: yup.string().required("Required Field"),
   securityQn: yup.string().required("Required Field"),
-  securityAns: yup.string().required("Required Field"),
+  securityAns: yup.string().required("Required Field")
 });
 
 export default validationSchema;

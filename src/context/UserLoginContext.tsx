@@ -21,9 +21,7 @@ export function useUserLoginContext() {
   return useContext(UserLoginContext);
 }
 
-export function UserloginContextProvider({
-  children,
-}: UserContextProviderProps) {
+export function UserloginContextProvider({ children }: UserContextProviderProps) {
   const [isLoggedin, setIsLoggedin] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [notLoggedIn, setNotLoggedIn] = useState(false);
@@ -66,9 +64,8 @@ export function UserloginContextProvider({
         currentUser,
         isAdmin,
         login,
-        logout,
-      }}
-    >
+        logout
+      }}>
       {children}
     </UserLoginContext.Provider>
   );

@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Stack } from "react-bootstrap";
 
@@ -39,9 +39,9 @@ export function CartItem({ id, quantity }: CartItemsProps) {
     }
   }, [dispatch]);
 
-   
+  useEffect(() => {
     fetchAllRecordsData();
- 
+  }, []);
 
   const allRecordsData: AllRecords[] = useSelector(
     (state: any) => state.getProductReducer?.getAllProductData
@@ -65,8 +65,7 @@ export function CartItem({ id, quantity }: CartItemsProps) {
           {quantity > 1 && (
             <span
               className="text-primary font-weight-bold text-lowercase "
-              style={{ fontSize: "0.8rem" }}
-            >
+              style={{ fontSize: "0.8rem" }}>
               {" "}
               x {quantity}
             </span>
@@ -76,16 +75,8 @@ export function CartItem({ id, quantity }: CartItemsProps) {
           {formatCurrency(item.discPrice ? item.discPrice : item.price)}
         </div>
       </div>
-      <div>
-        {formatCurrency(
-          (item.discPrice ? item.discPrice : item.price) * quantity
-        )}
-      </div>
-      <Button
-        variant="outline-danger"
-        size="sm"
-        onClick={() => removeFromCart(item.id)}
-      >
+      <div>{formatCurrency((item.discPrice ? item.discPrice : item.price) * quantity)}</div>
+      <Button variant="outline-danger" size="sm" onClick={() => removeFromCart(item.id)}>
         &times;
       </Button>
     </Stack>

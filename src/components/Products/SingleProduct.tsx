@@ -37,13 +37,13 @@ export function SingleProduct({
   increaseCartQuantity,
   decreaseCartQuantity,
   removeFromCart,
-  setNotLoggedinPopup,
+  setNotLoggedinPopup
 }: ProductItemProps) {
   const quantity: number = getItemQuantity(id);
 
   const CURRENCY_FORMATTER = new Intl.NumberFormat(undefined, {
     currency: "INR",
-    style: "currency",
+    style: "currency"
   });
 
   function formatCurrency(number: number) {
@@ -62,8 +62,7 @@ export function SingleProduct({
     <div
       style={{ height: "28rem" }}
       data-testid={`test_${id}`}
-      className="py-4 px-2 align-items-center justify-content-center d-flex  "
-    >
+      className="py-4 px-2 align-items-center justify-content-center d-flex  ">
       <Card
         key={id}
         data-testid={`test_${id}`}
@@ -74,9 +73,8 @@ export function SingleProduct({
           maxHeight: "50rem",
           overflow: "hidden",
           boxShadow:
-            "1.6px 1.6px 1.2px rgba(0, 0, 0, 0.015),  3.4px 3.4px 2.7px rgba(0, 0, 0, 0.022),  5.8px 5.8px 4.6px rgba(0, 0, 0, 0.027),  8.7px 8.7px 6.9px rgba(0, 0, 0, 0.031),  12.5px 12.5px 10px rgba(0, 0, 0, 0.035),  17.7px 17.7px 14.2px rgba(0, 0, 0, 0.039),  25.1px 25.1px 20.1px rgba(0, 0, 0, 0.043),  36.5px 36.5px 29.2px rgba(0, 0, 0, 0.048),  56.3px 56.3px 45px rgba(0, 0, 0, 0.055),  100px 100px 80px rgba(0, 0, 0, 0.07)",
-        }}
-      >
+            "1.6px 1.6px 1.2px rgba(0, 0, 0, 0.015),  3.4px 3.4px 2.7px rgba(0, 0, 0, 0.022),  5.8px 5.8px 4.6px rgba(0, 0, 0, 0.027),  8.7px 8.7px 6.9px rgba(0, 0, 0, 0.031),  12.5px 12.5px 10px rgba(0, 0, 0, 0.035),  17.7px 17.7px 14.2px rgba(0, 0, 0, 0.039),  25.1px 25.1px 20.1px rgba(0, 0, 0, 0.043),  36.5px 36.5px 29.2px rgba(0, 0, 0, 0.048),  56.3px 56.3px 45px rgba(0, 0, 0, 0.055),  100px 100px 80px rgba(0, 0, 0, 0.07)"
+        }}>
         <Card.Img
           variant="top"
           src={image}
@@ -86,15 +84,14 @@ export function SingleProduct({
             width: "16rem",
             height: "8rem",
             borderRadius: "8px",
-            boxShadow: "3px 3px 10px 3px #cc3300",
+            boxShadow: "3px 3px 10px 3px #cc3300"
           }}
         />
 
         <Card.Body className="  p-0 m-0">
           <Card.Header
             className="  m-0 d-flex justify-content-between align-items-baseline "
-            style={{ borderRadius: "10px" }}
-          >
+            style={{ borderRadius: "10px" }}>
             <Card.Title className="text-center p-0 m-0">
               {title.charAt(0).toUpperCase() + title.substring(1, 40)}
             </Card.Title>
@@ -102,19 +99,14 @@ export function SingleProduct({
           </Card.Header>
 
           <Card.Text className="text-center mb-0 pb-0  ">
-            <p
-              className="lh-1 py-1 mb-0 pb-0 fw-light"
-              style={{ fontSize: "14px" }}
-            >
-              {description.charAt(0).toUpperCase() +
-                description.substring(1, 60)}
+            <p className="lh-1 py-1 mb-0 pb-0 fw-light" style={{ fontSize: "14px" }}>
+              {description.charAt(0).toUpperCase() + description.substring(1, 60)}
             </p>
           </Card.Text>
         </Card.Body>
         <Card.Footer className="  p-0 m-0">
           <p className="p-0 m-0" style={{ fontSize: "11px" }}>
-            {"Net. Wt.: " + netWeight + "gms"}{" "}
-            {"Gross Wt.: " + grossWeight + "gms"}
+            {"Net. Wt.: " + netWeight + "gms"} {"Gross Wt.: " + grossWeight + "gms"}
           </p>
         </Card.Footer>
         <Card.Footer className=" ">
@@ -133,40 +125,25 @@ export function SingleProduct({
         <Card.Footer className="d-flex">
           <div className="mt-auto w-100   ">
             {quantity === 0 || !isLoggedin ? (
-              <Button
-                className="  "
-                onClick={() => checkLoginIncreaseQuantity(id)}
-              >
+              <Button className="  " onClick={() => checkLoginIncreaseQuantity(id)}>
                 Add to Cart
               </Button>
             ) : (
               isLoggedin && (
                 <>
-                  <div
-                    className="d-flex align-items-center flex-column"
-                    style={{ gap: ".5rem" }}
-                  >
+                  <div className="d-flex align-items-center flex-column" style={{ gap: ".5rem" }}>
                     <div
                       className="d-flex align-items-center justify-content-center"
-                      style={{ gap: "0.5rem" }}
-                    >
-                      <Button
-                        variant="danger"
-                        size="sm"
-                        onClick={() => removeFromCart(id)}
-                      >
+                      style={{ gap: "0.5rem" }}>
+                      <Button variant="danger" size="sm" onClick={() => removeFromCart(id)}>
                         x
                       </Button>
-                      <Button onClick={() => decreaseCartQuantity(id)}>
-                        -
-                      </Button>
+                      <Button onClick={() => decreaseCartQuantity(id)}>-</Button>
                       <div>
                         <span className="fs-3">{quantity}</span>
                         in cart
                       </div>
-                      <Button onClick={() => increaseCartQuantity(id)}>
-                        +
-                      </Button>
+                      <Button onClick={() => increaseCartQuantity(id)}>+</Button>
                     </div>
                   </div>
                 </>

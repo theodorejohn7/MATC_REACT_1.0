@@ -1,5 +1,4 @@
- 
- import { mongoInstance } from "../../axios/instance";
+import { mongoInstance } from "../../axios/instance";
 import { Dispatch } from "redux";
 
 export const DELETE_PRODUCT_DATA = "DELETE_PRODUCT_DATA";
@@ -11,15 +10,13 @@ export const deleteProductData = (id: string): any => {
     const apiURL = `${API_URL}api/delete/${id}`;
 
     try {
-      const deleteProductRecords = await mongoInstance
-        .delete(apiURL)
-        .then((response) => {
-          if (response) {
-            return response.data;
-          } else {
-            return false;
-          }
-        });
+      const deleteProductRecords = await mongoInstance.delete(apiURL).then((response) => {
+        if (response) {
+          return response.data;
+        } else {
+          return false;
+        }
+      });
       if (deleteProductRecords) {
         dispatch({ type: DELETE_PRODUCT_DATA, data: deleteProductRecords });
       }

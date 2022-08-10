@@ -2,7 +2,6 @@ import { DELETE_PRODUCT_DATA } from "../action/deleteProductAction";
 
 const initialState = {};
 
-
 interface IPost {
   image: string;
   title: string;
@@ -23,10 +22,9 @@ interface IPost {
   setNotLoggedinPopup: () => void;
 }
 
-
 const deleteProductReducer = (
   state = initialState,
-  action: { type: string; data?: IPost } = { type: ""  }
+  action: { type: string; data?: IPost } = { type: "" }
 ) => {
   if (action.type === DELETE_PRODUCT_DATA) {
     return { ...state, deleteProductData: action.data };

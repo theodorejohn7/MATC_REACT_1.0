@@ -36,9 +36,7 @@ const Footer = () => {
       </Container>
 
       <hr />
-      <p style={{ fontSize: "9px" }}>
-        Image Courtesy : https://www.licious.in/
-      </p>
+      <p style={{ fontSize: "9px" }}>Image Courtesy : https://www.licious.in/</p>
     </div>
   );
 };

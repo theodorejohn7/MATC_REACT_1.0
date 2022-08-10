@@ -12,7 +12,7 @@ describe("Testing Product Management Page", () => {
       </Provider>
     );
     const RegisterText = screen.getByText("Display Mutton Data", {
-      exact: false,
+      exact: false
     });
     expect(RegisterText).toBeInTheDocument();
   });
@@ -24,13 +24,13 @@ describe("Testing Product Management Page", () => {
       </Provider>
     );
     const muttonButton = screen.getByText("Display Mutton Data", {
-      exact: false,
+      exact: false
     });
     const chickenButton = screen.getByText("Display Chicken Data", {
-      exact: false,
+      exact: false
     });
     const seafoodButton = screen.getByText("Display SeaFood Data", {
-      exact: false,
+      exact: false
     });
     expect(muttonButton).toBeInTheDocument();
     expect(chickenButton).toBeInTheDocument();

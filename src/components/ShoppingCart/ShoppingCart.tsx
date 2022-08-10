@@ -1,10 +1,10 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Offcanvas, Stack } from "react-bootstrap";
 
 import { CartItem } from "./CartItem";
 import { formatCurrency } from "../../utilities/formatCurrency";
-import {useUserLoginContext} from "../../context/UserLoginContext"
+import { useUserLoginContext } from "../../context/UserLoginContext";
 import { useShoppingCart } from "../../context/ShoppingCartContext";
 import { getAllProductData } from "../../redux/action/getProductAction";
 
@@ -31,7 +31,7 @@ interface AllRecords {
 
 export default function ShoppingCart({ isOpen }: ShoppingCartProps) {
   const { closeCart, cartItems } = useShoppingCart();
-const {currentUser}= useUserLoginContext();
+  const { currentUser } = useUserLoginContext();
 
   const dispatch = useDispatch();
 
@@ -40,7 +40,6 @@ const {currentUser}= useUserLoginContext();
   );
 
   const fetchAllRecordsData = useCallback(async () => {
-
     try {
       dispatch(getAllProductData());
     } catch (error_1) {
@@ -48,14 +47,14 @@ const {currentUser}= useUserLoginContext();
     }
   }, [dispatch]);
 
- 
+  useEffect(() => {
     fetchAllRecordsData();
- 
+  }, []);
 
   return (
     <Offcanvas show={isOpen} placement="end" onHide={closeCart}>
       <Offcanvas.Header closeButton>
-        <Offcanvas.Title>{currentUser? `${currentUser}'s Cart`  : "Cart" } </Offcanvas.Title>
+        <Offcanvas.Title>{currentUser ? `${currentUser}'s Cart` : "Cart"} </Offcanvas.Title>
       </Offcanvas.Header>
 
       <Offcanvas.Body>
@@ -67,10 +66,11 @@ const {currentUser}= useUserLoginContext();
             Total
             {formatCurrency(
               cartItems?.reduce((total, cartItem) => {
-                const item = allRecordsData?.find(
-                  (item1) => item1.id === cartItem.id
+                const item = allRecordsData?.find((item1) => item1.id === cartItem.id);
+                return (
+                  total +
+                  ((item?.discPrice ? item?.discPrice : item?.price) || 0) * cartItem.quantity
                 );
-                return total + ( (item?.discPrice ? item?.discPrice :   item?.price) || 0) * cartItem.quantity;
               }, 0)
             )}
           </div>

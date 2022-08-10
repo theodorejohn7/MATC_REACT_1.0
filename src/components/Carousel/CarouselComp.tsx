@@ -15,16 +15,15 @@ const CarouselComp = () => {
 
   const defaultPosts: IPost[] = [];
 
-  const [posts, setPosts]: [IPost[], (posts: IPost[]) => void] =
-    useState(defaultPosts);
+  const [posts, setPosts]: [IPost[], (posts: IPost[]) => void] = useState(defaultPosts);
 
   useEffect(() => {
     instance
       .get<IPost[]>(`${CAROUSEL_API_URL}`, {
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
-        timeout: 10000,
+        timeout: 10000
       })
       .then((response) => {
         setPosts(response.data);
@@ -32,7 +31,7 @@ const CarouselComp = () => {
       .catch((ex) => {
         console.log(ex);
       });
-  });
+  }, [CAROUSEL_API_URL]);
 
   return (
     <div
@@ -40,17 +39,12 @@ const CarouselComp = () => {
         display: "block",
         maxHeight: 400,
         width: "100%",
-        overflow: "hidden",
-      }}
-    >
+        overflow: "hidden"
+      }}>
       <Carousel>
         {posts.map((data, index) => (
-          <Carousel.Item>
-            <img
-              className="d-block   w-100"
-              alt={`carousel-${index}`}
-              src={data.image}
-            />
+          <Carousel.Item key={index}>
+            <img className="d-block   w-100" alt={`carousel-${index}`} src={data.image} />
           </Carousel.Item>
         ))}
       </Carousel>

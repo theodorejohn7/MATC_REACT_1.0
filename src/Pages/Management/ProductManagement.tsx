@@ -1,13 +1,4 @@
-import {
-  Button,
-  Form,
-  Input,
-  InputNumber,
-  Popconfirm,
-  Spin,
-  Table,
-  Typography,
-} from "antd";
+import { Button, Form, Input, InputNumber, Popconfirm, Spin, Table, Typography } from "antd";
 import React, { useCallback, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -92,10 +83,9 @@ const EditableCell: React.FC<EditableCellProps> = ({
           rules={[
             {
               required: true,
-              message: `Please Input ${title}!`,
-            },
-          ]}
-        >
+              message: `Please Input ${title}!`
+            }
+          ]}>
           {inputNode}
         </Form.Item>
       ) : (
@@ -112,11 +102,9 @@ const ProductManagement: React.FC = () => {
   const [isUpload, setIsUpload] = useState(false);
 
   const [error, setError]: [string, (error: string) => void] = useState("");
-  const [muttonPosts, setMuttonPosts]: [IPost[], (posts: IPost[]) => void] =
-    useState(defaultPosts);
+  const [muttonPosts, setMuttonPosts]: [IPost[], (posts: IPost[]) => void] = useState(defaultPosts);
 
-  const [loading, setLoading]: [boolean, (loading: boolean) => void] =
-    useState<boolean>(true);
+  const [loading, setLoading]: [boolean, (loading: boolean) => void] = useState<boolean>(true);
 
   const [data, setData] = useState(muttonPosts);
 
@@ -127,7 +115,7 @@ const ProductManagement: React.FC = () => {
       title: "",
       discPrice: "",
       grossWeight: "",
-      ...record,
+      ...record
     });
     setEditingKey(record.id);
   };
@@ -168,7 +156,7 @@ const ProductManagement: React.FC = () => {
         const item = newData[index];
         newData.splice(index, 1, {
           ...item,
-          ...row,
+          ...row
         });
 
         updateProductData(newData[index]._id, newData[index]);
@@ -191,21 +179,21 @@ const ProductManagement: React.FC = () => {
       key: "category",
       dataIndex: "category",
       width: "5%",
-      editable: true,
+      editable: true
     },
     {
       title: "Title",
       key: "title",
       dataIndex: "title",
       width: "15%",
-      editable: true,
+      editable: true
     },
     {
       title: "Description",
       key: "description",
       dataIndex: "description",
       width: "25%",
-      editable: true,
+      editable: true
     },
     {
       title: "Price",
@@ -213,14 +201,14 @@ const ProductManagement: React.FC = () => {
 
       dataIndex: "price",
       width: "5%",
-      editable: true,
+      editable: true
     },
     {
       title: "Disc. Price",
       key: "discPrice",
       dataIndex: "discPrice",
       width: "7%",
-      editable: true,
+      editable: true
     },
     {
       title: "Gross Weight",
@@ -228,7 +216,7 @@ const ProductManagement: React.FC = () => {
 
       dataIndex: "grossWeight",
       width: "8.5%",
-      editable: true,
+      editable: true
     },
     {
       title: "Nett Weight",
@@ -237,7 +225,7 @@ const ProductManagement: React.FC = () => {
       dataIndex: "netWeight",
 
       width: "7.5%",
-      editable: true,
+      editable: true
     },
 
     {
@@ -248,12 +236,8 @@ const ProductManagement: React.FC = () => {
       width: "10%",
       editable: true,
       render: (image: string) => (
-        <img
-          alt={`${image}+title`}
-          src={`${image}`}
-          style={{ height: "10vh" }}
-        />
-      ),
+        <img alt={`${image}+title`} src={`${image}`} style={{ height: "10vh" }} />
+      )
     },
     {
       title: "Rating ",
@@ -261,7 +245,7 @@ const ProductManagement: React.FC = () => {
       key: "rating",
 
       width: "5%",
-      editable: false,
+      editable: false
     },
     {
       title: "Operation",
@@ -274,10 +258,7 @@ const ProductManagement: React.FC = () => {
           <div>
             {editable ? (
               <span>
-                <Typography.Link
-                  onClick={() => save(record.id)}
-                  style={{ marginRight: 8 }}
-                >
+                <Typography.Link onClick={() => save(record.id)} style={{ marginRight: 8 }}>
                   Save
                 </Typography.Link>
                 <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
@@ -290,30 +271,21 @@ const ProductManagement: React.FC = () => {
               <Typography.Link
                 disabled={editingKey !== ""}
                 onClick={() => edit(record)}
-                style={{ marginLeft: "20px" }}
-              >
+                style={{ marginLeft: "20px" }}>
                 Edit
               </Typography.Link>
             )}
             {
-              <Popconfirm
-                title="Sure to delete?"
-                onConfirm={() => handleDelete(record._id)}
-              >
-                <Button
-                  danger
-                  type="text"
-                  className="p-0 "
-                  style={{ marginLeft: "20px" }}
-                >
+              <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record._id)}>
+                <Button danger type="text" className="p-0 " style={{ marginLeft: "20px" }}>
                   Delete
                 </Button>
               </Popconfirm>
             }
           </div>
         );
-      },
-    },
+      }
+    }
   ];
 
   const handleDelete = (key: string) => {
@@ -335,8 +307,8 @@ const ProductManagement: React.FC = () => {
           dataIndex: col.dataIndex,
           title: col.title,
           editing: isEditing(record),
-          inputType: "text",
-        }),
+          inputType: "text"
+        })
       };
     } else if (
       col.dataIndex === "title" ||
@@ -350,8 +322,8 @@ const ProductManagement: React.FC = () => {
           dataIndex: col.dataIndex,
           title: col.title,
           editing: isEditing(record),
-          inputType: "lineOfText",
-        }),
+          inputType: "lineOfText"
+        })
       };
     } else {
       return {
@@ -361,15 +333,13 @@ const ProductManagement: React.FC = () => {
           dataIndex: col.dataIndex,
           title: col.title,
           editing: isEditing(record),
-          inputType: "number",
-        }),
+          inputType: "number"
+        })
       };
     }
   });
 
-  const productRecordsData = useSelector(
-    (state: any) => state.getProductReducer?.getProductData
-  );
+  const productRecordsData = useSelector((state: any) => state.getProductReducer?.getProductData);
 
   const fetchProductRecordsData = useCallback(
     async (category: string) => {
@@ -391,16 +361,12 @@ const ProductManagement: React.FC = () => {
 
       setLoading(false);
       if (productRecordsData.error) {
-        setError(
-          productRecordsData !== undefined && productRecordsData?.message
-        );
+        setError(productRecordsData !== undefined && productRecordsData?.message);
       }
     }
   }, [productRecordsData]);
 
-  const muttonRecordsData = useSelector(
-    (state: any) => state.muttonDataReducer?.getMuttonData
-  );
+  const muttonRecordsData = useSelector((state: any) => state.muttonDataReducer?.getMuttonData);
 
   const [spinLoader, setSpinLoader] = useState(false);
 
@@ -440,48 +406,39 @@ const ProductManagement: React.FC = () => {
           type="primary"
           data-testid="DataButton"
           className="custom_button"
-          onClick={() => fetchMuttonRecordsData()}
-        >
+          onClick={() => fetchMuttonRecordsData()}>
           Display Mutton data
         </Button>
         <Button
           type="primary"
           className="custom_button"
-          onClick={() => fetchProductRecordsData("chicken")}
-        >
+          onClick={() => fetchProductRecordsData("chicken")}>
           Display Chicken data
         </Button>
         <Button
           type="primary"
           className="custom_button"
-          onClick={() => fetchProductRecordsData("seafood")}
-        >
+          onClick={() => fetchProductRecordsData("seafood")}>
           Display SeaFood data
         </Button>
         <Button
           type="primary"
           data-testid="DataButton"
           className="custom_button"
-          onClick={() => uploadProducts()}
-        >
+          onClick={() => uploadProducts()}>
           Add Products
         </Button>
       </div>
 
-      <Form
-        data-testid="DataTable"
-        className="data_table"
-        form={form}
-        component={false}
-      >
+      <Form data-testid="DataTable" className="data_table" form={form} component={false}>
         <Spin spinning={spinLoader} className="custom_button" tip="Loading...">
           {!loading && (
             <Table
               className="table_style"
               components={{
                 body: {
-                  cell: EditableCell,
-                },
+                  cell: EditableCell
+                }
               }}
               dataSource={data}
               columns={mergedColumns}
@@ -491,7 +448,7 @@ const ProductManagement: React.FC = () => {
                 defaultPageSize: 5,
                 showSizeChanger: true,
                 pageSizeOptions: ["5", "10", "15"],
-                onChange: cancel,
+                onChange: cancel
               }}
             />
           )}

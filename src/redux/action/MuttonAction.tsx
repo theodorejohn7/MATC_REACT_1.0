@@ -1,5 +1,5 @@
 import instance from "../../axios/instance";
- 
+
 import { Dispatch } from "redux";
 
 const API_URL = process.env.REACT_APP_API_URL;
@@ -7,8 +7,6 @@ const API_URL = process.env.REACT_APP_API_URL;
 export const GET_MUTTON_DATA = "GET_MUTTON_DATA";
 export const RESET_MUTTON_DATA = "RESET_MUTTON_DATA";
 export const EDIT_MUTTON_DATA = "EDIT_MUTTON_DATA";
-
- 
 
 export const getMuttonData = (): any => {
   return async (dispatch: Dispatch) => {
@@ -30,7 +28,6 @@ export const getMuttonData = (): any => {
     }
   };
 };
- 
 
 export const resetMuttonData = () => {
   return async (dispatch: Dispatch) => {

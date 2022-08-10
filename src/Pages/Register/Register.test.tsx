@@ -25,17 +25,17 @@ describe("Testing Register Component", () => {
     expect(nameTextbox).toBeInTheDocument();
 
     const usernameTextbox = screen.getByTestId("test_userName", {
-      exact: false,
+      exact: false
     });
     expect(usernameTextbox).toBeInTheDocument();
 
     const passwordTextbox = screen.getByTestId("test_password", {
-      exact: false,
+      exact: false
     });
     expect(passwordTextbox).toBeInTheDocument();
 
     const confirmPasswordTextbox = screen.getByTestId("test_confirmPassword", {
-      exact: false,
+      exact: false
     });
     expect(confirmPasswordTextbox).toBeInTheDocument();
 
@@ -43,7 +43,7 @@ describe("Testing Register Component", () => {
     expect(eMailTextbox).toBeInTheDocument();
 
     const confirmEMailTextbox = screen.getByTestId("test_confirmEMail", {
-      exact: false,
+      exact: false
     });
     expect(confirmEMailTextbox).toBeInTheDocument();
 
@@ -57,12 +57,12 @@ describe("Testing Register Component", () => {
     expect(stateTextbox).toBeInTheDocument();
 
     const secQnTextbox = screen.getByTestId("test_securityQn", {
-      exact: false,
+      exact: false
     });
     expect(secQnTextbox).toBeInTheDocument();
 
     const secAnsTextbox = screen.getByTestId("test_securityAns", {
-      exact: false,
+      exact: false
     });
     expect(secAnsTextbox).toBeInTheDocument();
 
@@ -100,7 +100,6 @@ describe("Testing Register Component", () => {
   test("displays message when UserName field has less than 8 characters", async () => {
     render(
       <Router>
-        import React from "react";
         <Register />
       </Router>
     );
@@ -112,12 +111,9 @@ describe("Testing Register Component", () => {
     userEvent.click(submitButton);
 
     await waitFor(() => {
-      const errorTest = screen.getByText(
-        "Expected to have minimum 8 characters",
-        {
-          exact: false,
-        }
-      );
+      const errorTest = screen.getByText("Expected to have minimum 8 characters", {
+        exact: false
+      });
       expect(errorTest).toBeInTheDocument();
     });
   });
@@ -138,12 +134,9 @@ describe("Testing Register Component", () => {
     userEvent.click(submitButton);
 
     await waitFor(() => {
-      const errorTest = screen.getByText(
-        "password must be at least 8 characters",
-        {
-          exact: true,
-        }
-      );
+      const errorTest = screen.getByText("password must be at least 8 characters", {
+        exact: true
+      });
       expect(errorTest).toBeInTheDocument();
     });
 
@@ -152,12 +145,9 @@ describe("Testing Register Component", () => {
     userEvent.click(submitButton);
 
     await waitFor(() => {
-      const errorTest = screen.getByText(
-        "password must contain at least 1 uppercase letter",
-        {
-          exact: false,
-        }
-      );
+      const errorTest = screen.getByText("password must contain at least 1 uppercase letter", {
+        exact: false
+      });
       expect(errorTest).toBeInTheDocument();
     });
 
@@ -166,12 +156,9 @@ describe("Testing Register Component", () => {
     userEvent.click(submitButton);
 
     await waitFor(() => {
-      const errorTest = screen.getByText(
-        "password must contain at least 1 symbol",
-        {
-          exact: false,
-        }
-      );
+      const errorTest = screen.getByText("password must contain at least 1 symbol", {
+        exact: false
+      });
       expect(errorTest).toBeInTheDocument();
     });
 
@@ -183,7 +170,7 @@ describe("Testing Register Component", () => {
 
     await waitFor(() => {
       const errorTest = screen.getByText("Passwords do not match", {
-        exact: false,
+        exact: false
       });
       expect(errorTest).toBeInTheDocument();
     });
@@ -206,7 +193,7 @@ describe("Testing Register Component", () => {
 
     await waitFor(() => {
       const errorTest = screen.getByText("Must be a valid email", {
-        exact: false,
+        exact: false
       });
       expect(errorTest).toBeInTheDocument();
     });
@@ -219,7 +206,7 @@ describe("Testing Register Component", () => {
 
     await waitFor(() => {
       const errorTest = screen.getByText("e-Mail ID's do not match", {
-        exact: false,
+        exact: false
       });
       expect(errorTest).toBeInTheDocument();
     });
@@ -241,7 +228,7 @@ describe("Testing Register Component", () => {
 
     await waitFor(() => {
       const errorTest = screen.getByText("Must be exactly 6 digits", {
-        exact: false,
+        exact: false
       });
       expect(errorTest).toBeInTheDocument();
     });

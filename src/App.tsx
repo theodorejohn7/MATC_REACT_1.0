@@ -16,9 +16,7 @@ import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
 const Login = lazy(() => import("./Pages/Login/Login"));
 const Register = lazy(() => import("./Pages/Register/Register"));
 const NotFound = lazy(() => import("./Pages/NotFound/NotFound"));
-const ProductManagement = lazy(
-  () => import("./Pages/Management/ProductManagement")
-);
+const ProductManagement = lazy(() => import("./Pages/Management/ProductManagement"));
 
 function App() {
   return (
@@ -32,8 +30,7 @@ function App() {
                 <Spin spinning={true} tip="Loading...">
                   {" "}
                 </Spin>
-              }
-            >
+              }>
               <Routes>
                 <Route path="/home" element={<Home />} />
                 <Route path="/login" element={<Login />} />

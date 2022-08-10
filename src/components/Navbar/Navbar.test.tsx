@@ -19,15 +19,15 @@ describe("Testing Navbar Component", () => {
     );
 
     const StoreMenu = screen.getByText("Store", {
-      exact: true,
+      exact: true
     });
 
     const LoginMenu = screen.getByText("Login", {
-      exact: true,
+      exact: true
     });
 
     const RegisterMenu = screen.getByText("Register", {
-      exact: true,
+      exact: true
     });
 
     expect(StoreMenu).toBeInTheDocument();

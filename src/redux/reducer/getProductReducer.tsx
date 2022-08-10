@@ -1,11 +1,10 @@
 import {
   GET_PRODUCT_DATA,
   GET_ALL_PRODUCT_DATA,
-  RESET_PRODUCT_DATA,
+  RESET_PRODUCT_DATA
 } from "../action/getProductAction";
 
 const initialState = {};
-
 
 interface IPost {
   image: string;
@@ -26,9 +25,6 @@ interface IPost {
   isLoggedin: boolean;
   setNotLoggedinPopup: () => void;
 }
-
-
-
 
 const getProductReducer = (
   state = initialState,

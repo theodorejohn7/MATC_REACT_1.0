@@ -1,8 +1,4 @@
-import {
-  legacy_createStore as createStore,
-  combineReducers,
-  applyMiddleware,
-} from "redux";
+import { legacy_createStore as createStore, combineReducers, applyMiddleware } from "redux";
 
 import ReduxThunk from "redux-thunk";
 import muttonDataReducer from "./reducer/muttonDataReducer";
@@ -14,7 +10,7 @@ const appReducer = combineReducers({
   muttonDataReducer: muttonDataReducer,
   patchProductReducer: patchProductReducer,
   getProductReducer: getProductReducer,
-  deleteProductReducer: deleteProductReducer,
+  deleteProductReducer: deleteProductReducer
 });
 
 export const store = createStore(appReducer, applyMiddleware(ReduxThunk));

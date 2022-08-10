@@ -31,11 +31,8 @@ export default function AddProduct() {
   const [content, setContent] = useState(true);
   const handleClose = () => setOpen(false);
 
-  
-
-
   const style = {
-    position: "absolute" as "absolute",
+    position: "absolute" as const,
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
@@ -45,12 +42,12 @@ export default function AddProduct() {
     boxShadow: 24,
     margin: 0,
     padding: 0,
-    p: 4,
+    p: 4
   };
 
   const handleProdManagement = () => {
- setOpen(false)
- setContent(false)
+    setOpen(false);
+    setContent(false);
   };
 
   return (
@@ -60,14 +57,9 @@ export default function AddProduct() {
           className="border border-primary p-4 rounded "
           style={{
             textAlign: "center",
-            boxShadow: "1px 3px 38px 10px rgba(139,149,237,1)",
-          }}
-        >
-          <Typography
-            align="center"
-            variant="h5"
-            style={{ lineHeight: 1.25, marginBottom: 16 }}
-          >
+            boxShadow: "1px 3px 38px 10px rgba(139,149,237,1)"
+          }}>
+          <Typography align="center" variant="h5" style={{ lineHeight: 1.25, marginBottom: 16 }}>
             Add New Product
           </Typography>
           <Formik
@@ -81,13 +73,10 @@ export default function AddProduct() {
               netWeight: 0,
               price: 0,
               title: "",
-              rating: 0,
+              rating: 0
             }}
             validationSchema={ValidationSchema}
-            onSubmit={(
-              values: FormValues,
-              formikHelpers: FormikHelpers<FormValues>
-            ) => {
+            onSubmit={(values: FormValues, formikHelpers: FormikHelpers<FormValues>) => {
               setLoading(true);
 
               values.rating = 0;
@@ -95,10 +84,7 @@ export default function AddProduct() {
               axios
                 .post(`${API_URL}api/post`, values)
                 .then((response) => {
-                  if (
-                    response.statusText === "Created" ||
-                    response.status === 200
-                  ) {
+                  if (response.statusText === "Created" || response.status === 200) {
                     setLoading(false);
                     setErrorMessage("Details Registered Successfully");
                     setOpen(true);
@@ -118,18 +104,12 @@ export default function AddProduct() {
                 });
 
               formikHelpers.setSubmitting(false);
-            }}
-          >
+            }}>
             {(formikProps: FormikProps<FormValues>) => (
               <Form noValidate autoComplete="off">
                 <Grid container spacing={2}>
                   <Grid item xs={6}>
-                    <Field
-                      name="id"
-                      label="Product Id"
-                      size="small"
-                      component={FormTextField}
-                    />
+                    <Field name="id" label="Product Id" size="small" component={FormTextField} />
                   </Grid>
 
                   <Grid item xs={6}>
@@ -213,8 +193,7 @@ export default function AddProduct() {
                       data-testid="test_submitButton"
                       size="large"
                       color="primary"
-                      disabled={formikProps.isSubmitting}
-                    >
+                      disabled={formikProps.isSubmitting}>
                       {loading && (
                         <Spinner
                           as="span"
@@ -239,8 +218,7 @@ export default function AddProduct() {
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
+        aria-describedby="modal-modal-description">
         <Box className="border border-secondary p-2 rounded" sx={style}>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             {errorMessage}
