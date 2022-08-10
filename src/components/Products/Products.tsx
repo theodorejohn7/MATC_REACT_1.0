@@ -110,9 +110,9 @@ const Products = () => {
     }
   }, [dispatch]);
 
-  useEffect(() => {
+ 
     fetchMuttonRecordsData();
-  }, []);
+ 
 
   useEffect(() => {
     if (muttonRecordsData) {
@@ -133,7 +133,7 @@ const Products = () => {
         console.log("error", ex);
         setLoading(false);
       });
-  }, []);
+  });
 
   useEffect(() => {
     mongoInstance
@@ -148,7 +148,7 @@ const Products = () => {
         console.log("error", ex);
         setLoading(false);
       });
-  }, []);
+  });
 
   const handlePopupClose = () => {
     setNotLoggedinPopup();

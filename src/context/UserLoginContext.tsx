@@ -1,7 +1,5 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 
-import { useShoppingCart } from "./ShoppingCartContext";
-
 type UserContextProviderProps = {
   children: ReactNode;
 };

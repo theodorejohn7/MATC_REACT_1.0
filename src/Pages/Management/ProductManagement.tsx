@@ -19,7 +19,7 @@ import { patchProductUpdate } from "../../redux/action/patchProductAction";
 import AddProduct from "../../components/AddProduct/AddProduct";
 
 import "./styles.css";
-import "antd/dist/antd.css";
+import "antd/dist/antd.min.css";
 
 interface Item {
   id: string;
@@ -65,14 +65,12 @@ interface IPost {
   setNotLoggedinPopup: () => void;
 }
 
-const defaultPosts: IPost[] = []; 
+const defaultPosts: IPost[] = [];
 const EditableCell: React.FC<EditableCellProps> = ({
   editing,
   dataIndex,
   title,
   inputType,
-  _record,
-  _index,
   children,
   ...restProps
 }) => {
@@ -275,15 +273,17 @@ const ProductManagement: React.FC = () => {
         return (
           <div>
             {editable ? (
-              <span >
+              <span>
                 <Typography.Link
                   onClick={() => save(record.id)}
                   style={{ marginRight: 8 }}
                 >
                   Save
                 </Typography.Link>
-                <Popconfirm  title="Sure to cancel?" onConfirm={cancel}>
-                <Button type="text" className="p-0 m-0">Cancel</Button>
+                <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
+                  <Button type="text" className="p-0 m-0">
+                    Cancel
+                  </Button>
                 </Popconfirm>
               </span>
             ) : (
@@ -300,8 +300,14 @@ const ProductManagement: React.FC = () => {
                 title="Sure to delete?"
                 onConfirm={() => handleDelete(record._id)}
               >
-                 <Button danger type="text" className="p-0 " style={{ marginLeft: "20px" }}>Delete</Button>
-              
+                <Button
+                  danger
+                  type="text"
+                  className="p-0 "
+                  style={{ marginLeft: "20px" }}
+                >
+                  Delete
+                </Button>
               </Popconfirm>
             }
           </div>
@@ -321,7 +327,7 @@ const ProductManagement: React.FC = () => {
       return col;
     }
 
-    if ( col.dataIndex === "category") {
+    if (col.dataIndex === "category") {
       return {
         ...col,
         onCell: (record: Item) => ({
@@ -332,7 +338,11 @@ const ProductManagement: React.FC = () => {
           inputType: "text",
         }),
       };
-    } else if (col.dataIndex === "title" || col.dataIndex === "description" || col.dataIndex === "image") {
+    } else if (
+      col.dataIndex === "title" ||
+      col.dataIndex === "description" ||
+      col.dataIndex === "image"
+    ) {
       return {
         ...col,
         onCell: (record: Item) => ({
@@ -421,7 +431,6 @@ const ProductManagement: React.FC = () => {
     setLoading(true);
   };
 
- 
   if (error) console.log("below error occured ", error);
 
   return (
@@ -488,7 +497,7 @@ const ProductManagement: React.FC = () => {
           )}
         </Spin>
       </Form>
-      <div>{isUpload && <AddProduct   /> }</div>
+      <div>{isUpload && <AddProduct />}</div>
     </div>
   );
 };

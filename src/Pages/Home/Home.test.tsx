@@ -37,25 +37,25 @@ describe("Testing Home Page", () => {
 
   it("API returns data for category - Mutton", async () => {
     const response = await axios.get(`${API_URL}api/category/mutton`, {
-      timeout: 35000,
+      timeout: 35000
     });
 
-    expect(response.data[0].category).toEqual("mutton");  
+    expect(response.data[0].category).toEqual("mutton");
   });
 
   it("API returns data for category - Chicken", async () => {
     const response = await axios.get(`${API_URL}api/category/chicken`, {
-      timeout: 35000,
+      timeout: 35000
     });
 
-    expect(response.data[0].category).toEqual("chicken");  
+    expect(response.data[0].category).toEqual("chicken");
   });
 
   it("API returns data for category - Seafood", async () => {
     const response = await axios.get(`${API_URL}api/category/seafood`, {
-      timeout: 35000,
+      timeout: 35000
     });
 
-    expect(response.data[0].category).toEqual("seafood");  
+    expect(response.data[0].category).toEqual("seafood");
   });
 });

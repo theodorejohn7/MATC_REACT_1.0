@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Stack } from "react-bootstrap";
 
@@ -39,9 +39,9 @@ export function CartItem({ id, quantity }: CartItemsProps) {
     }
   }, [dispatch]);
 
-  useEffect(() => {
+   
     fetchAllRecordsData();
-  }, []);
+ 
 
   const allRecordsData: AllRecords[] = useSelector(
     (state: any) => state.getProductReducer?.getAllProductData

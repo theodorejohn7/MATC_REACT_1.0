@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Offcanvas, Stack } from "react-bootstrap";
 
@@ -48,9 +48,9 @@ const {currentUser}= useUserLoginContext();
     }
   }, [dispatch]);
 
-  useEffect(() => {
+ 
     fetchAllRecordsData();
-  }, []);
+ 
 
   return (
     <Offcanvas show={isOpen} placement="end" onHide={closeCart}>

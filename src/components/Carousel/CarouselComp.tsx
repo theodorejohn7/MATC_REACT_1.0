@@ -32,7 +32,7 @@ const CarouselComp = () => {
       .catch((ex) => {
         console.log(ex);
       });
-  }, []);
+  });
 
   return (
     <div
