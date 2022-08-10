@@ -17,7 +17,7 @@ export default function Navbar() {
       expand="lg"
       bg="light"
       variant="light"
-      className="bg-white shadow-lg mb-3 "
+      className="bg-white shadow mb-3 "
     >
       <Container>
         <NavbarBs.Brand   className="new-font">

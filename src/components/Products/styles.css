@@ -1,0 +1,35 @@
+.smooth-shadow {
+  
+    box-shadow:
+    2.8px 2.8px 2.2px rgba(0, 0, 0, 0.02),
+    6.7px 6.7px 5.3px rgba(0, 0, 0, 0.028),
+    12.5px 12.5px 10px rgba(0, 0, 0, 0.035),
+    22.3px 22.3px 17.9px rgba(0, 0, 0, 0.042),
+    41.8px 41.8px 33.4px rgba(0, 0, 0, 0.05),
+    100px 100px 80px rgba(0, 0, 0, 0.07)
+  ;
+  
+  
+
+}
+
+.text-shadow {
+  
+    text-shadow:
+  
+    3px 3.1px 4.4px rgba(0, 0, 0, 0.025),
+    6.7px 6.9px 9.7px rgba(0, 0, 0, 0.037),
+    11.2px 11.6px 16.3px rgba(0, 0, 0, 0.046),
+    16.9px 17.5px 24.6px rgba(0, 0, 0, 0.053),
+    24.4px 25.2px 35.4px rgba(0, 0, 0, 0.06),
+    34.6px 35.6px 50.2px rgba(0, 0, 0, 0.067),
+    49px 50.5px 71.1px rgba(0, 0, 0, 0.074),
+    71.2px 73.4px 103.3px rgba(0, 0, 0, 0.083),
+    109.7px 113.1px 159.2px rgba(0, 0, 0, 0.095),
+    195px 201px 283px rgba(0, 0, 0, 0.12)
+   
+  ;
+  
+
+}
+

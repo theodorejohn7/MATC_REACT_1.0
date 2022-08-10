@@ -2,7 +2,7 @@ import Carousel from "react-multi-carousel";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Typography, Button, Box,Modal  } from "@mui/material";
+import { Typography, Button, Box, Modal } from "@mui/material";
 
 import { useShoppingCart } from "../../context/ShoppingCartContext";
 
@@ -14,6 +14,7 @@ import { useUserLoginContext } from "../../context/UserLoginContext";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "react-multi-carousel/lib/styles.css";
+import "./styles.css";
 
 interface IPost {
   image: string;
@@ -71,7 +72,7 @@ const Products = () => {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
       items: 5,
-      paritialVisibilityGutter: 15,
+      paritialVisibilityGutter: 5,
     },
     tablet: {
       breakpoint: { max: 1024, min: 750 },
@@ -156,20 +157,14 @@ const Products = () => {
 
   return (
     <div className="App">
-      <div className="">
-        {!loading && (
-          <h3
-            className="display-1"
-            style={{ textShadow: "2px 2px 6px #171BCE", fontWeight: 350 }}
-          >
-            Mutton
-          </h3>
-        )}
+      <div>
+        {!loading && <h3 className="display-1 text-shadow pt-4">Mutton</h3>}
         <Carousel
           ssr
           partialVisible
           itemClass="image-item"
           responsive={responsive}
+          className=" rounded smooth-shadow"
         >
           {muttonPosts.map((item) => (
             <ProductCard
@@ -185,19 +180,13 @@ const Products = () => {
         </Carousel>
       </div>
       <div>
-        {!loading && (
-          <h3
-            className="display-1 text-dark"
-            style={{ textShadow: " 4px 3px 12px #171BCE", fontWeight: 350 }}
-          >
-            Chicken
-          </h3>
-        )}
+        {!loading && <h3 className="display-1 text-dark pt-4">Chicken</h3>}
 
         <Carousel
           ssr
           partialVisible
           itemClass="image-item"
+          className=" rounded smooth-shadow"
           responsive={responsive}
         >
           {chickenPosts.map((item) => (
@@ -214,20 +203,14 @@ const Products = () => {
         </Carousel>
       </div>
       <div>
-        {!loading && (
-          <h3
-            className="display-1 text-dark"
-            style={{ textShadow: " 4px 3px 12px #171BCE", fontWeight: 350 }}
-          >
-            Sea Foods
-          </h3>
-        )}
+        {!loading && <h3 className="display-1 text-dark pt-4">Sea Foods</h3>}
 
         <Carousel
           ssr
           partialVisible
           itemClass="image-item"
           responsive={responsive}
+          className=" rounded smooth-shadow"
         >
           {seafoodPosts.map((item) => (
             <ProductCard

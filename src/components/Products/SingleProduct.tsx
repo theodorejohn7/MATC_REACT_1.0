@@ -1,12 +1,9 @@
-import Card from "react-bootstrap/Card";
+import { Card } from "react-bootstrap";
 import { Button } from "react-bootstrap";
-
-import { useShoppingCart } from "../../context/ShoppingCartContext";
-import { formatCurrency } from "../../utilities/formatCurrency";
-import { useUserLoginContext } from "../../context/UserLoginContext";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "react-multi-carousel/lib/styles.css";
+import React from "react";
 
 type ProductItemProps = {
   image: string;
@@ -17,6 +14,13 @@ type ProductItemProps = {
   grossWeight: number;
   discPrice: number;
   price: number;
+  getItemQuantity: (arg0: number) => number;
+
+  increaseCartQuantity: (arg0: number) => void;
+  decreaseCartQuantity: (arg0: number) => void;
+  removeFromCart: (arg0: number) => void;
+  isLoggedin: boolean;
+  setNotLoggedinPopup: () => void;
 };
 
 export function SingleProduct({
@@ -28,21 +32,27 @@ export function SingleProduct({
   grossWeight,
   discPrice,
   price,
+  isLoggedin,
+  getItemQuantity,
+  increaseCartQuantity,
+  decreaseCartQuantity,
+  removeFromCart,
+  setNotLoggedinPopup,
 }: ProductItemProps) {
-  const {
-    getItemQuantity,
-    increaseCartQuantity,
-    decreaseCartQuantity,
-    removeFromCart,
-  } = useShoppingCart();
-
   const quantity: number = getItemQuantity(id);
 
-  const { isLoggedin, setNotLoggedinPopup } = useUserLoginContext();
+  const CURRENCY_FORMATTER = new Intl.NumberFormat(undefined, {
+    currency: "INR",
+    style: "currency",
+  });
 
-  const checkLoginIncreaseQuantity = (id1: number) => {
+  function formatCurrency(number: number) {
+    return CURRENCY_FORMATTER.format(number);
+  }
+
+  const checkLoginIncreaseQuantity = (id: number) => {
     if (isLoggedin) {
-      increaseCartQuantity(id1);
+      increaseCartQuantity(id);
     } else {
       setNotLoggedinPopup();
     }
@@ -52,7 +62,7 @@ export function SingleProduct({
     <div
       style={{ height: "28rem" }}
       data-testid={`test_${id}`}
-      className="py-4  align-items-center justify-content-center d-flex  "
+      className="py-4 px-2 align-items-center justify-content-center d-flex  "
     >
       <Card
         key={id}
@@ -63,7 +73,8 @@ export function SingleProduct({
           height: "26rem",
           maxHeight: "50rem",
           overflow: "hidden",
-          boxShadow: "3px 3px 10px 3px #000000",
+          boxShadow:
+            "1.6px 1.6px 1.2px rgba(0, 0, 0, 0.015),  3.4px 3.4px 2.7px rgba(0, 0, 0, 0.022),  5.8px 5.8px 4.6px rgba(0, 0, 0, 0.027),  8.7px 8.7px 6.9px rgba(0, 0, 0, 0.031),  12.5px 12.5px 10px rgba(0, 0, 0, 0.035),  17.7px 17.7px 14.2px rgba(0, 0, 0, 0.039),  25.1px 25.1px 20.1px rgba(0, 0, 0, 0.043),  36.5px 36.5px 29.2px rgba(0, 0, 0, 0.048),  56.3px 56.3px 45px rgba(0, 0, 0, 0.055),  100px 100px 80px rgba(0, 0, 0, 0.07)",
         }}
       >
         <Card.Img
