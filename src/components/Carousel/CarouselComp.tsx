@@ -34,13 +34,7 @@ const CarouselComp = () => {
   }, [CAROUSEL_API_URL]);
 
   return (
-    <div
-      style={{
-        display: "block",
-        maxHeight: 400,
-        width: "100%",
-        overflow: "hidden"
-      }}>
+    <div className="carousel-Banner">
       <Carousel>
         {posts.map((data, index) => (
           <Carousel.Item key={index}>

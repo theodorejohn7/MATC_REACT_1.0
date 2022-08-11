@@ -1,0 +1,143 @@
+@import url("https://fonts.googleapis.com/css2?family=Merienda+One&display=swap");
+
+$boxShadow: 1px 3px 38px 10px rgba(139, 149, 237, 1);
+$formFieldWidth: 95%;
+$lineHeight: 1.25;
+$marginTop: 20px;
+$marginLeft: 20px;
+$smoothShadowMild: 1.7px 1.6px 3.1px rgba(0, 0, 0, 0.027), 3.6px 3.4px 6.7px rgba(0, 0, 0, 0.04),
+  6.1px 5.8px 11.3px rgba(0, 0, 0, 0.05), 9.2px 8.7px 17px rgba(0, 0, 0, 0.058),
+  13.3px 12.5px 24.5px rgba(0, 0, 0, 0.065), 18.8px 17.7px 34.7px rgba(0, 0, 0, 0.072),
+  59.6px 56.3px 110.3px rgba(0, 0, 0, 0.103), 106px 100px 196px rgba(0, 0, 0, 0.13);
+$titleColor: blue;
+
+.global-MarginTop {
+  margin-top: $marginTop;
+}
+
+.global-MarginLeft {
+  margin-left: $marginLeft;
+}
+
+.global-NoMargin {
+  margin: 0px;
+}
+
+
+
+
+.addProduct-title {
+  line-height: $lineHeight;
+  margin-bottom: 16px;
+  padding-bottom: 2rem;
+}
+
+.addProduct-BoxShadow {
+  text-align: center;
+  box-shadow: $boxShadow;
+}
+
+.cartItem-image {
+  max-width: 125px;
+  height: 75px;
+  object-fit: cover;
+  box-shadow: $smoothShadowMild;
+  border: 1px solid lightcoral;
+}
+
+.cartItem-Text {
+  font-size: 0.75rem;
+}
+
+.carousel-Banner {
+  display: block;
+  max-height: 400;
+  width: 100%;
+  overflow: hidden;
+
+  border-radius: 0.4vw;
+  border-top-right-radius: 1.5vw;
+  border-bottom-left-radius: 1.5vw;
+  box-shadow: $smoothShadowMild;
+}
+
+.errorBoundary-Text {
+  color: blue;
+}
+.errorBoundary-Image {
+  max-width: 75vw;
+}
+
+.footerTitle {
+  color: $titleColor;
+  text-shadow: 4px 4px 4px rgba(150, 150, 150, 1);
+}
+
+.footer-Courtesy {
+  font-size: 9px;
+}
+
+.login-Box {
+  min-height: 350px;
+  margin-top: 20px;
+}
+
+.login-BoxShadow {
+  text-align: center;
+  box-shadow: $boxShadow;
+  width: 15rem;
+}
+
+.login-title {
+  line-height: $lineHeight;
+  margin-bottom: 16px;
+  color: brown;
+}
+
+.navbar-LogoText {
+  font-family: "Merienda One", cursive;
+}
+
+.navbar-Cart {
+  width: 3rem;
+  height: 3rem;
+  position: relative;
+}
+
+.navbar-CartQuantity {
+  color: white;
+  width: 1.5rem;
+  height: 1.5rem;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transform: translate(45%, 15%);
+}
+
+.navbar-Text {
+  font-weight: 600;
+}
+
+.produtManagement-height {
+  min-height: 350px;
+}
+
+.produtManagement-Image {
+  height: 10vh;
+  box-shadow: $smoothShadowMild;
+  border-radius: 0.75vw;
+}
+
+.productManagement-Message {
+  margin-right: 8;
+}
+
+.register-BoxShadow {
+  text-align: center;
+  box-shadow: $boxShadow;
+}
+
+.register-Title {
+  line-height: 1.25;
+  padding-bottom: 16px;
+}

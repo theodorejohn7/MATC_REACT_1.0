@@ -7,7 +7,7 @@ const Footer = () => {
       <Container>
         <Row>
           <Col>
-            <h5>COMPANY</h5>
+            <h5 className="footerTitle">COMPANY</h5>
             <hr />
             <p>Privacy Policy</p>
             <p>Terms and Condition</p>
@@ -15,7 +15,7 @@ const Footer = () => {
           </Col>
           <Col>
             {" "}
-            <h5>STAY CONNECTED</h5>
+            <h5 className="footerTitle">STAY CONNECTED</h5>
             <hr />
             <p>customercare@shop.in</p>
             <p>Chennai - 9789123619</p>
@@ -23,7 +23,7 @@ const Footer = () => {
           </Col>
           <Col>
             {" "}
-            <h5> OPTIMISED FOR MOBILE</h5>
+            <h5 className="footerTitle"> OPTIMISED FOR MOBILE</h5>
             <hr />
             <div className="mb-4">
               <img src="./img/app-store.svg" alt="app-store" />
@@ -36,7 +36,7 @@ const Footer = () => {
       </Container>
 
       <hr />
-      <p style={{ fontSize: "9px" }}>Image Courtesy : https://www.licious.in/</p>
+      <p className="footer-Courtesy">Image Courtesy : https://www.licious.in/</p>
     </div>
   );
 };

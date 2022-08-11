@@ -150,7 +150,7 @@ const Products = () => {
   return (
     <div className="App">
       <div>
-        {!loading && <h3 className="display-1 text-shadow pt-4">Mutton</h3>}
+        {!loading && <h3 className="display-1  pt-4">Mutton</h3>}
         <Carousel
           ssr
           partialVisible

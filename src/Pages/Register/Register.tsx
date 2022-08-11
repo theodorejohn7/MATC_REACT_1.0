@@ -48,18 +48,13 @@ export default function Register() {
   };
 
   const handleRegister = () => {
-    navigate(`/home`);
+    navigate(`/login`);
   };
 
   return (
-    <Container maxWidth="sm" style={{ marginTop: "20px" }}>
-      <div
-        className="border border-primary p-4 rounded "
-        style={{
-          textAlign: "center",
-          boxShadow: "1px 3px 38px 10px rgba(139,149,237,1)"
-        }}>
-        <Typography align="center" variant="h5" style={{ lineHeight: 1.25, marginBottom: 16 }}>
+    <Container maxWidth="sm" className="global-MarginTop">
+      <div className=" register-BoxShadow  border border-primary p-4 rounded ">
+        <Typography align="center" variant="h5" className="register-Title">
           Register Form
         </Typography>
         <Formik
@@ -249,7 +244,7 @@ export default function Register() {
             )}
             {status && (
               <Button onClick={handleRegister} variant="contained">
-                Navigate to Homepage
+                Navigate to Login Page
               </Button>
             )}
           </div>

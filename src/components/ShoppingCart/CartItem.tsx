@@ -53,25 +53,18 @@ export function CartItem({ id, quantity }: CartItemsProps) {
 
   return (
     <Stack direction="horizontal" gap={2} className="d-flex align-items-center">
-      <img
-        src={item.image}
-        alt={`${item.title}-product`}
-        className="rounded "
-        style={{ maxWidth: "125px", height: "75px", objectFit: "cover" }}
-      />
+      <img src={item.image} alt={`${item.title}-product`} className="rounded cartItem-image" />
       <div className="me-auto">
         <div className="text-uppercase">
           {item.title}
           {quantity > 1 && (
-            <span
-              className="text-primary font-weight-bold text-lowercase "
-              style={{ fontSize: "0.8rem" }}>
+            <span className="text-primary cartItem-Text font-weight-bold text-lowercase ">
               {" "}
-              x {quantity}
+              <br />x {quantity}
             </span>
           )}
         </div>
-        <div className="text-muted" style={{ fontSize: "0.75rem" }}>
+        <div className="text-muted cartItem-Text">
           {formatCurrency(item.discPrice ? item.discPrice : item.price)}
         </div>
       </div>

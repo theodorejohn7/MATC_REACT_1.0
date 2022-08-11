@@ -51,16 +51,9 @@ export default function Login() {
   return (
     <Container
       maxWidth="md"
-      className="   rounded d-flex align-items-center justify-content-center "
-      style={{ minHeight: "350px", marginTop: "20px" }}>
-      <div
-        className="border border-primary p-4 rounded "
-        style={{
-          textAlign: "center",
-          width: "15rem",
-          boxShadow: "1px 3px 38px 10px rgba(139,149,237,1)"
-        }}>
-        <Typography align="center" variant="h5" style={{ lineHeight: 1.25, marginBottom: 16 }}>
+      className=" login-Box d-flex align-items-center justify-content-center ">
+      <div className="border border-primary p-4 rounded login-BoxShadow">
+        <Typography align="center" variant="h5" className="pb-2 login-title">
           Login Form
         </Typography>
 

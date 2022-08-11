@@ -1,7 +1,13 @@
+import { useState } from "react";
+
 const NotFound = () => {
+  const [throwError, setThrowError] = useState(false);
+  if (throwError) throw Error("Error occured in the application");
+
   return (
     <div>
-      <img src="./img/404.webp" style={{ maxWidth: "75%" }} alt="404 error message" />
+      <button onClick={() => setThrowError(true)}>Click Me</button>
+      <br />
     </div>
   );
 };

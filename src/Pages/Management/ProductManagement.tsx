@@ -79,7 +79,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
       {editing ? (
         <Form.Item
           name={dataIndex}
-          style={{ margin: 0 }}
+          className="global-NoMargin"
           rules={[
             {
               required: true,
@@ -236,7 +236,7 @@ const ProductManagement: React.FC = () => {
       width: "10%",
       editable: true,
       render: (image: string) => (
-        <img alt={`${image}+title`} src={`${image}`} style={{ height: "10vh" }} />
+        <img alt={`${image}+title`} src={`${image}`} className="produtManagement-Image" />
       )
     },
     {
@@ -258,7 +258,9 @@ const ProductManagement: React.FC = () => {
           <div>
             {editable ? (
               <span>
-                <Typography.Link onClick={() => save(record.id)} style={{ marginRight: 8 }}>
+                <Typography.Link
+                  onClick={() => save(record.id)}
+                  className="productManagement-Message">
                   Save
                 </Typography.Link>
                 <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
@@ -271,13 +273,13 @@ const ProductManagement: React.FC = () => {
               <Typography.Link
                 disabled={editingKey !== ""}
                 onClick={() => edit(record)}
-                style={{ marginLeft: "20px" }}>
+                className="global-MarginLeft">
                 Edit
               </Typography.Link>
             )}
             {
               <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record._id)}>
-                <Button danger type="text" className="p-0 " style={{ marginLeft: "20px" }}>
+                <Button danger type="text" className="p-0 global-MarginLeft ">
                   Delete
                 </Button>
               </Popconfirm>
@@ -400,7 +402,7 @@ const ProductManagement: React.FC = () => {
   if (error) console.log("below error occured ", error);
 
   return (
-    <div style={{ minHeight: "350px" }}>
+    <div className="produtManagement-height">
       <div>
         <Button
           type="primary"
