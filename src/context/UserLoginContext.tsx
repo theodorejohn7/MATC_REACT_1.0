@@ -1,11 +1,15 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { string } from "yup";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 type UserContextProviderProps = {
   children: ReactNode;
 };
 
+type UserDetail = string;
+
 type UserContextType = {
-  currentUser: string;
+  currentUser: UserDetail;
   isLoggedin: boolean;
   notLoggedIn: boolean;
   isAdmin: boolean;
@@ -26,8 +30,18 @@ export function UserloginContextProvider({ children }: UserContextProviderProps)
   const [isAdmin, setIsAdmin] = useState(false);
   const [notLoggedIn, setNotLoggedIn] = useState(false);
 
-  const [currentUser, setCurrentUser] = useState("");
+  const [currentUser, setCurrentUser] = useLocalStorage<UserDetail>(`currentUser`, "");
+
   const ADMIN_USER = process.env.REACT_APP_ADMIN_USER;
+  const curr_User = JSON.parse(localStorage.getItem("currentUser") || "0");
+
+  useEffect(() => {
+    if (curr_User) {
+      setCurrentUser(curr_User);
+      setIsLoggedin(true);
+      console.log("currentUser", curr_User, currentUser);
+    }
+  }, []);
 
   function login(user: string) {
     setCurrentUser(user);

@@ -47,11 +47,10 @@ interface IPost {
   grossWeight: number;
   netWeight: number;
   price: number;
-  getItemQuantity: (arg0: number) => number;
-
-  increaseCartQuantity: (arg0: number) => void;
-  decreaseCartQuantity: (arg0: number) => void;
-  removeFromCart: (arg0: number) => void;
+  getItemQuantity: (id: number) => number;
+  increaseCartQuantity: (id: number) => void;
+  decreaseCartQuantity: (id: number) => void;
+  removeFromCart: (id: number) => void;
   isLoggedin: boolean;
   setNotLoggedinPopup: () => void;
 }
@@ -107,6 +106,8 @@ const ProductManagement: React.FC = () => {
   const [loading, setLoading]: [boolean, (loading: boolean) => void] = useState<boolean>(true);
 
   const [data, setData] = useState(muttonPosts);
+
+  const [clickButton, setClickButton] = useState("");
 
   const isEditing = (record: Item) => record.id === editingKey;
 
@@ -395,8 +396,14 @@ const ProductManagement: React.FC = () => {
   }, [muttonRecordsData]);
 
   const uploadProducts = () => {
+    setClickButton("addProducts");
     setIsUpload(true);
     setLoading(true);
+  };
+
+  const getProductsDetails = (category: string) => {
+    setClickButton(category);
+    fetchProductRecordsData(category);
   };
 
   if (error) console.log("below error occured ", error);
@@ -406,37 +413,41 @@ const ProductManagement: React.FC = () => {
       <div>
         <Button
           type="primary"
+          disabled={clickButton === "mutton" ? true : false}
           data-testid="DataButton"
           className="custom_button"
-          onClick={() => fetchMuttonRecordsData()}>
+          onClick={() => getProductsDetails("mutton")}>
           Display Mutton data
         </Button>
         <Button
           type="primary"
           className="custom_button"
-          onClick={() => fetchProductRecordsData("chicken")}>
+          disabled={clickButton === "chicken" ? true : false}
+          onClick={() => getProductsDetails("chicken")}>
           Display Chicken data
         </Button>
         <Button
           type="primary"
           className="custom_button"
-          onClick={() => fetchProductRecordsData("seafood")}>
+          disabled={clickButton === "seafood" ? true : false}
+          onClick={() => getProductsDetails("seafood")}>
           Display SeaFood data
         </Button>
         <Button
           type="primary"
           data-testid="DataButton"
           className="custom_button"
+          disabled={clickButton === "addProducts" ? true : false}
           onClick={() => uploadProducts()}>
           Add Products
         </Button>
       </div>
 
       <Form data-testid="DataTable" className="data_table" form={form} component={false}>
-        <Spin spinning={spinLoader} className="custom_button" tip="Loading...">
+        <Spin spinning={spinLoader} className="custom_button   table_height" tip="">
           {!loading && (
             <Table
-              className="table_style"
+              className="table_style  "
               components={{
                 body: {
                   cell: EditableCell

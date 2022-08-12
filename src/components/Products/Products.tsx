@@ -8,6 +8,8 @@ import { useShoppingCart } from "../../context/ShoppingCartContext";
 
 import { ProductCard } from "theo-components";
 
+// import { SingleProduct as ProductCard } from "./SingleProduct";
+
 import { mongoInstance } from "../../axios/instance";
 import { getMuttonData } from "../../redux/action/MuttonAction";
 import { useUserLoginContext } from "../../context/UserLoginContext";
@@ -67,8 +69,8 @@ const Products = () => {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 5,
-      paritialVisibilityGutter: 5
+      items: 4,
+      paritialVisibilityGutter: 9
     },
     tablet: {
       breakpoint: { max: 1024, min: 750 },
