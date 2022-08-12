@@ -99,11 +99,12 @@ export function SingleProduct({
 
           <Card.Text className="text-center mb-0 pb-0 font ">
             <p className="lh-1 pt-2 mb-0 pb-0 fw-light" style={{ fontSize: "16px" }}>
-              {description.charAt(0).toUpperCase() + description.substring(1, 60)}
+              {description.charAt(0).toUpperCase() + description.substring(1, 140)}
             </p>
+            {description.length < 140 ? "" : ""}
           </Card.Text>
         </Card.Body>
-        <Card.Body className="  pt-4 m-0 font">
+        <Card.Body className="  pt-2 m-0 font border border-danger pb-0 mb-0">
           <p className=" " style={{ fontSize: "13px" }}>
             {"Net. Wt.: " + netWeight + "gms"} {"Gross Wt.: " + grossWeight + "gms"}
           </p>
@@ -121,8 +122,8 @@ export function SingleProduct({
           </p>
         </Card.Body>
 
-        <Card.Body className="d-flex p-0">
-          <div className="mt-auto w-100 py-4  ">
+        <Card.Body className="d-flex p-0 border pt-2 mt-0 border-danger ">
+          <div className="mt-0 w-100 pb-4  ">
             {quantity === 0 || !isLoggedin ? (
               <Button className="  " onClick={() => checkLoginIncreaseQuantity(id)}>
                 Add to Cart
