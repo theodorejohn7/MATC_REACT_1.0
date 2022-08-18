@@ -1,5 +1,4 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { useSessionStorage } from "../hooks/useSessionStorage";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
