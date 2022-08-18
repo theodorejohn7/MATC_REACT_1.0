@@ -1,5 +1,4 @@
-import { Card } from "react-bootstrap";
-import { Button } from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "react-multi-carousel/lib/styles.css";
@@ -50,9 +49,9 @@ export function SingleProduct({
     return CURRENCY_FORMATTER.format(number);
   }
 
-  const checkLoginIncreaseQuantity = (id: number) => {
+  const checkLoginIncreaseQuantity = (id1: number) => {
     if (isLoggedin) {
-      increaseCartQuantity(id);
+      increaseCartQuantity(id1);
     } else {
       setNotLoggedinPopup();
     }
@@ -101,7 +100,6 @@ export function SingleProduct({
             <p className="lh-1 pt-2 mb-0 pb-0 fw-light" style={{ fontSize: "16px" }}>
               {description.charAt(0).toUpperCase() + description.substring(1, 140)}
             </p>
-            {description.length < 140 ? "" : ""}
           </Card.Text>
         </Card.Body>
         <Card.Body className="  pt-2 m-0 font border border-danger pb-0 mb-0">

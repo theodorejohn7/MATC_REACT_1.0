@@ -2,7 +2,6 @@ import { Button, Form, Input, InputNumber, Popconfirm, Spin, Table, Typography }
 import React, { useCallback, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { getMuttonData } from "../../redux/action/MuttonAction";
 import { getProductData } from "../../redux/action/getProductAction";
 import { deleteProductData } from "../../redux/action/deleteProductAction";
 import { patchProductUpdate } from "../../redux/action/patchProductAction";
@@ -372,16 +371,6 @@ const ProductManagement: React.FC = () => {
   const muttonRecordsData = useSelector((state: any) => state.muttonDataReducer?.getMuttonData);
 
   const [spinLoader, setSpinLoader] = useState(false);
-
-  const fetchMuttonRecordsData = useCallback(async () => {
-    try {
-      setIsUpload(false);
-      setSpinLoader(true);
-      dispatch(getMuttonData());
-    } catch (error_1) {
-      console.log(error_1);
-    }
-  }, [dispatch]);
 
   useEffect(() => {
     if (muttonRecordsData) {

@@ -8,8 +8,6 @@ import { useShoppingCart } from "../../context/ShoppingCartContext";
 
 import { ProductCard } from "theo-components";
 
-// import { SingleProduct as ProductCard } from "./SingleProduct";
-
 import { mongoInstance } from "../../axios/instance";
 import { getMuttonData } from "../../redux/action/MuttonAction";
 import { useUserLoginContext } from "../../context/UserLoginContext";
