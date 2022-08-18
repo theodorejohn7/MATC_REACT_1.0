@@ -20,7 +20,10 @@ const validationSchema = yup.object().shape({
   pincode: yup
     .string()
     .required()
-    .matches(/^\d+$/, "Must be only digits")
+    .matches(
+      /[6]{1}[0-9]{2}(0{0,2}[1-9]|0?[1-9][0-9]|[1-9][0-9][0-9])$/,
+      "Must be only number starting from 6 with 6 digits"
+    )
     .min(6, "Must be exactly 6 digits")
     .max(6, "Must be exactly 6 digits")
     .required("Required Field"),
