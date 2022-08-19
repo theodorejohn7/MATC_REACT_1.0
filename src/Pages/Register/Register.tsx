@@ -1,13 +1,39 @@
 import axios from "axios";
-import { useState } from "react";
+import {
+  ChangeEvent,
+  FormEvent,
+  FormEventHandler,
+  PointerEventHandler,
+  useEffect,
+  useState
+} from "react";
 
 import Spinner from "react-bootstrap/Spinner";
 import { useNavigate } from "react-router-dom";
-import { Container, Typography, Grid, Button, Box, Modal } from "@mui/material";
-import { Formik, FormikHelpers, FormikProps, Form, Field } from "formik";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import {
+  Container,
+  Typography,
+  Grid,
+  Button,
+  Box,
+  Modal,
+  MenuItem,
+  InputLabel,
+  TextFieldProps
+} from "@mui/material";
+import { Formik, FormikHelpers, FormikProps, Form, Field, FieldProps } from "formik";
 
 import ValidationSchema from "./ValidationSchema";
 import { FormTextField } from "../../components/FormTextField/FormTextField";
+import { EventType } from "@testing-library/react";
+
+interface countryList {
+  iso2: string;
+  iso3: string;
+  country: string;
+  cities: Array<string>;
+}
 
 interface FormValues {
   name: string;
@@ -21,8 +47,25 @@ interface FormValues {
   country: string;
   securityQn: string;
   securityAns: string;
-  pincode: number;
+  pincode: string;
 }
+
+export const DropDownField: React.FC<FieldProps & TextFieldProps> = (props: any) => {
+  const propsVal = props.data;
+  console.log("@$# props", props);
+  return (
+    <>
+      <InputLabel>{props.label}</InputLabel>
+      <Select label={props.label} onChange={props.onChange}>
+        {propsVal?.map((value: any, index: number) => (
+          <MenuItem key={index} value={value.country}>
+            {value.country}{" "}
+          </MenuItem>
+        ))}
+      </Select>
+    </>
+  );
+};
 
 export default function Register() {
   const USER_API_URL = process.env.REACT_APP_USER_API_URL;
@@ -32,7 +75,8 @@ export default function Register() {
   const [loading, setLoading] = useState(false);
   const handleClose = () => setOpen(false);
   const navigate = useNavigate();
-
+  const [country, setCountry] = useState([]);
+  const [state, setState] = useState([""]);
   const style = {
     position: "absolute" as const,
     top: "50%",
@@ -47,9 +91,33 @@ export default function Register() {
     p: 4
   };
 
+  const initialCountry: countryList = {
+    iso2: "",
+    iso3: "",
+    country: "",
+    cities: [""]
+  };
+
   const handleRegister = () => {
     navigate(`/login`);
   };
+
+  const handleChange = (event: SelectChangeEvent) => {
+    console.log("@$#", event);
+    const selCountry = event.target.value;
+    const selCity: countryList =
+      country.find((val: countryList) => val.country === selCountry) || initialCountry;
+    setState(selCity.cities);
+  };
+
+  useEffect(() => {
+    const getdata = async () => {
+      const response = await axios.get("https://countriesnow.space/api/v0.1/countries/");
+
+      setCountry(response.data.data);
+    };
+    getdata();
+  }, []);
 
   return (
     <Container maxWidth="sm" className="global-MarginTop">
@@ -67,7 +135,7 @@ export default function Register() {
             confirmEMail: "",
             address: "",
             state: "",
-            pincode: 0,
+            pincode: "",
             country: "",
             securityQn: "",
             securityAns: ""
@@ -165,6 +233,26 @@ export default function Register() {
                     component={FormTextField}
                     style={{ width: "95%" }}
                   />
+                </Grid>
+                <Grid xs={6} alignItems="stretch">
+                  <Field
+                    label="CountryDD"
+                    name="countrydd"
+                    onChange={handleChange}
+                    value="Country List"
+                    className="mx-3 mt-3"
+                    data={country}
+                    style={{ width: "90%" }}
+                    component={DropDownField}></Field>
+                </Grid>
+                <Grid xs={6} alignItems="stretch">
+                  <Field label="StateDD" name="statedd" displayEmpty={true} component={Select}>
+                    {state.map((value: string, index: number) => (
+                      <MenuItem value={value} key={index}>
+                        {value}
+                      </MenuItem>
+                    ))}
+                  </Field>
                 </Grid>
                 <Grid item xs={6}>
                   <Field
