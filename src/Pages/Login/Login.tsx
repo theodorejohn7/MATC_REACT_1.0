@@ -23,8 +23,6 @@ interface FormValues {
 }
 
 export default function Login() {
-  const API_URL = process.env.REACT_APP_API_URL;
-
   const USER_API_URL = process.env.REACT_APP_USER_API_URL;
   const ADMIN_USER = process.env.REACT_APP_ADMIN_USER;
 
@@ -235,9 +233,11 @@ export default function Login() {
             </Form>
           )}
         </Formik>
-        <p className="mb-0 mt-3 p-0" onClick={handleForgetPassword}>
-          Forgot Password?
-        </p>
+        <div className="mb-0 mt-3 p-0">
+          <span style={{ cursor: "pointer" }} onClick={handleForgetPassword}>
+            Forgot Password?
+          </span>
+        </div>
       </div>
       <Modal
         open={pwdModelOpen}

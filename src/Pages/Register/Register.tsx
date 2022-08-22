@@ -19,7 +19,7 @@ import { Formik, FormikHelpers, FormikProps, Form, Field, FieldProps } from "for
 
 import ValidationSchema from "./ValidationSchema";
 import { FormTextField } from "../../components/FormTextField/FormTextField";
-interface countryList {
+interface CountryList {
   iso2: string;
   iso3: string;
   name: string;
@@ -83,7 +83,7 @@ export default function Register() {
     p: 4
   };
 
-  const initialCountry: countryList = {
+  const initialCountry: CountryList = {
     iso2: "",
     iso3: "",
     name: "",
@@ -97,8 +97,8 @@ export default function Register() {
   const handleChange = (event: SelectChangeEvent) => {
     const selCountry = event.target.value;
     setUserCountry(event.target.value);
-    const selCity: countryList =
-      country.find((val: countryList) => val.name === selCountry) || initialCountry;
+    const selCity: CountryList =
+      country.find((val: CountryList) => val.name === selCountry) || initialCountry;
 
     const states = selCity.states;
 
