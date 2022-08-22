@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { getIn } from "formik";
 
 import Spinner from "react-bootstrap/Spinner";
 import { useNavigate } from "react-router-dom";
@@ -41,18 +42,59 @@ interface FormValues {
   pincode: string;
 }
 
-export const DropDownField: React.FC<FieldProps & TextFieldProps> = (props: any) => {
+export const SelectField: React.FC<FieldProps & TextFieldProps> = (props: any) => {
   const propsVal = props.data;
+  const isTouched = getIn(props.form.touched, props.field.name);
+  const errorMessage = getIn(props.form.errors, props.field.name);
+
+  const { error, helperText, field, ...rest } = props;
   return (
     <>
       <InputLabel>{props.label}</InputLabel>
-      <Select className="w-75 border h-50" label="Country" name="countr" onChange={props.onChange}>
+      <Select
+        className="w-75 border h-50"
+        label="State"
+        name="state"
+        error={error ?? Boolean(isTouched && errorMessage)}
+        onChange={props.onChange}>
+        {props.value.map((value: string, index: number) => (
+          <MenuItem value={value} key={index}>
+            {value}
+          </MenuItem>
+        ))}
+      </Select>
+      <p className="p-0 m-0 py-0 my-0 text-danger text-left" style={{ fontSize: "12px" }}>
+        {helperText ?? (isTouched && errorMessage ? errorMessage : undefined)}
+      </p>
+    </>
+  );
+};
+
+export const DropDownField: React.FC<FieldProps & TextFieldProps> = (props: any) => {
+  const propsVal = props.data;
+
+  const isTouched = getIn(props.form.touched, props.field.name);
+  const errorMessage = getIn(props.form.errors, props.field.name);
+
+  const { error, helperText, field, ...rest } = props;
+  return (
+    <>
+      <InputLabel>{props.label}</InputLabel>
+      <Select
+        className="w-75 border h-50"
+        label="Country"
+        name="countr"
+        error={error ?? Boolean(isTouched && errorMessage)}
+        onChange={props.handleChange}>
         {propsVal?.map((value: any, index: number) => (
           <MenuItem key={index} value={value.name}>
             {value.name}{" "}
           </MenuItem>
         ))}
       </Select>
+      <p className="p-0 m-0 py-0 my-0 text-danger text-left" style={{ fontSize: "12px" }}>
+        {helperText ?? (isTouched && errorMessage ? errorMessage : undefined)}
+      </p>
     </>
   );
 };
@@ -93,9 +135,14 @@ export default function Register() {
   const handleRegister = () => {
     navigate(`/login`);
   };
+  const setCountryFormikValue = (value: any, setFieldValue: any) => {
+    setFieldValue("country", value);
+  };
 
-  const handleChange = (event: SelectChangeEvent) => {
+  const handleChange = (event: SelectChangeEvent, setFieldValue: any) => {
     const selCountry = event.target.value;
+    setFieldValue("country", selCountry);
+
     setUserCountry(event.target.value);
     const selCity: CountryList =
       country.find((val: CountryList) => val.name === selCountry) || initialCountry;
@@ -120,7 +167,7 @@ export default function Register() {
     <Container maxWidth="sm" className="global-MarginTop">
       <div className=" register-BoxShadow  border border-primary p-4 rounded ">
         <Typography align="center" variant="h5" className="register-Title">
-          Register Form
+          Register Form1
         </Typography>
         <Formik
           initialValues={{
@@ -140,7 +187,6 @@ export default function Register() {
           validationSchema={ValidationSchema}
           onSubmit={(values: FormValues, formikHelpers: FormikHelpers<FormValues>) => {
             setLoading(true);
-            console.log("@$#values", values);
             const data = {
               name: values.name,
               eMail: values.eMail,
@@ -248,8 +294,7 @@ export default function Register() {
                   <Field
                     label="Country"
                     name="country"
-                    onChange={handleChange}
-                    // value="Country List"
+                    handleChange={(e: any) => handleChange(e, formikProps.setFieldValue)}
                     value={userCountry}
                     className="mx-3   py-0 my-0  w-100"
                     data={country}
@@ -267,19 +312,15 @@ export default function Register() {
                   />
                 </Grid>
                 <Grid xs={6} className="my-0 py-0" alignItems="stretch">
-                  <InputLabel className="my-0 py-0">State</InputLabel>
-
                   <Field
                     className="w-75 p-0 h-50 m-0"
                     name="state"
-                    label="state"
-                    component={Select}>
-                    {state.map((value: string, index: number) => (
-                      <MenuItem value={value} key={index}>
-                        {value}
-                      </MenuItem>
-                    ))}
-                  </Field>
+                    label="State"
+                    value={state}
+                    onChange={(e: any) => {
+                      formikProps.setFieldValue("state", e.target.value);
+                    }}
+                    component={SelectField}></Field>
                 </Grid>
 
                 <Grid item xs={6}>

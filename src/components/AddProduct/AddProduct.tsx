@@ -91,9 +91,9 @@ export default function AddProduct() {
                   setLoading(false);
 
                   console.log(error2);
-                  if (error2.response.data.message === "User already exists") {
+                  if (error2.response.data.message === "ID already exists") {
                     setLoading(false);
-                    setErrorMessage("Username already Registered");
+                    setErrorMessage("ID already Registered");
                     setOpen(true);
                   }
                 });

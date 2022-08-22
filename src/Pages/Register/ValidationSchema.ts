@@ -44,6 +44,8 @@ const validationSchema = yup.object().shape({
     .min(6, "Must be exactly 6 digits")
     .max(6, "Must be exactly 6 digits")
     .required("Required Field"),
+  state: yup.string().required("Required Field"),
+  country: yup.string().required("Required Field"),
   securityQn: yup.string().required("Required Field"),
   securityAns: yup.string().required("Required Field")
 });
