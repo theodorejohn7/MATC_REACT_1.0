@@ -42,7 +42,7 @@ mongoInstance.interceptors.response.use(
 
       const refreshToken = JSON.parse(sessionStorage.getItem("refreshToken")!) || "";
 
-      const response = await axios.post(`http://localhost:4225/api/v1/user/refresh`, {
+      const response = await axios.post(`${API_URL}api/v1/user/refresh`, {
         refreshToken: refreshToken
       });
 

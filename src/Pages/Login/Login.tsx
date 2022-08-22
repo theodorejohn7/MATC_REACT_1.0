@@ -84,13 +84,11 @@ export default function Login() {
           setQuestion(response.data.data);
           setValidName(true);
         }
-        console.log("@$# response", response);
       })
       .catch((error) => {
         console.log("error", error);
         if (error.response.status === 404) {
           setUserMessage("Username Not Found Please try Again");
-          console.log("USER NOT FOUND");
         }
       });
   };
@@ -102,7 +100,6 @@ export default function Login() {
       userName: username
     };
     instance.post(`${USER_API_URL}/fgtPwd`, data).then((response) => {
-      console.log("@$# Response", response);
       if (response.data.message === "details mismatch") {
         console.log("invalid answer");
         setAnswerStatus("Invalid answer Please try again");
@@ -233,7 +230,6 @@ export default function Login() {
                     )}
                     Login
                   </Button>
-                  {/* <Spinner animation="border" className="mx-3" variant="primary" /> */}
                 </Grid>
               </Grid>
             </Form>

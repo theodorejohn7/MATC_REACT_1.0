@@ -39,6 +39,9 @@ export function UserloginContextProvider({ children }: UserContextProviderProps)
     if (curr_User) {
       setCurrentUser(curr_User);
       setIsLoggedin(true);
+      if (curr_User === ADMIN_USER) {
+        setIsAdmin(true);
+      }
       console.log("currentUser", curr_User, currentUser);
     }
   }, []);
