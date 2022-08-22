@@ -76,7 +76,7 @@ export default function Login() {
 
   const handleValidName = () => {
     instance
-      .get(`${API_URL}api/v1/user/question/${username}`)
+      .get(`${USER_API_URL}/question/${username}`)
       .then((response) => {
         console.log(response.status);
         if (response.status === 200) {
@@ -101,7 +101,7 @@ export default function Login() {
       answer: answer,
       userName: username
     };
-    instance.post(`${API_URL}api/v1/user/fgtPwd`, data).then((response) => {
+    instance.post(`${USER_API_URL}/fgtPwd`, data).then((response) => {
       console.log("@$# Response", response);
       if (response.data.message === "details mismatch") {
         console.log("invalid answer");
@@ -309,7 +309,7 @@ export default function Login() {
                             password: values.password
                           };
                           instance
-                            .post(`${API_URL}api/v1/user/resetPwd`, data)
+                            .post(`${USER_API_URL}/resetPwd`, data)
                             .then((response) => {
                               console.log("response", response);
                               if (response.data.message === "password resetted") {
