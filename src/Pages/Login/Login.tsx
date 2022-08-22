@@ -194,6 +194,7 @@ export default function Login() {
                   <Field
                     name="name"
                     label="Name"
+                    className="mt-3"
                     data-testid="test_username"
                     size="small"
                     component={FormTextField}
@@ -205,6 +206,7 @@ export default function Login() {
                     type="password"
                     label="Password"
                     size="small"
+                    className="mt-3"
                     component={FormTextField}
                   />
                 </Grid>

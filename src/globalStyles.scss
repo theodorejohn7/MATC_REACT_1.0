@@ -92,14 +92,14 @@ $smoothShadowMild2:  0.8px 0.4px 2.2px rgba(0, 0, 0, 0.02),
 
 .login-BoxShadow {
   text-align: center;
-  box-shadow: $boxShadow;
-  width: 15rem;
+  box-shadow: $smoothShadowMild;
+  width: 19rem;
 }
 
 .login-title {
   line-height: $lineHeight;
   margin-bottom: 16px;
-  color: brown;
+  color: #000000;
 }
 
 .navbar-LogoText {
@@ -142,7 +142,7 @@ $smoothShadowMild2:  0.8px 0.4px 2.2px rgba(0, 0, 0, 0.02),
 
 .register-BoxShadow {
   text-align: center;
-  box-shadow: $boxShadow;
+  box-shadow: $smoothShadowMild;
 }
 
 .register-Title {
