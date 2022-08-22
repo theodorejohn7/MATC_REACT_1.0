@@ -6,7 +6,7 @@ YupPassword(yup);
 const validationSchema = yup.object().shape({
   name: yup
     .string()
-    .matches(/[A-Za-z] $/, "Name cannot contain Number or Special Characters")
+    .matches(/[A-Za-z]$/, "Name cannot contain Number or Special Characters")
     .required("Required Field"),
   userName: yup
     .string()
@@ -30,7 +30,7 @@ const validationSchema = yup.object().shape({
   address: yup
     .string()
     .matches(
-      /^[a-zA-Z0-9@#()_+\-=[\];':"\\|,./?]*$/,
+      /^[a-zA-Z0-9@#()_+\-=[\];':"\\|,./? ]*$/,
       "Address can contain only following symbols /,-,(,),[,],#,."
     )
     .required("Required Field"),
@@ -39,13 +39,11 @@ const validationSchema = yup.object().shape({
     .required()
     .matches(
       /[1-6]{1}\d{2}(0{0,2}[1-9]|0?[1-9]\d|[1-9]\d\d)$/,
-      "Must be only number starting from 6 with 6 digits"
+      "Must be only number starting from 1 to 6 with 6 digits"
     )
     .min(6, "Must be exactly 6 digits")
     .max(6, "Must be exactly 6 digits")
     .required("Required Field"),
-  state: yup.string().required("Required Field"),
-  country: yup.string().required("Required Field"),
   securityQn: yup.string().required("Required Field"),
   securityAns: yup.string().required("Required Field")
 });

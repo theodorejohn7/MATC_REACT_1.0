@@ -1,12 +1,5 @@
 import axios from "axios";
-import {
-  ChangeEvent,
-  FormEvent,
-  FormEventHandler,
-  PointerEventHandler,
-  useEffect,
-  useState
-} from "react";
+import { useEffect, useState } from "react";
 
 import Spinner from "react-bootstrap/Spinner";
 import { useNavigate } from "react-router-dom";
@@ -26,13 +19,11 @@ import { Formik, FormikHelpers, FormikProps, Form, Field, FieldProps } from "for
 
 import ValidationSchema from "./ValidationSchema";
 import { FormTextField } from "../../components/FormTextField/FormTextField";
-import { EventType } from "@testing-library/react";
-
 interface countryList {
   iso2: string;
   iso3: string;
-  country: string;
-  cities: Array<string>;
+  name: string;
+  states: [{ name: string }];
 }
 
 interface FormValues {
@@ -52,14 +43,13 @@ interface FormValues {
 
 export const DropDownField: React.FC<FieldProps & TextFieldProps> = (props: any) => {
   const propsVal = props.data;
-  console.log("@$# props", props);
   return (
     <>
       <InputLabel>{props.label}</InputLabel>
-      <Select label={props.label} onChange={props.onChange}>
+      <Select className="w-75 border h-50" label="Country" name="countr" onChange={props.onChange}>
         {propsVal?.map((value: any, index: number) => (
-          <MenuItem key={index} value={value.country}>
-            {value.country}{" "}
+          <MenuItem key={index} value={value.name}>
+            {value.name}{" "}
           </MenuItem>
         ))}
       </Select>
@@ -69,6 +59,7 @@ export const DropDownField: React.FC<FieldProps & TextFieldProps> = (props: any)
 
 export default function Register() {
   const USER_API_URL = process.env.REACT_APP_USER_API_URL;
+
   const [status, setStatus] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [open, setOpen] = useState(false);
@@ -76,6 +67,7 @@ export default function Register() {
   const handleClose = () => setOpen(false);
   const navigate = useNavigate();
   const [country, setCountry] = useState([]);
+  const [userCountry, setUserCountry] = useState("");
   const [state, setState] = useState([""]);
   const style = {
     position: "absolute" as const,
@@ -94,8 +86,8 @@ export default function Register() {
   const initialCountry: countryList = {
     iso2: "",
     iso3: "",
-    country: "",
-    cities: [""]
+    name: "",
+    states: [{ name: "" }]
   };
 
   const handleRegister = () => {
@@ -103,17 +95,22 @@ export default function Register() {
   };
 
   const handleChange = (event: SelectChangeEvent) => {
-    console.log("@$#", event);
     const selCountry = event.target.value;
+    setUserCountry(event.target.value);
     const selCity: countryList =
-      country.find((val: countryList) => val.country === selCountry) || initialCountry;
-    setState(selCity.cities);
+      country.find((val: countryList) => val.name === selCountry) || initialCountry;
+
+    const states = selCity.states;
+
+    const stateList: string[] = [];
+    states.map((value) => stateList.push(value.name));
+
+    setState(stateList);
   };
 
   useEffect(() => {
     const getdata = async () => {
-      const response = await axios.get("https://countriesnow.space/api/v0.1/countries/");
-
+      const response = await axios.get("https://countriesnow.space/api/v0.1/countries/states/");
       setCountry(response.data.data);
     };
     getdata();
@@ -143,6 +140,7 @@ export default function Register() {
           validationSchema={ValidationSchema}
           onSubmit={(values: FormValues, formikHelpers: FormikHelpers<FormValues>) => {
             setLoading(true);
+            console.log("@$#values", values);
             const data = {
               name: values.name,
               eMail: values.eMail,
@@ -234,50 +232,54 @@ export default function Register() {
                     style={{ width: "95%" }}
                   />
                 </Grid>
-                <Grid xs={6} alignItems="stretch">
-                  <Field
-                    label="CountryDD"
-                    name="countrydd"
-                    onChange={handleChange}
-                    value="Country List"
-                    className="mx-3 mt-3"
-                    data={country}
-                    style={{ width: "90%" }}
-                    component={DropDownField}></Field>
-                </Grid>
-                <Grid xs={6} alignItems="stretch">
-                  <Field label="StateDD" name="statedd" displayEmpty={true} component={Select}>
-                    {state.map((value: string, index: number) => (
-                      <MenuItem value={value} key={index}>
-                        {value}
-                      </MenuItem>
-                    ))}
-                  </Field>
-                </Grid>
+
                 <Grid item xs={6}>
                   <Field
                     name="pincode"
                     label="Pincode"
                     type="number"
+                    className="my-2"
                     size="small"
                     component={FormTextField}
                   />
                 </Grid>
-                <Grid item xs={6}>
-                  <Field name="state" label="State" size="small" component={FormTextField} />
+
+                <Grid xs={6} className="my-0 py-0" alignItems="stretch">
+                  <Field
+                    label="Country"
+                    name="country"
+                    onChange={handleChange}
+                    // value="Country List"
+                    value={userCountry}
+                    className="mx-3   py-0 my-0  w-100"
+                    data={country}
+                    style={{ width: "90%" }}
+                    component={DropDownField}></Field>
                 </Grid>
 
                 <Grid item sm={6}>
                   <Field
                     name="securityQn"
                     label="Security Question"
+                    className="my-2"
                     size="small"
                     component={FormTextField}
                   />
                 </Grid>
+                <Grid xs={6} className="my-0 py-0" alignItems="stretch">
+                  <InputLabel className="my-0 py-0">State</InputLabel>
 
-                <Grid item xs={6}>
-                  <Field name="country" label="Country" size="small" component={FormTextField} />
+                  <Field
+                    className="w-75 p-0 h-50 m-0"
+                    name="state"
+                    label="state"
+                    component={Select}>
+                    {state.map((value: string, index: number) => (
+                      <MenuItem value={value} key={index}>
+                        {value}
+                      </MenuItem>
+                    ))}
+                  </Field>
                 </Grid>
 
                 <Grid item xs={6}>

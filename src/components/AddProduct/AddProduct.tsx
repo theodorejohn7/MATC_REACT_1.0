@@ -59,8 +59,8 @@ export default function AddProduct() {
           </Typography>
           <Formik
             initialValues={{
-              category: " ",
-              description: " ",
+              category: "",
+              description: "",
               discPrice: 0,
               grossWeight: 0,
               id: 0,

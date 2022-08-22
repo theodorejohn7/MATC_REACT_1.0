@@ -10,3 +10,8 @@ const validationSchema = yup.object().shape({
 });
 
 export default validationSchema;
+
+export const passwordResetValidationSchema = yup.object().shape({
+  password: yup.string().password().required(),
+  verifyPassword: yup.string().oneOf([yup.ref("password")], "Passwords do not match")
+});
