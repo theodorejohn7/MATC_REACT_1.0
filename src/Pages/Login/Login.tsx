@@ -255,7 +255,7 @@ export default function Login() {
               <TextField
                 className="my-3 w-100"
                 required
-                id="outlined-required"
+                id="username"
                 onChange={setUserName}
                 label="User Name"
               />
@@ -277,12 +277,12 @@ export default function Login() {
                     disabled
                     label="Security Question"
                     value={question}
-                    id="outlined-required"
+                    id="security-question"
                   />
                   <TextField
                     className="my-3 w-100"
                     required
-                    id="outlined-required"
+                    id="security-answer"
                     onChange={(event) => setAnswer(event?.target.value)}
                     label="Security Answer"
                   />
@@ -331,6 +331,7 @@ export default function Login() {
                                   name="password"
                                   type="password"
                                   label="Password"
+                                  id="password"
                                   size="small"
                                   component={FormTextField}
                                 />
@@ -340,6 +341,7 @@ export default function Login() {
                                   name="verifyPassword"
                                   type="password"
                                   label="Verify Password"
+                                  id="verify-password"
                                   size="small"
                                   component={FormTextField}
                                 />
