@@ -93,7 +93,7 @@ export default function AddProduct() {
                   console.log(error2);
                   if (error2.response.data.message === "ID already exists") {
                     setLoading(false);
-                    setErrorMessage("ID already Registered");
+                    setErrorMessage("ID already Registered,Please retry with a different ID");
                     setOpen(true);
                   }
                 });
