@@ -167,7 +167,7 @@ export default function Register() {
     <Container maxWidth="sm" className="global-MarginTop">
       <div className=" register-BoxShadow  border border-primary p-4 rounded ">
         <Typography align="center" variant="h5" className="register-Title">
-          Register Form1
+          Register Form
         </Typography>
         <Formik
           initialValues={{
