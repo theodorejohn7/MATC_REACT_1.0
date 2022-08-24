@@ -67,7 +67,9 @@ const EditableCell: React.FC<EditableCellProps> = ({
   if (inputType === "number") {
     inputNode = <InputNumber />;
   } else if (inputType === "lineOfText") {
-    inputNode = <Input.TextArea autoSize showCount />;
+    inputNode = (
+      <Input.TextArea autoSize showCount style={{ minHeight: "20vh", maxHeight: "30vh" }} />
+    );
   } else {
     inputNode = <Input />;
   }
@@ -77,7 +79,8 @@ const EditableCell: React.FC<EditableCellProps> = ({
       {editing ? (
         <Form.Item
           name={dataIndex}
-          className="global-NoMargin"
+          style={{ maxHeight: "30vh", minWidth: "6.5vw", overflowY: "scroll" }}
+          className="global-NoMargin w-100 "
           rules={[
             {
               required: true,
