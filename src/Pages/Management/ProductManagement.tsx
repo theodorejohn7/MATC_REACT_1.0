@@ -263,6 +263,7 @@ const ProductManagement: React.FC = () => {
               <span>
                 <Typography.Link
                   onClick={() => save(record.id)}
+                  id={`save-${record.id}`}
                   className="productManagement-Message">
                   Save
                 </Typography.Link>
